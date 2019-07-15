@@ -1,0 +1,536 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../webfonts/open-sans-v16-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Open Sans Regular'), local('OpenSans-Regular'),
+       url('../webfonts/open-sans-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../webfonts/open-sans-v16-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../webfonts/open-sans-v16-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../webfonts/open-sans-v16-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../webfonts/open-sans-v16-latin-regular.svg#OpenSans') format('svg'); /* Legacy iOS */
+}
+/* open-sans-700 - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../webfonts/open-sans-v16-latin-700.eot'); /* IE9 Compat Modes */
+  src: local('Open Sans Bold'), local('OpenSans-Bold'),
+       url('../webfonts/open-sans-v16-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../webfonts/open-sans-v16-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../webfonts/open-sans-v16-latin-700.woff') format('woff'), /* Modern Browsers */
+       url('../webfonts/open-sans-v16-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../webfonts/open-sans-v16-latin-700.svg#OpenSans') format('svg'); /* Legacy iOS */
+}
+
+/*! modern-normalize | MIT License | https://github.com/sindresorhus/modern-normalize */
+html { box-sizing: border-box;}
+*,*::before,*::after { box-sizing: inherit;}
+:root { -moz-tab-size: 4;	tab-size: 4;}
+html { line-height: 1.15; /* 1 */	-webkit-text-size-adjust: 100%; /* 2 */}
+body { margin: 0;}
+body { font-family:	"Open Sans",	-apple-system,	BlinkMacSystemFont,	'Segoe UI',	Roboto,	Helvetica,Arial,sans-serif,		'Apple Color Emoji',		'Segoe UI Emoji',		'Segoe UI Symbol';}
+hr { height: 0;}
+abbr[title] { text-decoration: underline dotted;}
+b,strong, .strong { font-weight: bolder;}
+i,em, .em { font-style: italic;}
+code,kbd,samp,pre {
+	font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* 1 */
+	font-size: 1em; /* 2 */
+}
+small { font-size: 80%;}
+sub,sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sub { bottom: -0.25em;}
+sup { top: -0.5em;}
+button,input,optgroup,select,textarea {
+	font-family: inherit; /* 1 */
+	font-size: 100%; /* 1 */
+	line-height: 1.15; /* 1 */
+	margin: 0; /* 2 */
+}
+button,select { text-transform: none;}
+button,[type='button'],[type='reset'],[type='submit'] { -webkit-appearance: button;}
+button::-moz-focus-inner,
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
+	border-style: none;
+	padding: 0;
+}
+button:-moz-focusring,
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring {
+	outline: 1px dotted ButtonText;
+}
+fieldset { padding: 0.35em 0.75em 0.625em;}
+legend { padding: 0;}
+progress { vertical-align: baseline;}
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
+	height: auto;
+}
+[type='search'] {
+	-webkit-appearance: textfield; /* 1 */
+	outline-offset: -2px; /* 2 */
+}
+[type='search']::-webkit-search-decoration { -webkit-appearance: none;}
+::-webkit-file-upload-button { -webkit-appearance: button; /* 1 */	font: inherit; /* 2 */}
+summary { display: list-item;}
+/* end modernize */
+
+/* resets  */
+* { box-sizing: border-box; }
+*:focus { outline: none; }
+a { text-decoration: none; color: #40484f; }
+h1,h2,h3,h4,h5 { padding: 0; margin: 0; padding: 0.5em 0 1em 0; }
+h1 a,h2 a,h3 a,h4 a,h5 a { color: #60686d; text-decoration: none;}
+menu, nav, section, article, main, footer, header { margin: 0; padding: 0; }
+
+
+/* catbg */
+h3.catbg {
+	font-size: 0.8rem !important;
+	letter-spacing: 2px;
+}
+
+h3 img { display: none; }
+h3 .floatright img { display: block; }
+
+
+/* SMF styles
+------------------------------------------------------- */
+.floatright { float: right;}
+.floatleft { float: left;}
+.flow_auto { overflow: auto;}
+.flow_hidden { overflow: hidden; clear: both; }
+.flow_hidden .windowbg, .flow_hidden .windowbg2 { margin-top: 2px;}
+.clear { clear: both;}
+.clear_left { clear: left;}
+.clear_right { clear: right;}
+.fullwidth { width: 100%; display: block; }
+
+
+/* Default font sizes: small (8pt), normal (10pt), and large (14pt). */
+.smalltext, tr.smalltext th { font-size: 0.8rem;	}
+.tinytext { font-size: 0.7rem;	}
+.middletext { font-size: 0.9rem;}
+.normaltext { font-size: 1rem;	}
+.largetext { font-size: 1.4rem;}
+.centertext { margin: 0 auto;	text-align: center;}
+.righttext { margin-left: auto;	margin-right: 0;	text-align: right;}
+.lefttext { margin-left: 0;	margin-right: auto;	text-align: left;}
+.double_height { line-height: 2rem;}
+
+/* a quick reset list class. */
+ul.reset, ul.reset li { padding: 0;	margin: 0;	list-style: none;}
+
+.padding_top { padding-top: 1rem !important; }
+.padding_top_not { padding-top: 0 !important; }
+
+/* Some BBC related styles.
+------------------------------------------------------- */
+/* A quote, perhaps from another post. */
+blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote
+{
+	font-size: x-small;
+	color: #000;
+	line-height: 1.4em;
+	background: url(../images/theme/quote.png) 0.1em 0.1em no-repeat;
+	border-top: 2px solid #99A;
+	border-bottom: 2px solid #99A;
+	padding: 1.1em 1.4em;
+	margin: 0.1em 0 0.3em 0;
+	overflow: auto;
+}
+blockquote.bbc_standard_quote { background-color: #d7daec;}
+blockquote.bbc_alternate_quote { background-color: #e7eafc;}
+
+/* A code block - maybe PHP ;). */
+code.bbc_code
+{
+	display: block;
+	font-family: "dejavu sans mono", "monaco", "lucida console", "courier new", monospace;
+	font-size: x-small;
+	background: #eef;
+	border-top: 2px solid #999;
+	border-bottom: 2px solid #999;
+	line-height: 1.5em;
+	padding: 3px 1em;
+	overflow: auto;
+	white-space: nowrap;
+	/* Show a scrollbar after about 24 lines. */
+	max-height: 24em;
+}
+
+/* The "Quote:" and "Code:" header parts... */
+.codeheader, .quoteheader
+{
+	color: #666;
+	font-size: x-small;
+	font-weight: bold;
+	padding: 0 0.3em;
+}
+.codeoperation { font-weight: normal;}
+.bbc_link:link, .bbc_link:visited { border-bottom: 1px solid #A8B6CF;}
+.bbc_link:hover { text-decoration: none;	border-bottom: 1px solid #346;}
+.bbc_size { line-height: 1.4em;}
+.bbc_color a { color: inherit;}
+.bbc_img { border: 0;}
+.bbc_table { font: inherit;	color: inherit;}
+.bbc_table td { font: inherit;	color: inherit;	vertical-align: top;}
+.bbc_u { text-decoration: underline;}
+.bbc_list { text-align: left;}
+.bbc_tt { font-family: "dejavu sans mono", "monaco", "lucida console", "courier new", monospace;}
+
+/* Generally, those [?] icons.  This makes your cursor a help icon. */
+.help { cursor: help;}
+
+/* /me uses this a lot. (emote, try typing /me in a post.) */
+.meaction { color: red;}
+
+/* Highlighted text - such as search results. */
+.highlight { font-weight: bold;	color: #ff7200 !important;	font-size: 1.1em;}
+
+/* A more discreet highlight color, for selected membergroups etc. */
+.highlight2 { background-color: #D1E1EF;	color: #000 !important;}
+.error { color: red;}
+.alert { color: red;}
+.birthday { color: #920ac4;}
+.event { color: #078907;}
+.holiday { color: #000080;}
+.warn_mute { color: red;}
+.warn_moderate { color: #ffa500;}
+.warn_watch, .success { color: green;}
+
+fieldset, .information {
+	padding: 0.5rem 1.5rem; 
+	font-size: 0.8rem;
+	line-height: 1.3rem;
+	background: #f8f8f8;
+	margin: 0.5rem 0 1rem 0;
+	border: solid 1px #ddd;
+	background: #f3f5f0;
+	border-radius: 3px;
+	white-space: wrap;
+	overflow: auto;
+}
+.information + .information { margin-top: -0.5rem; }
+fieldset {
+	padding: 1rem 1.25rem; 
+	font-size: 0.9rem;
+	background: #fdfeff;
+	margin: 0.5rem 0 1rem 0;
+	overflow: hidden;
+}
+hr { height: 2px; background: #f0f0f0; border: none; margin: 1rem 0 1.5rem 0; width: 60%;  }
+
+/* the help icon..must go :P */
+img.icon, a.help > img { 	display: none; }
+a.help:before { 
+	content: '\e823'; 
+	font-family: "fontello";
+	font-style: normal;
+	font-weight: normal;
+	speak: none;
+	display: inline-block;
+	text-decoration: inherit;
+	text-align: center;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1em;
+	margin: 0; 
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 0.7rem;
+	color: #697;
+	vertical-align: 10%;
+	margin: 0 0.6rem 0 0;
+}
+
+/* AJAX notification bar
+------------------------------------------------------- */
+#ajax_in_progress
+{
+	background: url(../images/theme/loadingbar.png) repeat-x;
+	color: #f96f00;
+	text-align: center;
+	font-size: 16pt;
+	padding: 8px;
+	width: 100%;
+	height: 66px;
+	line-height: 25px;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#ajax_in_progress a
+{
+	color: orange;
+	text-decoration: underline;
+	font-size: smaller;
+	float: right;
+	margin-right: 20px;
+}
+
+/* some standard styles, tweaked
+------------------------------------------------------- */
+dl {
+	clear: right;
+	margin: 0 0 ;
+	padding: 0 0 10px 0;
+	display: grid;
+	grid-gap: 0.5rem 2rem;
+	grid-template-columns: 4fr 6fr;
+}
+dl dt, dl dd { 	line-height: 1.1rem; }
+
+/* a smaller version */
+dl.shortWidth { display: block;  }
+dl.shortWidth dt, dl.shortWidth dd { width: 100%; margin: 0; padding: 0;  }
+dl.shortWidth dt strong { margin-left: 1rem; opacity: 0.8; }
+dl.shortWidth dd { 
+	margin: 0 0 0.5rem 1.8rem;  
+	display: flex;
+	justify-content: space-between;
+}
+
+ul li { padding: 0.1rem 0 0.4rem 0; line-height: 1.3rem; }
+p { line-height: 1.5rem; }
+
+/* form controls - some defaults.. */
+input, select, button {
+    background: linear-gradient(180deg, #fbfdff, #f0f2f5) #f0f2f5;
+	height: 2rem;
+	color: #444;
+	border: solid 1px #bbb;
+	font-size: 0.8rem;
+	line-height: 1rem !important;
+	border-radius: 3px;
+}
+input[type=submit] {	border: solid 1px #bbb; }
+input[type=submit]:active, select:active, button:active {	border: solid 1px #888; }
+input { border: solid 1px #bbb; }
+input[type=submit]:hover, select:hover, button:hover {	background: #fff; cursor: pointer; }
+
+form { width: 100%; }
+
+
+/* helper classes */
+.cursor { cursor: pointer; }
+
+/* Styles for print media.
+------------------------------------------------------- */
+@media print
+{
+}
+
+/* icons */
+a.icon-new:after {
+	content: " ";
+	width: 
+}
+
+@font-face {
+  font-family: 'fontello';
+  src: url('../webfonts/fontello.eot?67803119');
+  src: url('../webfonts/fontello.eot?67803119#iefix') format('embedded-opentype'),
+       url('../webfonts/fontello.woff2?67803119') format('woff2'),
+       url('../webfonts/fontello.woff?67803119') format('woff'),
+       url('../webfonts/fontello.ttf?67803119') format('truetype'),
+       url('../webfonts/fontello.svg?67803119#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+ 
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+}
+ 
+.icon-heart:before { content: '\e800'; } 
+.icon-user-outline:before { content: '\e801'; } 
+.icon-picture-outline:before { content: '\e802'; } 
+.icon-camera-outline:before { content: '\e803'; } 
+.icon-th-large-outline:before { content: '\e804'; } 
+.icon-ok-outline:before { content: '\e805'; } 
+.icon-cancel-alt:before { content: '\e806'; } 
+.icon-plus-outline:before { content: '\e807'; } 
+.icon-eq-outline:before { content: '\e808'; } 
+.icon-info-outline:before { content: '\e809'; } 
+.icon-home-outline:before { content: '\e80a'; } 
+.icon-link-outline:before { content: '\e80b'; } 
+.icon-attach-outline:before { content: '\e80c'; } 
+.icon-lock:before { content: '\e80d'; } 
+.icon-lock-open:before { content: '\e80e'; } 
+.icon-pin-outline:before { content: '\e80f'; } 
+.icon-code-outline:before { content: '\e810'; } 
+.icon-forward-outline:before { content: '\e811'; } 
+.icon-reply-outline:before { content: '\e812'; } 
+.icon-upload-cloud-outline:before { content: '\e813'; } 
+.icon-upload-outline:before { content: '\e814'; } 
+.icon-download-outline:before { content: '\e815'; } 
+.icon-flag:before { content: '\e816'; } 
+.icon-bookmark:before { content: '\e817'; } 
+.icon-tags:before { content: '\e818'; } 
+.icon-tag:before { content: '\e819'; } 
+.icon-eye-outline:before { content: '\e81a'; } 
+.icon-search-outline:before { content: '\e81b'; } 
+.icon-cancel-outline:before { content: '\e81c'; } 
+.icon-thumbs-up:before { content: '\e81d'; } 
+.icon-thumbs-down:before { content: '\e81e'; } 
+.icon-location-outline:before { content: '\e81f'; } 
+.icon-warning-empty:before { content: '\e820'; } 
+.icon-bell:before { content: '\e821'; } 
+.icon-chat-alt:before { content: '\e822'; } 
+.icon-comment:before { content: '\e823'; } 
+.icon-chat:before { content: '\e824'; } 
+.icon-trash:before { content: '\e825'; } 
+.icon-doc:before { content: '\e826'; } 
+.icon-doc-text:before { content: '\e827'; } 
+.icon-picture:before { content: '\e828'; } 
+.icon-clock:before { content: '\e829'; } 
+.icon-folder:before { content: '\e82a'; } 
+.icon-rss-outline:before { content: '\e82b'; } 
+.icon-cog-outline:before { content: '\e82c'; }
+.icon-wrench-outline:before { content: '\e82d'; } 
+.icon-menu:before { content: '\e82e'; } 
+.icon-cancel:before { content: '\e82f'; }
+.icon-openid:before { content: '\e830'; }
+.icon-right-small:before { content: '\e831'; } 
+.icon-left-open:before { content: '\e832'; }
+.icon-right-open:before { content: '\e833'; }
+.icon-search:before { content: '\e834'; } 
+.icon-ok:before { content: '\e835'; } 
+.icon-down-open:before { content: '\f004'; } 
+.icon-up-open:before { content: '\f005'; } 
+.icon-chart-bar:before { content: '\e836'; }
+.icon-edit:before { content: '\e837'; }
+.icon-flow-split:before { content: '\e838'; }
+
+/* sections */
+body {
+	background: #f0f0f0;
+}
+
+/* attachment CSS */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 3%; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+.modal:target {
+	display: block;
+}
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 99%;
+  max-height: 95%;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+.modal .caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, .modal .caption { 
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close, .ddload, .dsload {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.ddload {
+  top: 65px;
+  font-size: 20px;
+}
+.dsload {
+  top: 100px;
+  font-size: 20px;
+}
+.dsload:hover,
+.dsload:focus,
+.ddload:hover,
+.ddload:focus,
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+#tsunami {
+	background-image: url(../images/logobg.jpg);
+}
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
