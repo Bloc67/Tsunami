@@ -289,7 +289,7 @@ function template_generic_menu_tabs(&$menu_context)
 		// The admin tabs.
 		echo '
 	<div id="adm_submenus">
-		<ul class="reset multiset">';
+		<menu class="buttons">';
 
 		// Print out all the items in this tab.
 		foreach ($tab_context['tabs'] as $sa => $tab)
@@ -300,20 +300,16 @@ function template_generic_menu_tabs(&$menu_context)
 			if (!empty($tab['is_selected']))
 			{
 				echo '
-			<li>
-				<a class="active button_submit" href="', isset($tab['url']) ? $tab['url'] : $menu_context['base_url'] . ';area=' . $menu_context['current_area'] . ';sa=' . $sa, $menu_context['extra_parameters'], isset($tab['add_params']) ? $tab['add_params'] : '', '">', $tab['label'], '</a>
-			</li>';
+				<a class="active buts button_submit" href="', isset($tab['url']) ? $tab['url'] : $menu_context['base_url'] . ';area=' . $menu_context['current_area'] . ';sa=' . $sa, $menu_context['extra_parameters'], isset($tab['add_params']) ? $tab['add_params'] : '', '">', $tab['label'], '</a>';
 			}
 			else
 				echo '
-			<li>
-				<a class="button_submit" href="', isset($tab['url']) ? $tab['url'] : $menu_context['base_url'] . ';area=' . $menu_context['current_area'] . ';sa=' . $sa, $menu_context['extra_parameters'], isset($tab['add_params']) ? $tab['add_params'] : '', '">', $tab['label'], '</a>
-			</li>';
+				<a class="button_submit buts" href="', isset($tab['url']) ? $tab['url'] : $menu_context['base_url'] . ';area=' . $menu_context['current_area'] . ';sa=' . $sa, $menu_context['extra_parameters'], isset($tab['add_params']) ? $tab['add_params'] : '', '">', $tab['label'], '</a>';
 		}
 
 	// the end of tabs
 	echo '
-		</ul>
+		</menu>
 	</div><br class="clear" />';
 }
 

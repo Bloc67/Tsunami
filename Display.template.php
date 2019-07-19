@@ -154,7 +154,7 @@ function template_main()
 
 	echo '
 </div>
-<article id="a_display">
+<article id="a_display" class="clear">
 	<div class="pagesection clear">
 		<div class="button_submit buts floatright">', $context['previous_next'], '</div>
 		<div class="clear">
@@ -256,7 +256,7 @@ function template_main()
 			if (!empty($settings['show_user_images']) && empty($options['show_no_avatars']) && !empty($message['member']['avatar']['image']))
 				echo '
 							<li>
-								<a class="mavatar" href="', $scripturl, '?action=profile;u=', $message['member']['id'], '" style="background-image: url(', $message['member']['avatar']['url'], ');"></a>
+								<a class="mavatar" href="', $scripturl, '?action=profile;u=', $message['member']['id'], '" style="background-image: url(', $message['member']['avatar']['href'], ');"></a>
 							</li>';
 
 			// Show how many posts they have made.
