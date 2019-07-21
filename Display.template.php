@@ -12,7 +12,10 @@ function template_main()
 	echo '
 <div id="a_maside">
 	<h2 class="header_name">', $context['subject'], '
-		<small class="floatright smalltext">(', $txt['read'], ' ', $context['num_views'], ' ', $txt['times'], ')</small>
+		<small class="floatright smalltext grey">', $txt['read'], ' ', $context['num_views'], ' ', $txt['times'], '
+			' , $context['is_sticky'] ? '<span class="icon-pin-outline red"></span>' : '' , '
+			' , $context['is_locked'] ? '<span class="icon-lock blue"></span>' : '' , '
+		</small>
 	</h2>';	
 
 	if ($context['report_sent'])
@@ -28,81 +31,69 @@ function template_main()
 	{
 		echo '
 	<div id="poll">
-		<h3><img src="', $settings['images_url'], '/topic/', $context['poll']['is_locked'] ? 'normal_poll_locked' : 'normal_poll', '.gif" alt="" class="icon" /> ', $txt['poll'], '</h3>
-		<div class="windowbg">
-			<div class="content" id="poll_options">
-				<h4 id="pollquestion">
-					', $context['poll']['question'], '
-				</h4>';
+		<div class="content" id="poll_options">
+			<h3 id="pollquestion"><span class="icon-chart-bar grey"></span> ', $context['poll']['question'], $context['poll']['is_locked'] ? ' <span class="icon-lock"></span>' : '' , '</h3>';
 
 		// Are they not allowed to vote but allowed to view the options?
 		if ($context['poll']['show_results'] || !$context['allow_vote'])
 		{
 			echo '
-					<dl class="options">';
+			<dl class="options">';
 
 			// Show each option with its corresponding percentage bar.
 			foreach ($context['poll']['options'] as $option)
 			{
 				echo '
-						<dt class="middletext', $option['voted_this'] ? ' voted' : '', '">', $option['option'], '</dt>
-						<dd class="middletext statsbar', $option['voted_this'] ? ' voted' : '', '">';
+				<dt class="middletext bgline', $option['voted_this'] ? ' voted' : '', '"><span class="text">', $option['option'], '</span></dt>
+				<dd class="middletext pollchart statsbar', $option['voted_this'] ? ' voted' : '', '">';
 
 				if ($context['allow_poll_view'])
 					echo '
-							', $option['bar_ndt'], '
-							<span class="percentage">', $option['votes'], ' (', $option['percent'], '%)</span>';
+					<span class="barchart"><span style="width: ', $option['percent'] , '%;"></span></span>
+					<span class="percentage">', $option['votes'], ' (', $option['percent'], '%)</span>';
+				else
+					echo '
+					<span></span><span></span>';
 
 				echo '
-						</dd>';
+				</dd>';
 			}
 
 			echo '
-					</dl>';
+			</dl>';
 
 			if ($context['allow_poll_view'])
 				echo '
-						<p><strong>', $txt['poll_total_voters'], ':</strong> ', $context['poll']['total_votes'], '</p>';
+			<p><strong>', $txt['poll_total_voters'], ':</strong> ', $context['poll']['total_votes'], '</p>';
 		}
 		// They are allowed to vote! Go to it!
 		else
 		{
 			echo '
-						<form action="', $scripturl, '?action=vote;topic=', $context['current_topic'], '.', $context['start'], ';poll=', $context['poll']['id'], '" method="post" accept-charset="', $context['character_set'], '">';
+			<form action="', $scripturl, '?action=vote;topic=', $context['current_topic'], '.', $context['start'], ';poll=', $context['poll']['id'], '" method="post" accept-charset="', $context['character_set'], '">';
 
 			// Show a warning if they are allowed more than one option.
 			if ($context['poll']['allowed_warning'])
 				echo '
-							<p class="smallpadding">', $context['poll']['allowed_warning'], '</p>';
+				<p class="information">', $context['poll']['allowed_warning'], '</p>';
 
 			echo '
-							<ul class="reset options">';
+				<ul class="reset options" id="polloptions">';
 
 			// Show each option with its button - a radio likely.
 			foreach ($context['poll']['options'] as $option)
 				echo '
-								<li class="middletext">', $option['vote_button'], ' <label for="', $option['id'], '">', $option['option'], '</label></li>';
+					<li class="middletext"><span>', $option['vote_button'], '</span><label for="', $option['id'], '">', $option['option'], '</label></li>';
 
 			echo '
-							</ul>
-							<div class="submitbutton">
-								<input type="submit" value="', $txt['poll_vote'], '" class="button_submit" />
-								<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
-							</div>
-						</form>';
-		}
-
-		// Is the clock ticking?
-		if (!empty($context['poll']['expire_time']))
-			echo '
-						<p><strong>', ($context['poll']['is_expired'] ? $txt['poll_expired_on'] : $txt['poll_expires_on']), ':</strong> ', $context['poll']['expire_time'], '</p>';
-
-		echo '
-					</div>
+				</ul>
+				<div class="floatleft" id="pollmoderation">
+					<input type="submit" value="', $txt['poll_vote'], '" class="button_submit" />
+					<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 				</div>
-			</div>
-			<div id="pollmoderation">';
-
+			</form>
+			';
+		}
 		// Build the poll moderation button array.
 		$poll_buttons = array(
 			'vote' => array('test' => 'allow_return_vote', 'text' => 'poll_return_vote', 'image' => 'poll_options.gif', 'lang' => true, 'url' => $scripturl . '?topic=' . $context['current_topic'] . '.' . $context['start']),
@@ -113,10 +104,18 @@ function template_main()
 			'remove_poll' => array('test' => 'can_remove_poll', 'text' => 'poll_remove', 'image' => 'admin_remove_poll.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . $txt['poll_remove_warn'] . '\');"', 'url' => $scripturl . '?action=removepoll;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
 		);
 
-		template_button_strip($poll_buttons);
+		template_button_strip($poll_buttons,'right');
+		
+		
+		// Is the clock ticking?
+		if (!empty($context['poll']['expire_time']))
+			echo '
+			<p class="information"><strong>', ($context['poll']['is_expired'] ? $txt['poll_expired_on'] : $txt['poll_expires_on']), ':</strong> ', $context['poll']['expire_time'], '</p>';
 
 		echo '
-			</div>';
+			<span class="hr2"></span>
+		</div>
+	</div>';
 	}
 
 	// Does this topic have some events linked to it?
@@ -156,10 +155,10 @@ function template_main()
 </div>
 <article id="a_display" class="clear">
 	<div class="pagesection clear">
-		<div class="button_submit buts floatright">', $context['previous_next'], '</div>
-		<div class="clear">
-			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#lastPost" class="button_submit buts floatleft"><strong>' . $txt['go_down'] . '</strong></a>' : '', '
+		<div class="clear bgline">
+			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#lastPost" class="button_submit buts floatleft"><span class="icon-down-open"></span></a>&nbsp;' : '', '
 			', template_button_strip($normal_buttons, 'right'), '
+			<div class="button_submit buts">', $context['previous_next'], '</div>
 		</div>
 		<div class="pagelinks clear"><small>', $txt['pages'], '</small> ', $context['page_index'], '</div>
 	</div>';
@@ -335,22 +334,22 @@ function template_main()
 				// Don't show the profile button if you're not allowed to view the profile.
 				if ($message['member']['can_view_profile'])
 					echo '
-									<li><a href="', $message['member']['href'], '">', ($settings['use_image_buttons'] ? '<img src="' . $settings['images_url'] . '/icons/profile_sm.gif" alt="' . $txt['view_profile'] . '" title="' . $txt['view_profile'] . '" />' : $txt['view_profile']), '</a></li>';
+									<li><a href="', $message['member']['href'], '"><span class="icon-eye-outline" title="' , $txt['view_profile'], '"></span></a></li>';
 
 				// Don't show an icon if they haven't specified a website.
 				if ($message['member']['website']['url'] != '' && !isset($context['disabled_fields']['website']))
 					echo '
-									<li><a href="', $message['member']['website']['url'], '" title="' . $message['member']['website']['title'] . '" target="_blank" class="new_win">', ($settings['use_image_buttons'] ? '<img src="' . $settings['images_url'] . '/www_sm.gif" alt="' . $message['member']['website']['title'] . '" />' : $txt['www']), '</a></li>';
+									<li><a href="', $message['member']['website']['url'], '" title="' . $message['member']['website']['title'] . '" target="_blank" class="new_win"><span class="icon-home-outline"></span></a></li>';
 
 				// Don't show the email address if they want it hidden.
 				if (in_array($message['member']['show_email'], array('yes', 'yes_permission_override', 'no_through_forum')))
 					echo '
-									<li><a href="', $scripturl, '?action=emailuser;sa=email;msg=', $message['id'], '" rel="nofollow">', ($settings['use_image_buttons'] ? '<img src="' . $settings['images_url'] . '/email_sm.gif" alt="' . $txt['email'] . '" title="' . $txt['email'] . '" />' : $txt['email']), '</a></li>';
+									<li><a href="', $scripturl, '?action=emailuser;sa=email;msg=', $message['id'], '" rel="nofollow"><span class="icon-mail"></span></a></li>';
 
 				// Since we know this person isn't a guest, you *can* message them.
 				if ($context['can_send_pm'])
 					echo '
-									<li><a href="', $scripturl, '?action=pm;sa=send;u=', $message['member']['id'], '" title="', $message['member']['online']['is_online'] ? $txt['pm_online'] : $txt['pm_offline'], '">', $settings['use_image_buttons'] ? '<img src="' . $settings['images_url'] . '/im_' . ($message['member']['online']['is_online'] ? 'on' : 'off') . '.gif" alt="' . ($message['member']['online']['is_online'] ? $txt['pm_online'] : $txt['pm_offline']) . '" />' : ($message['member']['online']['is_online'] ? $txt['pm_online'] : $txt['pm_offline']), '</a></li>';
+									<li><a href="', $scripturl, '?action=pm;sa=send;u=', $message['member']['id'], '" title="', $message['member']['online']['is_online'] ? $txt['pm_online'] : $txt['pm_offline'], '"><span class="icon-comment"></span></a></li>';
 
 				echo '
 								</ul>
@@ -439,6 +438,13 @@ function template_main()
 			echo '
 								<li class="inline_mod_check floatright" style="display: none;" id="in_topic_mod_check_', $message['id'], '"></li>';
 
+		// Can the user modify the contents of this post?  Show the modify inline image.
+		if ($message['can_modify'])
+			echo '
+								<li class="button_submit buts">
+									<span class="icon-edit" id="modify_button_', $message['id'], '" style="cursor: pointer; " onclick="oQuickModify.modifyMsg(\'', $message['id'], '\')"></span>
+								</li>';
+
 		if ($message['can_approve'] || $context['can_reply'] || $message['can_modify'] || $message['can_remove'] || $context['can_split'] || $context['can_restore_msg'])
 			echo '
 							</ul>';
@@ -467,12 +473,6 @@ function template_main()
 							<div class="inner" id="msg_', $message['id'], '"', '>', $message['body'], '</div>
 						</div>';
 
-		// Can the user modify the contents of this post?  Show the modify inline image.
-		if ($message['can_modify'])
-			echo '
-						<div class="flow_hidden" style="margin-bottom: 1rem;">
-							<img src="', $settings['images_url'], '/icons/svg/edit.svg" alt="', $txt['modify_msg'], '" title="', $txt['modify_msg'], '" class="floatright smallwidth" id="modify_button_', $message['id'], '" style="cursor: ', ($context['browser']['is_ie5'] || $context['browser']['is_ie5.5'] ? 'hand' : 'pointer'), '; display: none;" onclick="oQuickModify.modifyMsg(\'', $message['id'], '\')" />
-						</div>';
 
 		// Assuming there are attachments...
 		if (!empty($message['attachment']))
@@ -620,8 +620,7 @@ function template_main()
 		echo '
 				</div>
 			</div>
-		</div>
-		<hr class="post_separator" />';
+		</div>';
 	}
 
 	echo '
@@ -634,8 +633,8 @@ function template_main()
 	echo '
 	<div class="pagesection clear">
 		<div class="pagelinks clear"><small>', $txt['pages'], '</small> ', $context['page_index'], '</div>
-		<div class="clear">
-			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#top" class="button_submit buts floatleft"><strong>' . $txt['go_up'] . '</strong></a>' : '', '
+		<div class="clear bgline">
+			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#top" class="button_submit buts floatleft"><span class="icon-up-open"></span></a>&nbsp;' : '', '
 			', template_button_strip($normal_buttons, 'right'), '
 		</div>
 	</div>';

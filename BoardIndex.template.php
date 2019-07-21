@@ -78,7 +78,7 @@ function template_main()
 				if (!empty($board['last_post']['id']))
 					echo '
 					<span class="memb">
-						<span class="icon-right-small"></span>
+						<span class="icon-doc"></span>
 						<span class="item">', $board['last_post']['link'], '</span>
 						<span class="item"><span class="icon-user-outline"></span>', $board['last_post']['member']['link'] , '</span>
 						<span class="item"><span class="icon-clock"></span>', $board['last_post']['time'],'</span>

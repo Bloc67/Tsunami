@@ -147,7 +147,7 @@ function template_main()
 		echo '
 	<div class="pagesection">
 		<div class="pagelinks">', $context['page_index'],'</div>
-		' , !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a id="a_go_down" href="#bot" class="button_submit buts"><strong>' . $txt['go_down'] . '</strong></a>' : '', '
+		' , !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a id="a_go_down" href="#bot" class="button_submit buts"><span class="icon-down-open"></span></a>' : '', '
 		', template_button_strip($normal_buttons, 'right'), '
 	</div>';
 
@@ -197,13 +197,13 @@ function template_main()
 		{
 			$exclass = '';
 			if($topic['is_sticky'])
-				$exclass .= '<span class="icon-pin-outline smaller blue" title="' . $txt['sticky_topic'] . '"></span>';
+				$exclass .= '<span class="icon-pin-outline smaller red" title="' . $txt['sticky_topic'] . '"></span>';
 			if($topic['is_locked'])
-				$exclass .= '<span class="icon-lock smaller grey" title="' . $txt['locked_topic'] . '"></span>';
+				$exclass .= '<span class="icon-lock smaller blue" title="' . $txt['locked_topic'] . '"></span>';
 			if($context['can_approve_posts'] && $topic['unapproved_posts'])
-				$exclass .= '<span class="icon-flag smaller red" title="' . $txt['awaiting_approval'] . '"></span>';
+				$exclass .= '<span class="icon-flag smaller orange" title="' . $txt['awaiting_approval'] . '"></span>';
 			if($topic['is_posted_in'])
-				$exclass .= '<span class="icon-bell smaller green" title="' . $txt['participation_caption'] . '"></span>';
+				$exclass .= '<span class="icon-comment smaller green" title="' . $txt['participation_caption'] . '"></span>';
 			if($topic['is_poll'])
 				$exclass .= '<span class="icon-chart-bar smaller" title="' . $txt['poll'] . '"></span>';
 			
@@ -218,14 +218,14 @@ function template_main()
 				<li class="icon1"><img src="', $settings['images_url'], '/post/svg/', $topic['first_post']['icon'], '.svg" alt="" /></li>
 				<li class="subject">
 					<div ', (!empty($topic['quick_mod']['modify']) ? 'id="topic_' . $topic['first_post']['id'] . '" onmouseout="mouse_on_div = 0;" onmouseover="mouse_on_div = 1;" ondblclick="modify_topic(\'' . $topic['id'] . '\', \'' . $topic['first_post']['id'] . '\');"' : ''), '>
-						' , $exclass, '<span id="msg_' . $topic['first_post']['id'] . '">', $topic['first_post']['link'], (!$context['can_approve_posts'] && !$topic['approved'] ? '&nbsp;<em>(' . $txt['awaiting_approval'] . ')</em>' : ''), '</span>';
+						<span id="msg_' . $topic['first_post']['id'] . '">', $topic['first_post']['link'], (!$context['can_approve_posts'] && !$topic['approved'] ? '&nbsp;<em>(' . $txt['awaiting_approval'] . ')</em>' : ''), '</span>';
 
 			// Is this topic new? (assuming they are logged in!)
 			if ($topic['new'] && $context['user']['is_logged'])
 					echo '
 						<a href="', $topic['new_href'], '" id="newicon' . $topic['first_post']['id'] . '"><span class="icon-micro-new"></span></a>';
 
-			echo '
+			echo ' ' , $exclass, '
 					</div>
 				</li>
 				<li class="user">', $topic['first_post']['member']['link'], '</li>
@@ -324,8 +324,8 @@ function template_main()
 	</form>';
 
 		echo '
-	<div class="pagesection">
-		' , !empty($modSettings['topbottomEnable']) ? '<a href="#a_messageindex" id="a_go_up" class="button_submit buts"><strong>' . $txt['go_up'] . '</strong></a>' : '', template_button_strip($normal_buttons, 'right'), '
+	<div class="pagesection" style="margin-top: 5px;">
+		' , !empty($modSettings['topbottomEnable']) ? '<a href="#a_messageindex" id="a_go_up" class="button_submit buts"><span class="icon-up-open"></span></a>' : '', template_button_strip($normal_buttons, 'right'), '
 		<div class="pagelinks">', $context['page_index'], '</div>
 	</div>';
 	}

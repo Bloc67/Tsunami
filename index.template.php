@@ -458,10 +458,7 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	if (empty($buttons))
 		return;
 
-	echo '
-		<menu class="buttons', !empty($direction) ? ' float'.$direction : '', (empty($buttons) ? '" style="display: none;"' : '"'), (!empty($strip_options['id']) ? ' id="' . $strip_options['id'] . '"': ''), '>
-			', 	implode('', $buttons), '
-		</menu>';
+	echo 	implode('', $buttons);
 }
 function get_avatars($ids = '')
 {
