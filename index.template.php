@@ -97,6 +97,7 @@ function template_html_above()
 	echo $context['html_headers'];
 
 	echo '
+	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/user.css?v2" />
 </head>
 <body' , function_exists('template_body_id') ? template_body_id() : ''   , '>';
 }
@@ -121,7 +122,7 @@ function template_body_above()
 		</div>
 	</header>
 </section>
-<div id="h_linktree"><span class="icon-down-open" id="oaside"></span>' , theme_linktree() , '</div>
+<div id="h_linktree"><a href="#maincontent" id="oaside"><span class="icon-down-open"></span></a>' , theme_linktree() , '</div>
 <div id="tsunami">Tsunami <span>theme by Bloc</span></div>
 
 <section id="contentsection">
@@ -280,7 +281,6 @@ function theme_linktree($force_show = false)
 		return;
 
 	echo '
-		<img id="upshrink" src="', $settings['images_url'], '/upshrink.png" alt="*" title="', $txt['upshrink_description'], '" style="display: none;" />
 		<ul class="reset">';
 
 	// Each tree item has a URL and name. Some may have extra_before and extra_after.
@@ -450,8 +450,20 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	foreach ($button_strip as $key => $value)
 	{
 		if (!isset($value['test']) || !empty($context[$value['test']]))
-			$buttons[] = '
+		{
+			if(isset($value['icon']))
+			{
+				if(is_array($value['icon']))
+					$buttons[] = '
+				<a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="button_strip_' . $key . (isset($value['active']) ? ' active' : '') . '" href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span class="button_submit buts is_icon"><span style="opacity: 0.7;" class="mobile ' . (implode('"></span><span class="mobile iconbig ',$value['icon'])) . '"></span><span class="desktop">' . $txt[$value['text']] . '</span></span></a>';
+				else
+					$buttons[] = '
+				<a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="button_strip_' . $key . (isset($value['active']) ? ' active' : '') . '" href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span class="button_submit buts is_icon"><span class="' . $value['icon'] . ' mobile iconbig"></span><span class="desktop">' . $txt[$value['text']] . '</span></span></a>';
+			}
+			else
+				$buttons[] = '
 				<a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="button_strip_' . $key . (isset($value['active']) ? ' active' : '') . '" href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span class="button_submit buts">' . $txt[$value['text']] . '</span></a>';
+		}
 	}
 
 	// No buttons? No button strip either.

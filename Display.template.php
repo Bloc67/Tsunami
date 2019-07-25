@@ -138,12 +138,12 @@ function template_main()
 
 	// Build the normal button array.
 	$normal_buttons = array(
-		'reply' => array('test' => 'can_reply', 'text' => 'reply', 'image' => 'reply.gif', 'lang' => true, 'url' => $scripturl . '?action=post;topic=' . $context['current_topic'] . '.' . $context['start'] . ';last_msg=' . $context['topic_last_message'], 'active' => true),
-		'add_poll' => array('test' => 'can_add_poll', 'text' => 'add_poll', 'image' => 'add_poll.gif', 'lang' => true, 'url' => $scripturl . '?action=editpoll;add;topic=' . $context['current_topic'] . '.' . $context['start']),
-		'notify' => array('test' => 'can_mark_notify', 'text' => $context['is_marked_notify'] ? 'unnotify' : 'notify', 'image' => ($context['is_marked_notify'] ? 'un' : '') . 'notify.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . ($context['is_marked_notify'] ? $txt['notification_disable_topic'] : $txt['notification_enable_topic']) . '\');"', 'url' => $scripturl . '?action=notify;sa=' . ($context['is_marked_notify'] ? 'off' : 'on') . ';topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
-		'mark_unread' => array('test' => 'can_mark_unread', 'text' => 'mark_unread', 'image' => 'markunread.gif', 'lang' => true, 'url' => $scripturl . '?action=markasread;sa=topic;t=' . $context['mark_unread_time'] . ';topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
-		'send' => array('test' => 'can_send_topic', 'text' => 'send_topic', 'image' => 'sendtopic.gif', 'lang' => true, 'url' => $scripturl . '?action=emailuser;sa=sendtopic;topic=' . $context['current_topic'] . '.0'),
-		'print' => array('text' => 'print', 'image' => 'print.gif', 'lang' => true, 'custom' => 'rel="new_win nofollow"', 'url' => $scripturl . '?action=printpage;topic=' . $context['current_topic'] . '.0'),
+		'reply' => array('icon' => 'icon-comment', 'test' => 'can_reply', 'text' => 'reply', 'image' => 'reply.gif', 'lang' => true, 'url' => $scripturl . '?action=post;topic=' . $context['current_topic'] . '.' . $context['start'] . ';last_msg=' . $context['topic_last_message'], 'active' => true),
+		'add_poll' => array('icon' => 'icon-chart-bar', 'test' => 'can_add_poll', 'text' => 'add_poll', 'image' => 'add_poll.gif', 'lang' => true, 'url' => $scripturl . '?action=editpoll;add;topic=' . $context['current_topic'] . '.' . $context['start']),
+		'notify' => array('icon' => 'icon-bell', 'test' => 'can_mark_notify', 'text' => $context['is_marked_notify'] ? 'unnotify' : 'notify', 'image' => ($context['is_marked_notify'] ? 'un' : '') . 'notify.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . ($context['is_marked_notify'] ? $txt['notification_disable_topic'] : $txt['notification_enable_topic']) . '\');"', 'url' => $scripturl . '?action=notify;sa=' . ($context['is_marked_notify'] ? 'off' : 'on') . ';topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
+		'mark_unread' => array('icon' => 'icon-reply-outline', 'test' => 'can_mark_unread', 'text' => 'mark_unread', 'image' => 'markunread.gif', 'lang' => true, 'url' => $scripturl . '?action=markasread;sa=topic;t=' . $context['mark_unread_time'] . ';topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
+		'send' => array('icon' => 'icon-mail', 'test' => 'can_send_topic', 'text' => 'send_topic', 'image' => 'sendtopic.gif', 'lang' => true, 'url' => $scripturl . '?action=emailuser;sa=sendtopic;topic=' . $context['current_topic'] . '.0'),
+		'print' => array('icon' => 'icon-print', 'text' => 'print', 'image' => 'print.gif', 'lang' => true, 'custom' => 'rel="new_win nofollow"', 'url' => $scripturl . '?action=printpage;topic=' . $context['current_topic'] . '.0'),
 	);
 
 	// Allow adding new buttons easily.
@@ -156,9 +156,9 @@ function template_main()
 <article id="a_display" class="clear">
 	<div class="pagesection clear">
 		<div class="clear bgline">
-			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#lastPost" class="button_submit buts floatleft"><span class="icon-down-open"></span></a>&nbsp;' : '', '
+			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#lastPost" class="button_submit buts floatleft"><span class="icon-down-open"></span></a>' : '', '
 			', template_button_strip($normal_buttons, 'right'), '
-			<div class="button_submit buts">', $context['previous_next'], '</div>
+			<div class="button_submit buts is_icon">', $context['previous_next'], '</div>
 		</div>
 		<div class="pagelinks clear"><small>', $txt['pages'], '</small> ', $context['page_index'], '</div>
 	</div>';
@@ -218,7 +218,7 @@ function template_main()
 		// Show information about the poster of this message.
 		echo '
 					<div class="poster">
-						<h3>';
+						<h3 class="floatleft">';
 
 		// Show online and offline buttons?
 		if (!empty($modSettings['onlineEnable']) && !$message['member']['is_guest'])
@@ -228,13 +228,22 @@ function template_main()
 		// Show a link to the member's profile.
 		echo '
 							', $message['member']['link'], '
-						</h3>
-						<ul class="reset smalltext" id="msg_', $message['id'], '_extra_info">';
+						</h3>';
+
+		if (!$message['member']['is_guest'])
+		{
+			// Show avatars, images, etc.?
+			if (!empty($settings['show_user_images']) && empty($options['show_no_avatars']) && !empty($message['member']['avatar']['image']))
+				echo '
+						<a class="mavatar mobile floatright" href="', $scripturl, '?action=profile;u=', $message['member']['id'], '" style="background-image: url(', $message['member']['avatar']['href'], ');"></a>';
+		}
+		echo '
+						<ul class="desktop reset smalltext" id="msg_', $message['id'], '_extra_info">';
 
 		// Show the member's custom title, if they have one.
 		if (!empty($message['member']['title']))
 			echo '
-							<li class="title">', $message['member']['title'], '</li>';
+							<li class="desktop title">', $message['member']['title'], '</li>';
 
 		// Show the member's primary group (like 'Administrator') if they have one.
 		if (!empty($message['member']['group']))
@@ -247,9 +256,9 @@ function template_main()
 			// Show the post group if and only if they have no other group or the option is on, and they are in a post group.
 			if ((empty($settings['hide_post_group']) || $message['member']['group'] == '') && $message['member']['post_group'] != '')
 				echo '
-							<li class="postgroup">', $message['member']['post_group'], '</li>';
+							<li class="desktop postgroup">', $message['member']['post_group'], '</li>';
 			echo '
-							<li class="stars">', $message['member']['group_stars'], '</li>';
+							<li class="desktop stars">', $message['member']['group_stars'], '</li>';
 
 			// Show avatars, images, etc.?
 			if (!empty($settings['show_user_images']) && empty($options['show_no_avatars']) && !empty($message['member']['avatar']['image']))
@@ -261,20 +270,20 @@ function template_main()
 			// Show how many posts they have made.
 			if (!isset($context['disabled_fields']['posts']))
 				echo '
-							<li class="postcount">', $txt['member_postcount'], ': ', $message['member']['posts'], '</li>';
+							<li class="desktop postcount">', $txt['member_postcount'], ': ', $message['member']['posts'], '</li>';
 
 			// Is karma display enabled?  Total or +/-?
 			if ($modSettings['karmaMode'] == '1')
 				echo '
-							<li class="karma">', $modSettings['karmaLabel'], ' ', $message['member']['karma']['good'] - $message['member']['karma']['bad'], '</li>';
+							<li class="desktop karma">', $modSettings['karmaLabel'], ' ', $message['member']['karma']['good'] - $message['member']['karma']['bad'], '</li>';
 			elseif ($modSettings['karmaMode'] == '2')
 				echo '
-							<li class="karma">', $modSettings['karmaLabel'], ' +', $message['member']['karma']['good'], '/-', $message['member']['karma']['bad'], '</li>';
+							<li class="desktop karma">', $modSettings['karmaLabel'], ' +', $message['member']['karma']['good'], '/-', $message['member']['karma']['bad'], '</li>';
 
 			// Is this user allowed to modify this member's karma?
 			if ($message['member']['karma']['allow'])
 				echo '
-							<li class="karma_allow">
+							<li class="desktop karma_allow">
 								<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $modSettings['karmaApplaudLabel'], '</a>
 								<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $modSettings['karmaSmiteLabel'], '</a>
 							</li>';
@@ -282,12 +291,12 @@ function template_main()
 			// Show the member's gender icon?
 			if (!empty($settings['show_gender']) && $message['member']['gender']['image'] != '' && !isset($context['disabled_fields']['gender']))
 				echo '
-							<li class="gender">', $txt['gender'], ': ', $message['member']['gender']['image'], '</li>';
+							<li class="desktop gender">', $txt['gender'], ': ', $message['member']['gender']['image'], '</li>';
 
 			// Show their personal text?
 			if (!empty($settings['show_blurb']) && $message['member']['blurb'] != '')
 				echo '
-							<li class="blurb">', $message['member']['blurb'], '</li>';
+							<li class="desktop blurb">', $message['member']['blurb'], '</li>';
 
 			// Any custom fields to show as icons?
 			if (!empty($message['member']['custom_fields']))
@@ -301,7 +310,7 @@ function template_main()
 					{
 						$shown = true;
 						echo '
-							<li class="im_icons flexlist">
+							<li class="im_icons desktop  flexlist">
 								<ul>';
 					}
 					echo '
@@ -316,7 +325,7 @@ function template_main()
 			// This shows the popular messaging icons.
 			if ($message['member']['has_messenger'] && $message['member']['can_view_profile'])
 				echo '
-							<li class="im_icons flexlist">
+							<li class="desktop im_icons flexlist">
 								<ul>
 									', !empty($message['member']['icq']['link']) ? '<li>' . $message['member']['icq']['link'] . '</li>' : '', '
 									', !empty($message['member']['msn']['link']) ? '<li>' . $message['member']['msn']['link'] . '</li>' : '', '
@@ -329,7 +338,7 @@ function template_main()
 			if ($settings['show_profile_buttons'])
 			{
 				echo '
-							<li class="profile">
+							<li class="desktop profile">
 								<ul class="flexlist">';
 				// Don't show the profile button if you're not allowed to view the profile.
 				if ($message['member']['can_view_profile'])
@@ -362,18 +371,18 @@ function template_main()
 				foreach ($message['member']['custom_fields'] as $custom)
 					if (empty($custom['placement']) || empty($custom['value']))
 						echo '
-							<li class="custom">', $custom['title'], ': ', $custom['value'], '</li>';
+							<li class="desktop custom">', $custom['title'], ': ', $custom['value'], '</li>';
 			}
 
 			// Are we showing the warning status?
 			if ($message['member']['can_see_warning'])
 				echo '
-							<li class="warning">', $context['can_issue_warning'] ? '<a href="' . $scripturl . '?action=profile;area=issuewarning;u=' . $message['member']['id'] . '">' : '', '<img src="', $settings['images_url'], '/warning_', $message['member']['warning_status'], '.gif" alt="', $txt['user_warn_' . $message['member']['warning_status']], '" />', $context['can_issue_warning'] ? '</a>' : '', '<span class="warn_', $message['member']['warning_status'], '">', $txt['warn_' . $message['member']['warning_status']], '</span></li>';
+							<li class="desktop warning">', $context['can_issue_warning'] ? '<a href="' . $scripturl . '?action=profile;area=issuewarning;u=' . $message['member']['id'] . '">' : '', '<img src="', $settings['images_url'], '/warning_', $message['member']['warning_status'], '.gif" alt="', $txt['user_warn_' . $message['member']['warning_status']], '" />', $context['can_issue_warning'] ? '</a>' : '', '<span class="warn_', $message['member']['warning_status'], '">', $txt['warn_' . $message['member']['warning_status']], '</span></li>';
 		}
 		// Otherwise, show the guest's email.
 		elseif (!empty($message['member']['email']) && in_array($message['member']['show_email'], array('yes', 'yes_permission_override', 'no_through_forum')))
 			echo '
-							<li class="email"><a href="', $scripturl, '?action=emailuser;sa=email;msg=', $message['id'], '" rel="nofollow">', ($settings['use_image_buttons'] ? '<img src="' . $settings['images_url'] . '/email_sm.gif" alt="' . $txt['email'] . '" title="' . $txt['email'] . '" />' : $txt['email']), '</a></li>';
+							<li class="desktop email"><a href="', $scripturl, '?action=emailuser;sa=email;msg=', $message['id'], '" rel="nofollow">', ($settings['use_image_buttons'] ? '<img src="' . $settings['images_url'] . '/email_sm.gif" alt="' . $txt['email'] . '" title="' . $txt['email'] . '" />' : $txt['email']), '</a></li>';
 
 		// Done with the information about the poster... on to the post itself.
 		echo '
@@ -381,7 +390,10 @@ function template_main()
 					</div>
 					<div class="postarea">
 						<div class="flow_hidden">
-							<div class="keyinfo">
+							<h4 id="subject_', $message['id'], '" class="mobile headerpost">
+								<a href="', $message['href'], '" rel="nofollow">', $message['subject'], ' <small class="floatright">' , $message['time'], '</small></a>
+							</h4>
+							<div class="keyinfo desktop">
 								<div class="messageicon">
 									<img src="', $settings['images_url'] .'/post/svg/'. $message['icon'] . '.svg" alt=""', $message['can_modify'] ? ' id="msg_icon_' . $message['id'] . '"' : '', ' />
 								</div>
@@ -389,7 +401,7 @@ function template_main()
 									<a href="', $message['href'], '" rel="nofollow">', $message['subject'], '</a>
 								</h5>
 							</div>
-							<div class="keyinfotext smalltext">&#171; <strong>', !empty($message['counter']) ? $txt['reply_noun'] . ' #' . $message['counter'] : '', ' ', $txt['on'], ':</strong> ', $message['time'], ' &#187;</div>
+							<div class="keyinfotext smalltext desktop">&#171; <strong>', !empty($message['counter']) ? $txt['reply_noun'] . ' #' . $message['counter'] : '', ' ', $txt['on'], ':</strong> ', $message['time'], ' &#187;</div>
 							<div class="" id="msg_', $message['id'], '_quick_mod"></div>
 							';
 
@@ -401,37 +413,37 @@ function template_main()
 		// Maybe we can approve it, maybe we should?
 		if ($message['can_approve'])
 			echo '
-								<li class="approve_button button_submit buts"><a href="', $scripturl, '?action=moderate;area=postmod;sa=approve;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $txt['approve'], '</a></li>';
+								<li class="is_icon approve_button button_submit buts"><a href="', $scripturl, '?action=moderate;area=postmod;sa=approve;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '"><span class="icon-thumbs-up iconbig mobile"></span><span class="desktop">', $txt['approve'], '</span></a></li>';
 
 		// Can they reply? Have they turned on quick reply?
 		if ($context['can_quote'] && !empty($options['display_quick_reply']))
 			echo '
-								<li class="quote_button button_submit buts"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '" onclick="return oQuickReply.quote(', $message['id'], ');">', $txt['quote'], '</a></li>';
+								<li class="is_icon quote_button button_submit buts"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '" onclick="return oQuickReply.quote(', $message['id'], ');"><span class="icon-chat iconbig mobile"></span><span class="desktop">', $txt['quote'], '</span></a></li>';
 
 		// So... quick reply is off, but they *can* reply?
 		elseif ($context['can_quote'])
 			echo '
-								<li class="quote_button button_submit buts"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '">', $txt['quote'], '</a></li>';
+								<li class="is_icon quote_button button_submit buts"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '"><span class="icon-comment iconbig mobile"></span><span class="desktop">', $txt['quote'], '</span></a></li>';
 
 		// Can the user modify the contents of this post?
 		if ($message['can_modify'])
 			echo '
-								<li class="modify_button  button_submit buts"><a href="', $scripturl, '?action=post;msg=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], '">', $txt['modify'], '</a></li>';
+								<li class="is_icon modify_button  button_submit buts"><a href="', $scripturl, '?action=post;msg=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], '"><span class="icon-wrench-outline iconbig mobile"></span><span class="desktop">', $txt['modify'], '</span></a></li>';
 
 		// How about... even... remove it entirely?!
 		if ($message['can_remove'])
 			echo '
-								<li class="remove_button button_submit buts"><a href="', $scripturl, '?action=deletemsg;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '" onclick="return confirm(\'', $txt['remove_message'], '?\');">', $txt['remove'], '</a></li>';
+								<li class="is_icon remove_button button_submit buts"><a href="', $scripturl, '?action=deletemsg;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '" onclick="return confirm(\'', $txt['remove_message'], '?\');"><span class="icon-trash iconbig mobile"></span><span class="desktop">', $txt['remove'], '</span></a></li>';
 
 		// What about splitting it off the rest of the topic?
 		if ($context['can_split'] && !empty($context['real_num_replies']))
 			echo '
-								<li class="split_button button_submit buts"><a href="', $scripturl, '?action=splittopics;topic=', $context['current_topic'], '.0;at=', $message['id'], '">', $txt['split'], '</a></li>';
+								<li class="is_icon split_button button_submit buts"><a href="', $scripturl, '?action=splittopics;topic=', $context['current_topic'], '.0;at=', $message['id'], '"><span class="icon-flow-split iconbig mobile"></span><span class="desktop">', $txt['split'], '</span></a></li>';
 
 		// Can we restore topics?
 		if ($context['can_restore_msg'])
 			echo '
-								<li class="restore_button button_submit buts"><a href="', $scripturl, '?action=restoretopic;msgs=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $txt['restore_message'], '</a></li>';
+								<li class="is_icon restore_button button_submit buts"><a href="', $scripturl, '?action=restoretopic;msgs=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '"><span class="icon-cog-outline iconbig mobile"></span><span class="desktop">', $txt['restore_message'], '</span></a></li>';
 
 		// Show a checkbox for quick moderation?
 		if (!empty($options['display_quick_mod']) && $options['display_quick_mod'] == 1 && $message['can_remove'])
@@ -441,8 +453,8 @@ function template_main()
 		// Can the user modify the contents of this post?  Show the modify inline image.
 		if ($message['can_modify'])
 			echo '
-								<li class="button_submit buts">
-									<span class="icon-edit" id="modify_button_', $message['id'], '" style="cursor: pointer; " onclick="oQuickModify.modifyMsg(\'', $message['id'], '\')"></span>
+								<li class="is_icon button_submit buts">
+									<span class="icon-edit iconbig" id="modify_button_', $message['id'], '" style="cursor: pointer; " onclick="oQuickModify.modifyMsg(\'', $message['id'], '\')"></span>
 								</li>';
 
 		if ($message['can_approve'] || $context['can_reply'] || $message['can_modify'] || $message['can_remove'] || $context['can_split'] || $context['can_restore_msg'])
@@ -634,23 +646,23 @@ function template_main()
 	<div class="pagesection clear">
 		<div class="pagelinks clear"><small>', $txt['pages'], '</small> ', $context['page_index'], '</div>
 		<div class="clear bgline">
-			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#top" class="button_submit buts floatleft"><span class="icon-up-open"></span></a>&nbsp;' : '', '
+			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#top" class="button_submit buts floatleft"><span class="icon-up-open"></span></a>' : '', '
 			', template_button_strip($normal_buttons, 'right'), '
 		</div>
 	</div>';
 
 	$mod_buttons = array(
-		'move' => array('test' => 'can_move', 'text' => 'move_topic', 'image' => 'admin_move.gif', 'lang' => true, 'url' => $scripturl . '?action=movetopic;topic=' . $context['current_topic'] . '.0'),
-		'delete' => array('test' => 'can_delete', 'text' => 'remove_topic', 'image' => 'admin_rem.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . $txt['are_sure_remove_topic'] . '\');"', 'url' => $scripturl . '?action=removetopic2;topic=' . $context['current_topic'] . '.0;' . $context['session_var'] . '=' . $context['session_id']),
-		'lock' => array('test' => 'can_lock', 'text' => empty($context['is_locked']) ? 'set_lock' : 'set_unlock', 'image' => 'admin_lock.gif', 'lang' => true, 'url' => $scripturl . '?action=lock;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
-		'sticky' => array('test' => 'can_sticky', 'text' => empty($context['is_sticky']) ? 'set_sticky' : 'set_nonsticky', 'image' => 'admin_sticky.gif', 'lang' => true, 'url' => $scripturl . '?action=sticky;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
-		'merge' => array('test' => 'can_merge', 'text' => 'merge', 'image' => 'merge.gif', 'lang' => true, 'url' => $scripturl . '?action=mergetopics;board=' . $context['current_board'] . '.0;from=' . $context['current_topic']),
-		'calendar' => array('test' => 'calendar_post', 'text' => 'calendar_link', 'image' => 'linktocal.gif', 'lang' => true, 'url' => $scripturl . '?action=post;calendar;msg=' . $context['topic_first_message'] . ';topic=' . $context['current_topic'] . '.0'),
+		'move' => array('icon' => array('icon-right-open','icon-doc-text'), 'test' => 'can_move', 'text' => 'move_topic', 'image' => 'admin_move.gif', 'lang' => true, 'url' => $scripturl . '?action=movetopic;topic=' . $context['current_topic'] . '.0'),
+		'delete' => array('icon' => array('icon-right-open','icon-trash'),'test' => 'can_delete', 'text' => 'remove_topic', 'image' => 'admin_rem.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . $txt['are_sure_remove_topic'] . '\');"', 'url' => $scripturl . '?action=removetopic2;topic=' . $context['current_topic'] . '.0;' . $context['session_var'] . '=' . $context['session_id']),
+		'lock' => array('icon' => array('icon-right-open','icon-lock'),'test' => 'can_lock', 'text' => empty($context['is_locked']) ? 'set_lock' : 'set_unlock', 'image' => 'admin_lock.gif', 'lang' => true, 'url' => $scripturl . '?action=lock;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
+		'sticky' => array('icon' => array('icon-right-open','icon-pin-outline'),'test' => 'can_sticky', 'text' => empty($context['is_sticky']) ? 'set_sticky' : 'set_nonsticky', 'image' => 'admin_sticky.gif', 'lang' => true, 'url' => $scripturl . '?action=sticky;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
+		'merge' => array('icon' => array('icon-right-open','icon-flow-cross'),'test' => 'can_merge', 'text' => 'merge', 'image' => 'merge.gif', 'lang' => true, 'url' => $scripturl . '?action=mergetopics;board=' . $context['current_board'] . '.0;from=' . $context['current_topic']),
+		'calendar' => array('icon' => array('icon-right-open','icon-clock'),'test' => 'calendar_post', 'text' => 'calendar_link', 'image' => 'linktocal.gif', 'lang' => true, 'url' => $scripturl . '?action=post;calendar;msg=' . $context['topic_first_message'] . ';topic=' . $context['current_topic'] . '.0'),
 	);
 
 	// Restore topic. eh?  No monkey business.
 	if ($context['can_restore_topic'])
-		$mod_buttons[] = array('text' => 'restore_topic', 'image' => '', 'lang' => true, 'url' => $scripturl . '?action=restoretopic;topics=' . $context['current_topic'] . ';' . $context['session_var'] . '=' . $context['session_id']);
+		$mod_buttons[] = array('icon' => array('icon-right-open','icon-reply-outline'),'text' => 'restore_topic', 'image' => '', 'lang' => true, 'url' => $scripturl . '?action=restoretopic;topics=' . $context['current_topic'] . ';' . $context['session_var'] . '=' . $context['session_id']);
 
 	// Allow adding new mod buttons easily.
 	call_integration_hook('integrate_mod_buttons', array(&$mod_buttons));

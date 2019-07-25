@@ -14,12 +14,6 @@ function template_main()
 <article id="a_boardindex">
 	<div class="a_boards">';
 
-	// the upshrink image, right-floated
-	echo '
-	<div class="floatright" id="abuttons">
-		<span id="bindex_switch" class="icon-doc" ></span>
-	</div>';
-
 	foreach ($context['categories'] as $category)
 	{
 		// If theres no parent boards we can see, avoid showing an empty category (unless its collapsed)
@@ -134,37 +128,6 @@ function template_main()
 			echo '
 	<div class="a_markread">', template_button_strip($mark_read_button, 'right'), '</div>';
 	}
-	// add option for a smaller set of display
-	echo '
-		<script type="text/javascript"><!-- // --><![CDATA[
-			var oBoardindexToggle = new tsu_Toggle({
-				bToggleEnabled: true,
-				bCurrentlyCollapsed: ', empty($options['collapse_bindex']) ? 'false' : 'true', ',
-				aSwappableContainers: [
-					\'a_board_description\',
-					\'a_board_lastpost\'
-				],
-				aSwapIconClass: [
-					{
-						sId: \'bindex_switch\',
-						classExpanded: \'icon-doc\',
-						classCollapsed: \'icon-doc-text\'
-					}
-				],
-				oThemeOptions: {
-					bUseThemeSettings: ', $context['user']['is_guest'] ? 'false' : 'true', ',
-					sOptionName: \'collapse_bindex\',
-					sSessionVar: ', JavaScriptEscape($context['session_var']), ',
-					sSessionId: ', JavaScriptEscape($context['session_id']), '
-				},
-				oCookieOptions: {
-					bUseCookie: ', $context['user']['is_guest'] ? 'true' : 'false', ',
-					sCookieName: \'bindex\'
-				}
-			});
-		// ]]></script>
-		';
-
 	echo '
 </article>';
 	template_info_center();

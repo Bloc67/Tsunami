@@ -1,3 +1,7 @@
+/* #####################################	*/
+/* fonts used																		*/
+/* #####################################	*/
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -24,7 +28,11 @@
        url('../webfonts/open-sans-v16-latin-700.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
 
+/* #####################################	*/
+/* basic normalize																*/
+/* #####################################	*/
 /*! modern-normalize | MIT License | https://github.com/sindresorhus/modern-normalize */
+
 html { box-sizing: border-box;}
 *,*::before,*::after { box-sizing: inherit;}
 :root { -moz-tab-size: 4;	tab-size: 4;}
@@ -137,32 +145,28 @@ ul.reset, ul.reset li { padding: 0;	margin: 0;	list-style: none;}
 /* Some BBC related styles.
 ------------------------------------------------------- */
 /* A quote, perhaps from another post. */
-blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote
-{
-	font-size: x-small;
-	color: #000;
-	line-height: 1.4em;
-	background: url(../images/theme/quote.png) 0.1em 0.1em no-repeat;
-	border-top: 2px solid #99A;
-	border-bottom: 2px solid #99A;
-	padding: 1.1em 1.4em;
-	margin: 0.1em 0 0.3em 0;
+blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote {
+	font-size: 90%;
+	color: #555;
+	border-top: 4px double #888;
+	border-bottom: 4px double #888;
+	padding: 1rem 1rem;
+	margin: 0 0 0.5rem 0;
 	overflow: auto;
+	background: LightCyan;
 }
-blockquote.bbc_standard_quote { background-color: #d7daec;}
-blockquote.bbc_alternate_quote { background-color: #e7eafc;}
+blockquote.bbc_alternate_quote { background: white;}
 
 /* A code block - maybe PHP ;). */
-code.bbc_code
-{
+code.bbc_code {
 	display: block;
 	font-family: "dejavu sans mono", "monaco", "lucida console", "courier new", monospace;
 	font-size: x-small;
-	background: #eef;
-	border-top: 2px solid #999;
-	border-bottom: 2px solid #999;
+	background: #fff;
+	border: 1px solid #bbb;
+	border-left: 10px solid #bbb;
 	line-height: 1.5em;
-	padding: 3px 1em;
+	padding: 0.5rem 1rem;
 	overflow: auto;
 	white-space: nowrap;
 	/* Show a scrollbar after about 24 lines. */
@@ -170,13 +174,13 @@ code.bbc_code
 }
 
 /* The "Quote:" and "Code:" header parts... */
-.codeheader, .quoteheader
-{
-	color: #666;
-	font-size: x-small;
+.codeheader, .quoteheader {
+	color: teal;
+	font-size: 0.7rem;
 	font-weight: bold;
-	padding: 0 0.3em;
+	padding: 0.3em 0;
 }
+.codeheader a, .quoteheader a {color: teal; }
 .codeoperation { font-weight: normal;}
 .bbc_link:link, .bbc_link:visited { border-bottom: 1px solid #A8B6CF;}
 .bbc_link:hover { text-decoration: none;	border-bottom: 1px solid #346;}
@@ -446,6 +450,9 @@ a.icon-new:after {
 .icon-edit:before { content: '\e837'; }
 .icon-flow-split:before { content: '\e838'; }
 .icon-mail:before { content: '\e839'; }
+.icon-print:before { content: '\e83b'; }
+.icon-flow-cross:before { content: '\e83a'; } 
+
 
 /* sections */
 body {
@@ -582,7 +589,8 @@ section#headersection, #footersection {
 #maincontent { padding-top: 2rem; background: #fff; }
 #tsunami {
     background-size: 100% auto;
-    background-attachment: fixed;
+	background-position: bottom left;
+	background-attachment: fixed;
     padding: 0.7rem 2rem 3% 2.2rem;
     font-size: 1.1rem;
     color: rgba(255,255,255,0.7);
@@ -724,8 +732,16 @@ ul.reset.dropmenu ul li:hover a:hover {
 #mobilmeny:checked ~ #mobilmeny_label span:before {
     content: '\e82f'; 
     font-size: 1.4rem;
-    margin-left: 0;
-    opacity: 0.5;
+    margin-top: -4px;
+	margin-left: -4px;
+	position: fixed;
+	z-index: 99;
+	background: #000;
+	border-radius: 50%;
+	width: 2rem;
+	height: 2rem;
+	line-height: 2rem;
+	box-shadow: 5px 5px 10px 0 rgba(0,0,0,0.2);
 }
 body { position: relative;}
 #menu_nav_mobile {
@@ -994,6 +1010,7 @@ menu.buttons .buts { text-align: center; }
     height: 16px;
     margin-top: 6px;
     background: #eee !important;
+	border-radius: 3px;
 }
 .avvy_new .avvy { background: teal !important;}
 .avvy_new2 .avvy { opacity: 0.5; background: teal !important;}
@@ -1261,7 +1278,11 @@ dl.settings dt {   font-size: 0.9rem; line-height: 1.3rem; }
 dl.settings dd input[type=checkbox] {margin-top: -3px;}
 
 
+
+/* ############################### */
 /* responsive  */
+/* ############################### */
+
 @media only screen and (max-width:1059px) {
     #h_user .user { display: block;}
     .mavatar { width: 40px; height: 40px; float: right;  }
@@ -1276,7 +1297,9 @@ dl.settings dd input[type=checkbox] {margin-top: -3px;}
     #mobilnav { display: block;}
     #desktopmenu { display: none;}
     #topheader {grid-template-columns: auto 50px;}
-    .a_boards ul.a_boards_single {
+	#tsunami { background-size: auto 220px; background-position: top left; }
+
+	.a_boards ul.a_boards_single {
         grid-template-columns: 40px 1fr 5rem 5px;
         padding-left: 0;
     }
@@ -1292,16 +1315,16 @@ dl.settings dd input[type=checkbox] {margin-top: -3px;}
         width: 14px !important;
     }
     .a_topics_single {
-        grid-template-columns: 24px 1fr 1fr 24px;
+        grid-template-columns: 24px 1fr 5rem 24px;
         grid-template-areas:
-            "micon msubject msubject mmoderation"
+            "micon msubject mstats mmoderation"
             "micon mpages mpages mpages";
     }
     .a_topics_single li.lastpost {display: none; text-align: left; }
     .a_topics_single li.user {display: none; text-align: left; }
     .a_topics_single li.moderation {align-self: start;}
     .a_topics_single li.moderation input {margin-bottom: 0!important;}
-    .a_topics_single li.stats {display: none;text-align: right; }
+    .a_topics_single li.stats {text-align: right; }
     menu.buttons.floatright { 
         float: none; 
         clear: both;
@@ -1316,9 +1339,6 @@ dl.settings dd input[type=checkbox] {margin-top: -3px;}
     }
     .pagesection a.button_submit.buts {
         width: 100%;
-        background: linear-gradient(0deg, #4f5f5f,#6f7f7f) #4f5f5f;
-        color: white;
-        border-color: slategrey;
         text-align: center;
         padding: 0.3rem 0;
     }
@@ -1337,11 +1357,12 @@ dl.settings dd input[type=checkbox] {margin-top: -3px;}
     h1 {font-size: 1.2rem;}
     #supportVersionsTable, #live_news { width: 100%; }
     #smfAnnouncements dl { grid-template-columns: 1fr;    }
+    .desktop {  display: none;    }
+	.iconbig { font-size: 170%;}
+	.is_icon { padding: 0.3rem !important; }
 }
 @media only screen and (min-width:1060px) {
-    .mobile {
-        display: none;
-    }
+    .mobile {  display: none;    }
 }
 @media only screen and (min-width:1459px) {
     #contentsection {
