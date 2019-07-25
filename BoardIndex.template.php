@@ -1,6 +1,5 @@
 <?php
 
-
 function template_body_id()
 {
 	echo ' id="b_index"';
@@ -77,7 +76,7 @@ function template_main()
 						<span class="item"><span class="icon-user-outline"></span>', $board['last_post']['member']['link'] , '</span>
 						<span class="item"><span class="icon-clock"></span>', $board['last_post']['time'],'</span>
 					</span>';
-			
+
 				echo '
 			</li>
 			<li class="a_board_avvy' , ($board['new'] || $board['children_new']) ? ' avvy_new'.($board['children_new'] ? '2' : '') : '' , $board['is_redirect'] ? ' avvy_redirect' : '', '">
