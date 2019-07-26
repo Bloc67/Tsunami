@@ -84,7 +84,7 @@ function template_main()
 				else
 					echo '
 					<span class="memb">&nbsp;</span>';
-			
+
 				echo '
 			</li>
 			<li class="a_board_avvy' , ($board['new'] || $board['children_new']) ? ' avvy_new'.($board['children_new'] ? '2' : '') : '' , '">
@@ -147,7 +147,7 @@ function template_main()
 		echo '
 	<div class="pagesection">
 		<div class="pagelinks">', $context['page_index'],'</div>
-		' , !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a id="a_go_down" href="#bot" class="button_submit buts"><span class="icon-down-open"></span></a>' : '', '
+		' , !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a id="a_go_down" href="#bot" class="button_submit buts is_icon"><span class="icon-down-open iconbig"></span></a>' : '', '
 		', template_button_strip($normal_buttons, 'right'), '
 	</div>';
 
@@ -165,11 +165,10 @@ function template_main()
 			echo '
 			<ul class="reset a_topics_headers">
 				<li>
-					<a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=subject', $context['sort_by'] == 'subject' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['subject'], $context['sort_by'] == 'subject' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a> 
+					<a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=subject', $context['sort_by'] == 'subject' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['subject'], $context['sort_by'] == 'subject' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a>
 					/ <a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=starter', $context['sort_by'] == 'starter' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['started_by'], $context['sort_by'] == 'starter' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a>
-					/ <a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=replies', $context['sort_by'] == 'replies' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['replies'], $context['sort_by'] == 'replies' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a> 
-					/ <a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=views', $context['sort_by'] == 'views' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['views'], $context['sort_by'] == 'views' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a>
-				';
+					/ <a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=replies', $context['sort_by'] == 'replies' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['replies'], $context['sort_by'] == 'replies' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a>
+					/ <a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=views', $context['sort_by'] == 'views' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['views'], $context['sort_by'] == 'views' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a>';
 
 			// Show a "select all" box for quick moderation?
 			if (empty($context['can_quick_mod']))
@@ -183,7 +182,7 @@ function template_main()
 			if (!empty($context['can_quick_mod']) && $options['display_quick_mod'] == 1)
 				echo '
 				<input type="checkbox" onclick="invertAll(this, this.form, \'topics[]\');" class="input_check floatright" />';
-			
+
 			echo '
 				</li>
 			</ul>';
@@ -206,13 +205,13 @@ function template_main()
 				$exclass .= '<span class="icon-comment smaller green" title="' . $txt['participation_caption'] . '"></span>';
 			if($topic['is_poll'])
 				$exclass .= '<span class="icon-chart-bar smaller" title="' . $txt['poll'] . '"></span>';
-			
+
 			$hotish = '';
 			if($topic['is_hot'])
 				$hotish =' hot';
 			if($topic['is_very_hot'])
 				$hotish =' veryhot';
-			
+
 			echo '
 			<ul class="reset a_topics_single' ,  $hotish , '">
 				<li class="icon1"><img src="', $settings['images_url'], '/post/svg/', $topic['first_post']['icon'], '.svg" alt="" /></li>
@@ -325,7 +324,7 @@ function template_main()
 
 		echo '
 	<div class="pagesection" style="margin-top: 5px;">
-		' , !empty($modSettings['topbottomEnable']) ? '<a href="#a_messageindex" id="a_go_up" class="button_submit buts"><span class="icon-up-open"></span></a>' : '', template_button_strip($normal_buttons, 'right'), '
+		' , !empty($modSettings['topbottomEnable']) ? '<a href="#a_messageindex" id="a_go_up" class="button_submit buts is_icon"><span class="icon-up-open iconbig"></span></a>' : '', template_button_strip($normal_buttons, 'right'), '
 		<div class="pagelinks">', $context['page_index'], '</div>
 	</div>';
 	}

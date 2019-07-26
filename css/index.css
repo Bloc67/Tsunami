@@ -1170,6 +1170,7 @@ menu.buttons.floatright a span{ overflow: hidden; }
 .a_topics_single.hot { border-left: 2px solid #ffe080; }
 .a_topics_single.veryhot { border-left: 2px solid #ff5000; }
 
+
 .moderation_bar { margin-top: 8px; text-align: right;}
 #topic_icons { border-top: solid 1px #ddd;}
 
@@ -1329,11 +1330,9 @@ dl.settings dd input[type=checkbox] {margin-top: -3px;}
         grid-gap: 4px;
     }
     menu.buttons.floatright a span{
-        width: 100% !important;
         white-space: nowrap;
     }
     .pagesection a.button_submit.buts {
-        width: 100%;
         text-align: center;
         padding: 0.3rem 0;
     }
@@ -1353,8 +1352,37 @@ dl.settings dd input[type=checkbox] {margin-top: -3px;}
     #supportVersionsTable, #live_news { width: 100%; }
     #smfAnnouncements dl { grid-template-columns: 1fr;    }
     .desktop {  display: none;    }
-	.iconbig { font-size: 170%;}
-	.is_icon { padding: 0.3rem !important; }
+	.iconbig { font-size: 130%;}
+	.is_icon { padding: 0.1rem 0.4rem !important; }
+    .a_message {grid-template-columns: 1fr;}
+    #a_maside h2.header_name {
+        font-size: 1.1rem;
+        border: none;
+    }
+    #a_maside h2.header_name small {
+        margin-top: 0.4rem;
+    }
+    h4.mobile.headerpost { padding: 0 0.2rem 0.7rem 0.2rem;}
+    ul.quickbuttons {margin-left: 0; }
+    .post {padding: 0.7rem 0.2rem;}
+    .pagelinks { padding: 0.2rem 0.2rem 0.5rem 0.2rem;}
+    .a_message .poster { border-bottom: solid 1px #ccc; margin-bottom: 0.5rem;padding: 0; background: none; }
+    .a_message {grid-gap: 0;}
+    .a_message .poster h3 {margin: 1rem 0 0rem 0; padding: 0;}
+    .a_message .poster .mavatar {margin: 0 0 0.5rem 0;}
+    #a_boardindex .button_strip_markread span {
+        width: 100%;
+    }
+    #h_user { padding: 0 0.3rem;}
+    #h_news {padding: 0 0.2rem; border: none; background: none;}
+    #h_news h2, #h_news p { font-size: 0.9rem;display: inline; clear: none;}
+    #tsunami {padding-left: 1.1rem;}
+    .pagelinks { padding-left: 0;}
+    #h_search { padding: 0; }
+    h4.headerpost small, h2.header_name small {font-weight: normal;} 
+    #a_maside .a_boards {margin-bottom: 1rem;}
+    .a_topics_single { padding: 0.5rem !important}
+    .is_icon.space { margin-right: 5px !important; }
 }
 @media only screen and (min-width:1060px) {
     .mobile {  display: none;    }

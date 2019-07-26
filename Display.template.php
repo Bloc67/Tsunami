@@ -16,7 +16,7 @@ function template_main()
 			' , $context['is_sticky'] ? '<span class="icon-pin-outline red"></span>' : '' , '
 			' , $context['is_locked'] ? '<span class="icon-lock blue"></span>' : '' , '
 		</small>
-	</h2>';	
+	</h2>';
 
 	if ($context['report_sent'])
 		echo '
@@ -87,8 +87,8 @@ function template_main()
 
 			echo '
 				</ul>
-				<div class="floatleft" id="pollmoderation">
-					<input type="submit" value="', $txt['poll_vote'], '" class="button_submit" />
+				<div class="floatleft is_icon space" id="pollmoderation">
+					<input type="submit" value="', $txt['poll_vote'], '" class="button_submit buts iconbig" />
 					<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 				</div>
 			</form>
@@ -96,17 +96,17 @@ function template_main()
 		}
 		// Build the poll moderation button array.
 		$poll_buttons = array(
-			'vote' => array('test' => 'allow_return_vote', 'text' => 'poll_return_vote', 'image' => 'poll_options.gif', 'lang' => true, 'url' => $scripturl . '?topic=' . $context['current_topic'] . '.' . $context['start']),
-			'results' => array('test' => 'show_view_results_button', 'text' => 'poll_results', 'image' => 'poll_results.gif', 'lang' => true, 'url' => $scripturl . '?topic=' . $context['current_topic'] . '.' . $context['start'] . ';viewresults'),
-			'change_vote' => array('test' => 'allow_change_vote', 'text' => 'poll_change_vote', 'image' => 'poll_change_vote.gif', 'lang' => true, 'url' => $scripturl . '?action=vote;topic=' . $context['current_topic'] . '.' . $context['start'] . ';poll=' . $context['poll']['id'] . ';' . $context['session_var'] . '=' . $context['session_id']),
-			'lock' => array('test' => 'allow_lock_poll', 'text' => (!$context['poll']['is_locked'] ? 'poll_lock' : 'poll_unlock'), 'image' => 'poll_lock.gif', 'lang' => true, 'url' => $scripturl . '?action=lockvoting;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
-			'edit' => array('test' => 'allow_edit_poll', 'text' => 'poll_edit', 'image' => 'poll_edit.gif', 'lang' => true, 'url' => $scripturl . '?action=editpoll;topic=' . $context['current_topic'] . '.' . $context['start']),
-			'remove_poll' => array('test' => 'can_remove_poll', 'text' => 'poll_remove', 'image' => 'admin_remove_poll.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . $txt['poll_remove_warn'] . '\');"', 'url' => $scripturl . '?action=removepoll;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
+			'vote' => array('icon' => 'icon-chart-bar', 'test' => 'allow_return_vote', 'text' => 'poll_return_vote', 'image' => 'poll_options.gif', 'lang' => true, 'url' => $scripturl . '?topic=' . $context['current_topic'] . '.' . $context['start']),
+			'results' => array('icon' => 'icon-chart-bar', 'test' => 'show_view_results_button', 'text' => 'poll_results', 'image' => 'poll_results.gif', 'lang' => true, 'url' => $scripturl . '?topic=' . $context['current_topic'] . '.' . $context['start'] . ';viewresults'),
+			'change_vote' => array('icon' => 'icon-chart-bar', 'test' => 'allow_change_vote', 'text' => 'poll_change_vote', 'image' => 'poll_change_vote.gif', 'lang' => true, 'url' => $scripturl . '?action=vote;topic=' . $context['current_topic'] . '.' . $context['start'] . ';poll=' . $context['poll']['id'] . ';' . $context['session_var'] . '=' . $context['session_id']),
+			'lock' => array('icon' => 'icon-chart-bar', 'test' => 'allow_lock_poll', 'text' => (!$context['poll']['is_locked'] ? 'poll_lock' : 'poll_unlock'), 'image' => 'poll_lock.gif', 'lang' => true, 'url' => $scripturl . '?action=lockvoting;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
+			'edit' => array('icon' => 'icon-chart-bar', 'test' => 'allow_edit_poll', 'text' => 'poll_edit', 'image' => 'poll_edit.gif', 'lang' => true, 'url' => $scripturl . '?action=editpoll;topic=' . $context['current_topic'] . '.' . $context['start']),
+			'remove_poll' => array('icon' => 'icon-trash', 'test' => 'can_remove_poll', 'text' => 'poll_remove', 'image' => 'admin_remove_poll.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . $txt['poll_remove_warn'] . '\');"', 'url' => $scripturl . '?action=removepoll;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
 		);
 
-		template_button_strip($poll_buttons,'right');
-		
-		
+		template_button_strip($poll_buttons,'right mobileclear');
+
+
 		// Is the clock ticking?
 		if (!empty($context['poll']['expire_time']))
 			echo '
@@ -148,7 +148,6 @@ function template_main()
 
 	// Allow adding new buttons easily.
 	call_integration_hook('integrate_display_buttons', array(&$normal_buttons));
-
 	convertPageindex();
 
 	echo '
@@ -156,11 +155,11 @@ function template_main()
 <article id="a_display" class="clear">
 	<div class="pagesection clear">
 		<div class="clear bgline">
-			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#lastPost" class="button_submit buts floatleft"><span class="icon-down-open"></span></a>' : '', '
+			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#lastPost" class="button_submit buts floatleft is_icon space"><span class="icon-down-open iconbig"></span></a>' : '', '
 			', template_button_strip($normal_buttons, 'right'), '
 			<div class="button_submit buts is_icon">', $context['previous_next'], '</div>
 		</div>
-		<div class="pagelinks clear"><small>', $txt['pages'], '</small> ', $context['page_index'], '</div>
+		<div class="pagelinks clear"><small class="desktop">', $txt['pages'], '</small> ', $context['page_index'], '</div>
 	</div>';
 
 	// Show the topic information - icon, subject, etc.
@@ -525,7 +524,7 @@ function template_main()
 									<a href="' . $attachment['href'] . '"><span class="dsload icon-download-outline"></span></a>
 									<img src="', $attachment['href'], ';image" class="modal-content" alt="*">
 									<div class="caption">' , $attachment['name'], '</div>
-								</div>								
+								</div>
 								';
 					else
 						echo '
@@ -541,7 +540,7 @@ function template_main()
 				if (!$attachment['is_approved'] && $context['can_approve'])
 					echo '
 								<a  class="a_block" href="', $scripturl, '?action=attachapprove;sa=approve;aid=', $attachment['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $txt['approve'], '</a>]&nbsp;|&nbsp;[<a href="', $scripturl, '?action=attachapprove;sa=reject;aid=', $attachment['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $txt['delete'], '</a>';
-				
+
 				echo '
 								<div>', $attachment['size'], ($attachment['is_image'] ? ', ' . $attachment['real_width'] . 'x' . $attachment['real_height'] . ' - ' . $txt['attach_viewed'] : ' - ' . $txt['attach_downloaded']) . ' ' . $attachment['downloads'] . ' ' . $txt['attach_times'] . '.</div>
 							</div>';
@@ -553,10 +552,9 @@ function template_main()
 
 		echo '
 					</div>
-				</div>	
+				</div>
 				<div>';
 
-		// Show "� Last Edit: Time by Person �" if this post was edited.
 		if ($settings['show_modify'] && !empty($message['modified']['name']))
 			echo '
 					<div class="smalltext modified information" id="modified_', $message['id'], '">
@@ -644,9 +642,9 @@ function template_main()
 	// Show the page index... "Pages: [1]".
 	echo '
 	<div class="pagesection clear">
-		<div class="pagelinks clear"><small>', $txt['pages'], '</small> ', $context['page_index'], '</div>
+		<div class="pagelinks clear"><small class="desktop">', $txt['pages'], '</small> ', $context['page_index'], '</div>
 		<div class="clear bgline">
-			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#top" class="button_submit buts floatleft"><span class="icon-up-open"></span></a>' : '', '
+			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#top" class="button_submit buts floatleft is_icon space"><span class="icon-up-open iconbig"></span></a>' : '', '
 			', template_button_strip($normal_buttons, 'right'), '
 		</div>
 	</div>';

@@ -28,7 +28,7 @@ function template_main()
 			<a class="collapse" href="', $category['collapse_href'], '"></a>';
 
 		if (!$context['user']['is_guest'] && !empty($category['show_unread']))
-			echo '
+		 echo '
 			<a class="unreadlink floatright" href="', $scripturl, '?action=unread;c=', $category['id'], '">', $txt['view_unread_category'], '</a>';
 
 		echo '

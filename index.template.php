@@ -96,8 +96,11 @@ function template_html_above()
 	// Output any remaining HTML headers. (from mods, maybe?)
 	echo $context['html_headers'];
 
+	if(!empty($settings['mycss']))
+		echo '
+	<style>' , $settings['mycss'] , '</style>';
+	
 	echo '
-	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/user.css?v2" />
 </head>
 <body' , function_exists('template_body_id') ? template_body_id() : ''   , '>';
 }

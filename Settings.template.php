@@ -143,6 +143,11 @@ function template_settings()
 
 	$context['theme_settings'] = array(
 		array(
+			'id' => 'mycss',
+			'label' => $txt['mycss'],
+			'type' => 'textarea',
+		),
+		array(
 			'id' => 'smiley_sets_default',
 			'label' => $txt['smileys_default_set_for_theme'],
 			'options' => $context['smiley_sets'],
