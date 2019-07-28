@@ -1,5 +1,8 @@
 <?php
 
+/*	@ Bloc 2019										*/
+/*	@	SMF 2.0.x										*/
+
 // Initialize the template... mainly little settings.
 function template_init()
 {
@@ -20,6 +23,8 @@ function template_init()
 function template_html_above()
 {
 	global $context, $settings, $options, $scripturl, $txt, $modSettings;
+
+	loadtemplate('Common');
 
 	// Show right to left and the character set for ease of translating.
 	echo '

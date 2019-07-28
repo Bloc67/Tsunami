@@ -1,5 +1,8 @@
 <?php
 
+/*	@ Bloc 2019										*/
+/*	@	SMF 2.0.x										*/
+
 function template_body_id()
 {
 	echo ' id="b_index"';
@@ -40,75 +43,7 @@ function template_main()
 		{
 			foreach ($category['boards'] as $board)
 			{
-				echo '
-		<ul id="category_', $category['id'], '_boards" class="reset a_boards_single">
-			<li class="a_board_subject">
-				<a class="a_subject" href="', $board['href'], '" name="b', $board['id'], '">', $board['name'], '</a>' , ($board['new'] || $board['children_new']) ? '<span class="icon-micro-new"></span>' : '';
-
-				// Has it outstanding posts for approval?
-				if ($board['can_approve_posts'] && ($board['unapproved_posts'] || $board['unapproved_topics']))
-					echo '
-				<a class="a_approval" href="', $scripturl, '?action=moderate;area=postmod;sa=', ($board['unapproved_topics'] > 0 ? 'topics' : 'posts'), ';brd=', $board['id'], ';', $context['session_var'], '=', $context['session_id'], '" title="', sprintf($txt['unapproved_posts'], $board['unapproved_topics'], $board['unapproved_posts']), '" class="moderation_link"><span class="a_icons a_moderation"></span></a>';
-
-				echo '
-			</li>
-			<li class="a_board_description">
-				<p class="a_description">', $board['description'] , '</p>';
-
-				// Show the "Moderators: ". Each has name, href, link, and id. (but we're gonna use link_moderators.)
-				if (!empty($board['moderators']))
-					echo '
-				<p class="a_description">', count($board['moderators']) == 1 ? $txt['moderator'] : $txt['moderators'], ': ', implode(', ', $board['link_moderators']), '</p>';
-
-				// Show some basic information about the number of posts, etc.
-					echo '
-			</li>
-			<li class="a_board_stats">
-				<span>' , $board['posts'], ' ', $board['is_redirect'] ? '' : ' <span style="opacity: 0.3;">|</span> '.$board['topics'], '</span>
-			</li>
-			<li class="a_board_lastpost">';
-
-				if (!empty($board['last_post']['id']))
-					echo '
-					<span class="memb">
-						<span class="icon-doc"></span>
-						<span class="item">', $board['last_post']['link'], '</span>
-						<span class="item"><span class="icon-user-outline"></span>', $board['last_post']['member']['link'] , '</span>
-						<span class="item"><span class="icon-clock"></span>', $board['last_post']['time'],'</span>
-					</span>';
-
-				echo '
-			</li>
-			<li class="a_board_avvy' , ($board['new'] || $board['children_new']) ? ' avvy_new'.($board['children_new'] ? '2' : '') : '' , $board['is_redirect'] ? ' avvy_redirect' : '', '">
-				<span class="avvy avvy_not"></span>
-			</li>
-			<li class="a_board_childs">';
-				// Show the "Child Boards: ". (there's a link_children but we're going to bold the new ones...)
-				if (!empty($board['children']))
-				{
-					// Sort the links into an array with new boards bold so it can be imploded.
-					$children = array();
-					/* Each child in each board's children has:
-							id, name, description, new (is it new?), topics (#), posts (#), href, link, and last_post. */
-					foreach ($board['children'] as $child)
-					{
-						if (!$child['is_redirect'])
-							$child['link'] = '<a href="' . $child['href'] . '" ' . ($child['new'] ? 'class="new_posts" ' : '') . 'title="' . ($child['new'] ? $txt['new_posts'] : $txt['old_posts']) . ' (' . $txt['board_topics'] . ': ' . comma_format($child['topics']) . ', ' . $txt['posts'] . ': ' . comma_format($child['posts']) . ')">' . $child['name'] . ($child['new'] ? '</a> <a href="' . $scripturl . '?action=unread;board=' . $child['id'] . '" title="' . $txt['new_posts'] . ' (' . $txt['board_topics'] . ': ' . comma_format($child['topics']) . ', ' . $txt['posts'] . ': ' . comma_format($child['posts']) . ')"><img src="' . $settings['lang_images_url'] . '/new.gif" class="new_posts" alt="" />' : '') . '</a>';
-						else
-							$child['link'] = '<a href="' . $child['href'] . '" title="' . comma_format($child['posts']) . ' ' . $txt['redirects'] . '">' . $child['name'] . '</a>';
-
-						// Has it posts awaiting approval?
-						if ($child['can_approve_posts'] && ($child['unapproved_posts'] || $child['unapproved_topics']))
-							$child['link'] .= ' <a href="' . $scripturl . '?action=moderate;area=postmod;sa=' . ($child['unapproved_topics'] > 0 ? 'topics' : 'posts') . ';brd=' . $child['id'] . ';' . $context['session_var'] . '=' . $context['session_id'] . '" title="' . sprintf($txt['unapproved_posts'], $child['unapproved_topics'], $child['unapproved_posts']) . '" class="moderation_link">(!)</a>';
-
-						$children[] = $child['new'] ? '<strong>' . $child['link'] . '</strong>' : $child['link'];
-					}
-					echo '
-				<div class="childs"><span class="icon-folder"></span> <span>', implode('</span>|<span>', $children), '</span></div>';
-				}
-				echo '
-			</li>
-		</ul>';
+				a_boardindex($board);
 			}
 		}
 	}

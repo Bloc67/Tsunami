@@ -1,14 +1,7 @@
 <?php
-/**
- * Simple Machines Forum (SMF)
- *
- * @package SMF
- * @author Simple Machines
- * @copyright 2011 Simple Machines
- * @license http://www.simplemachines.org/about/smf/license.php BSD
- *
- * @version 2.0
- */
+
+/*	@ Bloc 2019										*/
+/*	@	SMF 2.0.x										*/
 
 // This function displays all the stuff you get with a richedit box - BBC, smileys etc.
 function template_control_richedit($editor_id, $smileyContainer = null, $bbcContainer = null)
@@ -67,10 +60,10 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 						%smileyRows% %moreSmileys%
 					'), ',
 					sSmileyRowTemplate: ', JavaScriptEscape('
-						<div>%smileyRow%</div>
+						<span>%smileyRow%</span>
 					'), ',
 					sSmileyTemplate: ', JavaScriptEscape('
-						<img src="%smileySource%" align="bottom" alt="%smileyDescription%" title="%smileyDescription%" id="%smileyId%" />
+						<img src="%smileySource%" alt="%smileyDescription%" title="%smileyDescription%" id="%smileyId%" />
 					'), ',
 					sMoreSmileysTemplate: ', JavaScriptEscape('
 						<a href="#" id="%moreSmileysId%">[' . (!empty($context['smileys']['postform']) ? $txt['more_smileys'] : $txt['more_smileys_pick']) . ']</a>
@@ -213,13 +206,10 @@ function template_control_richedit($editor_id, $smileyContainer = null, $bbcCont
 			echo '
 					],
 					sButtonTemplate: ', JavaScriptEscape('
-						<img id="%buttonId%" src="%buttonSrc%" align="bottom" width="23" height="22" alt="%buttonDescription%" title="%buttonDescription%" />
+						<img id="%buttonId%" src="%buttonSrc%" alt="%buttonDescription%" title="%buttonDescription%" />
 					'), ',
-					sButtonBackgroundImage: ', JavaScriptEscape($settings['images_url'] . '/bbc/bbc_bg.gif'), ',
-					sButtonBackgroundImageHover: ', JavaScriptEscape($settings['images_url'] . '/bbc/bbc_hoverbg.gif'), ',
-					sActiveButtonBackgroundImage: ', JavaScriptEscape($settings['images_url'] . '/bbc/bbc_hoverbg.gif'), ',
 					sDividerTemplate: ', JavaScriptEscape('
-						<img src="' . $settings['images_url'] . '/bbc/divider.gif" alt="|" style="margin: 0 3px 0 3px;" />
+						&nbsp;
 					'), ',
 					sSelectTemplate: ', JavaScriptEscape('
 						<select name="%selectName%" id="%selectId%" style="margin-bottom: 1ex; font-size: x-small;">

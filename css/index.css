@@ -1,3 +1,7 @@
+
+/*	@ Bloc 2019										*/
+/*	@	SMF 2.0.x										*/
+
 /* #####################################	*/
 /* fonts used																		*/
 /* #####################################	*/
@@ -228,7 +232,7 @@ fieldset {
 	margin: 0.5rem 0 1rem 0;
 	overflow: hidden;
 }
-hr { height: 2px; background: #f0f0f0; border: none; margin: 1rem 0 1.5rem 0; width: 60%;  }
+hr { height: 1px; background: #ddd; border: none; margin: 1rem 0 1.5rem 0; width: 100%;  }
 span.hr2 { height: 1rem; border-bottom: solid 1px #ddd; margin: 0 0 1.5rem 0; width: 100%; clear: both; display: block; }
 
 
@@ -283,15 +287,6 @@ a.help:before {
 
 /* some standard styles, tweaked
 ------------------------------------------------------- */
-dl, .optionsettings li {
-	clear: right;
-	margin: 0 0 ;
-	padding: 0 0 10px 0;
-	display: grid;
-	grid-gap: 1rem;
-	grid-template-columns: 4fr 6fr;
-}
-.optionsettings li { grid-template-columns: 4fr 6fr; }
 dl dt, dl dd { 	line-height: 1.1rem; }
 
 /* a smaller version */
@@ -310,7 +305,7 @@ p { line-height: 1.5rem; }
 /* form controls - some defaults.. */
 input, select, button {
     background: linear-gradient(180deg, #fbfdff, #f0f2f5) #f0f2f5;
-	height: 2rem;
+	height: 1.6rem;
 	color: #444;
 	border: solid 1px #bbb;
 	font-size: 0.8rem;
