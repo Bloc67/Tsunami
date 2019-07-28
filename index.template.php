@@ -131,7 +131,7 @@ function template_body_above()
 	</header>
 </section>
 <div id="h_linktree"><a href="#maincontent" id="oaside"><span class="icon-down-open"></span></a>' , theme_linktree() , '</div>
-<div id="tsunami">Tsunami <span>theme by Bloc</span></div>
+<div id="tsunami"' , !empty($settings['a_hide_credit']) ? ' style="display: none;"' : '' , '>Tsunami <span>theme by Bloc</span></div>
 
 <section id="contentsection">
 	<aside id="maside">

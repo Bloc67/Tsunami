@@ -104,7 +104,7 @@ function a_topic($topic, $check = false)
 		$hotish =' veryhot';
 
 	echo '
-			<ul class="reset a_topics_single' ,  $hotish , '">
+			<ul class="reset a_topics_single' ,  $hotish , $options['display_quick_mod'] != 1 ? ' boxes' : '' , '">
 				<li class="icon1"><img src="', $settings['images_url'], '/post/svg/', $topic['first_post']['icon'], '.svg" alt="" /></li>
 				<li class="subject">
 					<div ', (!empty($topic['quick_mod']['modify']) ? 'id="topic_' . $topic['first_post']['id'] . '" onmouseout="mouse_on_div = 0;" onmouseover="mouse_on_div = 1;" ondblclick="modify_topic(\'' . $topic['id'] . '\', \'' . $topic['first_post']['id'] . '\');"' : ''), '>
@@ -162,6 +162,5 @@ function a_topic($topic, $check = false)
 	echo '
 			</ul>';
 }
-
 
 ?>
