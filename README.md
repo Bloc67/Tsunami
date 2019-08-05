@@ -1,2 +1,2 @@
 # Tsunami
-Theme for SMF &amp; Elkarte
+Theme for SMF 2.0.x
