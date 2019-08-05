@@ -135,9 +135,15 @@ function template_body_above()
 
 <section id="contentsection">
 	<aside id="maside">
-		<div id="h_user" class="bbox bbox_pad">' , template_head_user() , '</div>
-		<div id="h_search" class="bbox bbox_pad">' , template_head_search() , '</div>
-		<div id="h_news" class="bbox bbox_pad">' , template_head_news() , '</div>
+		<div id="h_user">' , template_head_user() , '</div>
+		<div id="h_search">' , template_head_search() , '</div>
+		<div id="h_news">' , template_head_news() , '</div>';
+	
+	if(function_exists('more_aside'))
+		echo '
+		<div id="h_more">', more_aside() ,'</div>';
+
+	echo '
 	</aside>
 	<main id="maincontent">';
 	// convert any pages

@@ -1,4 +1,4 @@
-// *** smc_Toggle class.
+// *** tsu_Toggle class.
 function tsu_Toggle(oOptions)
 {
 	this.opt = oOptions;

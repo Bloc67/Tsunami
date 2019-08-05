@@ -7,6 +7,12 @@ function template_body_id()
 {
 	echo ' id="b_index"';
 }
+function more_aside()
+{
+	echo '
+	show/hide latest posts';
+}
+
 
 function template_main()
 {

@@ -33,7 +33,7 @@ function a_boardindex($board, $category = '')
 			<li class="a_board_stats">
 				<span>' , $board['posts'], ' ', $board['is_redirect'] ? '' : ' <span style="opacity: 0.3;">|</span> '.$board['topics'], '</span>
 			</li>
-			<li class="a_board_lastpost">';
+			<li class="a_board_lastpost" ' , empty($options['lastpost_boardindex']) ? ' style="display: none;"' : '' , '>';
 
 	if (!empty($board['last_post']['id']))
 		echo '
