@@ -105,7 +105,6 @@ function template_unread()
 
 	if (!empty($context['topics']))
 	{
-		convertPageindex();
 		echo '
 			<div class="pagesection">
 				<div class="pagelinks">', $context['page_index'], '</div>';
@@ -196,7 +195,6 @@ function template_replies()
 
 	if (!empty($context['topics']))
 	{
-		convertPageindex();
 		echo '
 			<div class="pagesection">
 				<div class="pagelinks">', $context['page_index'], '</div>';

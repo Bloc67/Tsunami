@@ -449,9 +449,21 @@ function template_set_settings()
 				<span class="botslice"><span></span></span>
 			</div>';
 
+	// updates
 	echo '
 			<div class="cat_bar">
 				<h3 class="catbg">
+					BlocThemes Version
+				</h3>
+			</div>
+			<img src="' . $settings['images_url'] . '/version.svg?cached" alt=" old" /><span style="padding: 0 1rem;">>></span> 
+			
+			<a href="https://github.com/blocthemes/Tsunami/releases" target="_new" title="Get the latest version on GitHub!"><img src="https://www.bhksite.info/svg/tsunami20.svg?new" alt="new" /></a>
+			';
+
+	echo '
+			<div class="cat_bar">
+				<h3 class="header_name">
 					<span class="ie6_header floatleft"><img src="', $settings['images_url'], '/icons/config_sm.gif" alt="" class="icon" /> ', $txt['theme_url_config'], '</span>
 				</h3>
 			</div>

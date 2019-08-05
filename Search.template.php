@@ -250,7 +250,6 @@ function template_results()
 	</div><br />';
 	}
 
-	convertPageindex();
 	if ($context['compact'])
 	{
 		// Quick moderation set to checkboxes? Oh, how fun :/.

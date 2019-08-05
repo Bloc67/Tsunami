@@ -138,6 +138,7 @@ function template_settings()
 		array(
 			'id' => 'mycss',
 			'label' => $txt['mycss'],
+			'description' => $txt['mycss_desc'],
 			'type' => 'textarea',
 		),
 		array(
