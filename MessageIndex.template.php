@@ -75,7 +75,6 @@ function template_main()
 
 	if (!$context['no_topic_listing'])
 	{
-		convertPageindex();
 		echo '
 	<div class="pagesection">
 		<div class="pagelinks">', $context['page_index'],'</div>

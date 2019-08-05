@@ -151,7 +151,6 @@ function template_main()
 
 	// Allow adding new buttons easily.
 	call_integration_hook('integrate_display_buttons', array(&$normal_buttons));
-	convertPageindex();
 
 	echo '
 </div>

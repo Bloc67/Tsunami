@@ -140,6 +140,8 @@ function template_body_above()
 		<div id="h_news" class="bbox bbox_pad">' , template_head_news() , '</div>
 	</aside>
 	<main id="maincontent">';
+	// convert any pages
+	convertPageindex();
 }
 
 function template_body_below()
@@ -513,7 +515,11 @@ function get_avatars($ids = '')
 
 function convertPageindex()
 {
-	global $context;
+	global $context, $txt;
+	
+	if(empty($context['page_index']))
+		return;
+
 	$context['page_index'] = '<span class="page_index">' . (str_replace(array('[',']'), array('<span>','</span>'),$context['page_index'])) . '</span>';
 }
 
