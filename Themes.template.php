@@ -348,9 +348,8 @@ function template_set_options()
 				', $context['theme_options_reset'] ? $txt['themeadmin_reset_options_info'] : $txt['theme_options_defaults'], '
 			</div>
 			<div class="windowbg2">
-				<span class="topslice"><span></span></span>
 				<div class="content">
-					<ul class="theme_options">';
+					<ul class="reset theme_options">';
 
 	foreach ($context['options'] as $setting)
 	{
@@ -406,7 +405,6 @@ function template_set_options()
 						<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 					</div>
 				</div>
-				<span class="botslice"><span></span></span>
 			</div>
 		</form>
 	</div>
@@ -693,16 +691,18 @@ function template_pick()
 	foreach ($context['available_themes'] as $theme)
 	{
 		echo '
-			<div class="cat_bar">
-				<h3 class="catbg">
-					<a href="', $scripturl, '?action=theme;sa=pick;u=', $context['current_member'], ';th=', $theme['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $theme['name'], (!empty($theme['variants']) ? ';vrt=' . $theme['selected_variant'] : ''), '</a>
-				</h3>
-			</div>
+		<div class="a_themes">
+			<a class="floatright" href="', $scripturl, '?action=theme;sa=pick;u=', $context['current_member'], ';theme=', $theme['id'], ';', $context['session_var'], '=', $context['session_id'], '" id="theme_thumb_preview_', $theme['id'], '" title="', $txt['theme_preview'], '">
+				<img src="', $theme['thumbnail_href'], '" id="theme_thumb_', $theme['id'], '" alt="" class="padding" />
+			</a>
+			<h3 class="header_name">
+				<a href="', $scripturl, '?action=theme;sa=pick;u=', $context['current_member'], ';th=', $theme['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $theme['name'], (!empty($theme['variants']) ? ';vrt=' . $theme['selected_variant'] : ''), '</a>
+			</h3>
 			<div class="', $theme['selected'] ? 'windowbg' : 'windowbg2', '">
-				<span class="topslice"><span></span></span>
-				<div class="flow_hidden content">
-					<div class="floatright"><a href="', $scripturl, '?action=theme;sa=pick;u=', $context['current_member'], ';theme=', $theme['id'], ';', $context['session_var'], '=', $context['session_id'], '" id="theme_thumb_preview_', $theme['id'], '" title="', $txt['theme_preview'], '"><img src="', $theme['thumbnail_href'], '" id="theme_thumb_', $theme['id'], '" alt="" class="padding" /></a></div>
-					<p>', $theme['description'], '</p>';
+				<div class="content">
+					<div class="infotext">
+						', $theme['description'], '
+					</div>';
 
 		if (!empty($theme['variants']))
 		{
@@ -723,22 +723,20 @@ function template_pick()
 		}
 
 		echo '
-					<br />
-					<p>
+					<div class="infotext">
 						<em class="smalltext">', $theme['num_users'], ' ', ($theme['num_users'] == 1 ? $txt['theme_user'] : $txt['theme_users']), '</em>
-					</p>
-					<br />
-					<ul class="reset">
+					</div>
+					<ul class="reset multi_set">
 						<li>
-							<a href="', $scripturl, '?action=theme;sa=pick;u=', $context['current_member'], ';th=', $theme['id'], ';', $context['session_var'], '=', $context['session_id'], (!empty($theme['variants']) ? ';vrt=' . $theme['selected_variant'] : ''), '" id="theme_use_', $theme['id'], '">[', $txt['theme_set'], ']</a>
+							<a class="button_submit multi_start active centertext" href="', $scripturl, '?action=theme;sa=pick;u=', $context['current_member'], ';th=', $theme['id'], ';', $context['session_var'], '=', $context['session_id'], (!empty($theme['variants']) ? ';vrt=' . $theme['selected_variant'] : ''), '" id="theme_use_', $theme['id'], '">', $txt['theme_set'], '</a>
 						</li>
 						<li>
-							<a href="', $scripturl, '?action=theme;sa=pick;u=', $context['current_member'], ';theme=', $theme['id'], ';', $context['session_var'], '=', $context['session_id'],  (!empty($theme['variants']) ? ';vrt=' . $theme['selected_variant'] : ''), '" id="theme_preview_', $theme['id'], '">[', $txt['theme_preview'], ']</a>
+							<a  class="button_submit multi_end centertext" href="', $scripturl, '?action=theme;sa=pick;u=', $context['current_member'], ';theme=', $theme['id'], ';', $context['session_var'], '=', $context['session_id'],  (!empty($theme['variants']) ? ';vrt=' . $theme['selected_variant'] : ''), '" id="theme_preview_', $theme['id'], '">', $txt['theme_preview'], '</a>
 						</li>
 					</ul>
 				</div>
-				<span class="botslice"><span></span></span>
-			</div>';
+			</div>
+		</div>';
 
 		if (!empty($theme['variants']))
 		{

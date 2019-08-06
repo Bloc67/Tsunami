@@ -9,6 +9,16 @@ function template_options()
 
 	$context['theme_options'] = array(
 		array(
+			'id' => 'hidelastpost_boardindex',
+			'label' => $txt['lastpostbindex'],
+			'default' => true,
+		),
+		array(
+			'id' => 'hidelinfo_boardindex',
+			'label' => $txt['infobindex'],
+			'default' => true,
+		),
+		array(
 			'id' => 'show_board_desc',
 			'label' => $txt['board_desc_inside'],
 			'default' => true,
@@ -16,11 +26,6 @@ function template_options()
 		array(
 			'id' => 'show_children',
 			'label' => $txt['show_children'],
-			'default' => true,
-		),
-		array(
-			'id' => 'show_no_avatars',
-			'label' => $txt['show_no_avatars'],
 			'default' => true,
 		),
 		array(

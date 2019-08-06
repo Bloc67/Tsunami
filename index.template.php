@@ -16,7 +16,7 @@ function template_init()
 	$settings['separate_sticky_lock'] = true;
 	$settings['strict_doctype'] = false;
 	$settings['message_index_preview'] = false;
-	$settings['require_theme_strings'] = false;
+	$settings['require_theme_strings'] = true;
 }
 
 // The main sub template above the content.

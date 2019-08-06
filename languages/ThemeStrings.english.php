@@ -8,5 +8,10 @@ Some suggestions are<br>
 
 </ul>
 ';
+$txt['lastpostbindex'] = 'Show latest posts column';
+$txt['lastpostbindex2'] = 'Hide latest posts column';
+$txt['infobindex'] = 'Show Info Center';
+$txt['infobindex2'] = 'Hide Info center';
+
 
 ?>

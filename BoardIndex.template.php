@@ -7,10 +7,23 @@ function template_body_id()
 {
 	echo ' id="b_index"';
 }
+
 function more_aside()
 {
+	global $options, $context, $txt;
+
 	echo '
-	show/hide latest posts';
+		<div>
+			<span id="bindex_switch" class="icon-doc"></span>
+			' , empty($options['hidelastpost_boardindex']) ? $txt['lastpostbindex'] : $txt['lastpostbindex2'] , '
+		</div>
+
+		<div>
+			<span id="binfo_switch" class="icon-doc"></span>
+			' , empty($options['hideinfo_boardindex']) ? $txt['infobindex'] : $txt['infobindex2'] , '
+		</div>
+		';
+
 }
 
 
@@ -146,7 +159,7 @@ function template_info_center()
 
 	// Here's where the "Info Center" starts...
 	echo '
-	<div id="a_infocenter">
+	<div id="a_infocenter" class="a_infocenters"' , !empty($options['hideinfo_boardindex']) ? '': ' style="display: none;"' , '>
 		<div id="a_info_items">';
 
 	// This is the "Recent Posts" bar.

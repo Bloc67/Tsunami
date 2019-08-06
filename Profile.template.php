@@ -1132,31 +1132,26 @@ function template_edit_options()
 	// The main header!
 	echo '
 		<form action="', (!empty($context['profile_custom_submit_url']) ? $context['profile_custom_submit_url'] : $scripturl . '?action=profile;area=' . $context['menu_item_selected'] . ';u=' . $context['id_member'] . ';save'), '" method="post" accept-charset="', $context['character_set'], '" name="creator" id="creator" enctype="multipart/form-data" onsubmit="return checkProfileSubmit();">
-			<div class="cat_bar">
-				<h3 class="catbg">
-					<span class="ie6_header floatleft"><img src="', $settings['images_url'], '/icons/profile_sm.gif" alt="" class="icon" />';
+			<h3 class="header_name">';
 
 		// Don't say "Profile" if this isn't the profile...
 		if (!empty($context['profile_header_text']))
 			echo '
-					', $context['profile_header_text'];
+				', $context['profile_header_text'];
 		else
 			echo '
-					', $txt['profile'];
+				', $txt['profile'];
 
 		echo '
-					</span>
-				</h3>
-			</div>';
+			</h3>';
 
 	// Have we some description?
 	if ($context['page_desc'])
 		echo '
-			<p class="windowbg description">', $context['page_desc'], '</p>';
+			<p class="information">', $context['page_desc'], '</p>';
 
 	echo '
 			<div class="windowbg2">
-				<span class="topslice"><span></span></span>
 				<div class="content">';
 
 	// Any bits at the start?
@@ -1464,7 +1459,16 @@ function template_profile_theme_settings()
 	echo '
 							<dd></dd>
 						</dl>
-						<ul id="theme_settings">
+						<ul class="reset options" id="theme_settings">
+							<li>
+								<input type="hidden" name="default_options[hidelastpost_boardindex]" value="0" />
+								<label for="hidelastpost_boardindex"><input type="checkbox" name="default_options[hidelastpost_boardindex]" id="hidelastpost_boardindex" value="1"', !empty($context['member']['options']['hidelastpost_boardindex']) ? ' checked="checked"' : '', ' class="input_check" /> ', $txt['lastpostbindex'], '</label>
+							</li>
+							<li>
+								<input type="hidden" name="default_options[hideinfo_boardindex]" value="0" />
+								<label for="hideinfo_boardindex"><input type="checkbox" name="default_options[hideinfo_boardindex]" id="hideinfo_boardindex" value="1"', !empty($context['member']['options']['hideinfo_boardindex']) ? ' checked="checked"' : '', ' class="input_check" /> ', $txt['infobindex'], '</label>
+							</li>
+
 							<li>
 								<input type="hidden" name="default_options[show_board_desc]" value="0" />
 								<label for="show_board_desc"><input type="checkbox" name="default_options[show_board_desc]" id="show_board_desc" value="1"', !empty($context['member']['options']['show_board_desc']) ? ' checked="checked"' : '', ' class="input_check" /> ', $txt['board_desc_inside'], '</label>
@@ -1472,14 +1476,6 @@ function template_profile_theme_settings()
 							<li>
 								<input type="hidden" name="default_options[show_children]" value="0" />
 								<label for="show_children"><input type="checkbox" name="default_options[show_children]" id="show_children" value="1"', !empty($context['member']['options']['show_children']) ? ' checked="checked"' : '', ' class="input_check" /> ', $txt['show_children'], '</label>
-							</li>
-							<li>
-								<input type="hidden" name="default_options[use_sidebar_menu]" value="0" />
-								<label for="use_sidebar_menu"><input type="checkbox" name="default_options[use_sidebar_menu]" id="use_sidebar_menu" value="1"', !empty($context['member']['options']['use_sidebar_menu']) ? ' checked="checked"' : '', ' class="input_check" /> ', $txt['use_sidebar_menu'], '</label>
-							</li>
-							<li>
-								<input type="hidden" name="default_options[show_no_avatars]" value="0" />
-								<label for="show_no_avatars"><input type="checkbox" name="default_options[show_no_avatars]" id="show_no_avatars" value="1"', !empty($context['member']['options']['show_no_avatars']) ? ' checked="checked"' : '', ' class="input_check" /> ', $txt['show_no_avatars'], '</label>
 							</li>
 							<li>
 								<input type="hidden" name="default_options[show_no_signatures]" value="0" />
