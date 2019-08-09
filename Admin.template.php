@@ -1374,59 +1374,60 @@ function template_core_features()
 	if ($context['is_new_install'])
 	{
 		echo '
-			<div class="cat_bar">
-				<h3 class="catbg">
-					', $txt['core_settings_welcome_msg'], '
-				</h3>
-			</div>
-			<div class="information">
-				', $txt['core_settings_welcome_msg_desc'], '
-			</div>';
+		<h3 class="header_name">', $txt['core_settings_welcome_msg'], '</h3>
+		<div class="information">
+			', $txt['core_settings_welcome_msg_desc'], '
+		</div>';
 	}
 
 	echo '
 		<form action="', $scripturl, '?action=admin;area=corefeatures;" method="post" accept-charset="', $context['character_set'], '">
-			<div class="cat_bar">
-				<h3 class="catbg">
-					', $txt['core_settings_title'], '
-				</h3>
-			</div>';
+			<h3 class="catbg">', $txt['core_settings_title'], '</h3>
+			<div id="a_core_features">';
 
-	$alternate = true;
+	$icons = array(
+		'w' => 'icon-warning-empty', // Warning system
+		'sp' => 'icon-search-outline',  // search engine track
+		'rg' => 'icon-cog-outline', // report gen
+		'ps' => 'icon-basket', // paid subs
+		'pm' => 'icon-flag', // post moderation
+		'ml' => 'icon-doc-text', // moderation logs
+		'k' => 'icon-contrast', // karma
+		'cp' => 'icon-user-outline', // advanced profile fields
+		'cd' => 'icon-calendar', // calendar
+		
+	);
+
 	foreach ($context['features'] as $id => $feature)
 	{
 		echo '
-			<div class="windowbg', $alternate ? '2' : '', '">
-				<span class="topslice"><span></span></span>
 				<div class="content features">
-					<img class="features_image png_fix" src="', $settings['default_images_url'], '/admin/feature_', $id, '.png" alt="', $feature['title'], '" />
+					<span class="' , !empty($icons[$id]) ? $icons[$id] : 'icon-doc' , ' icon-large" title="', $feature['title'], '"></span>
+					<div>
+						<h4>', ($feature['enabled'] && $feature['url'] ? '<a href="' . $feature['url'] . '">' . $feature['title'] . '</a>' : $feature['title']), '</h4>
+						<p>', $feature['desc'], '</p>
+					</div>
 					<div class="features_switch" id="js_feature_', $id, '" style="display: none;">
 						<a href="', $scripturl, '?action=admin;area=featuresettings;sa=core;', $context['session_var'], '=', $context['session_id'], ';toggle=', $id, ';state=', $feature['enabled'] ? 0 : 1, '" onclick="return toggleItem(\'', $id, '\');">
-							<input type="hidden" name="feature_', $id, '" id="feature_', $id, '" value="', $feature['enabled'] ? 1 : 0, '" /><img src="', $settings['images_url'], '/admin/switch_', $feature['enabled'] ? 'on' : 'off', '.png" id="switch_', $id, '" style="margin-top: 1.3em;" alt="', $txt['core_settings_switch_' . ($feature['enabled'] ? 'off' : 'on')], '" title="', $txt['core_settings_switch_' . ($feature['enabled'] ? 'off' : 'on')], '" />
+							<input type="hidden" name="feature_', $id, '" id="feature_', $id, '" value="', $feature['enabled'] ? 1 : 0, '" /><img src="', $settings['images_url'], '/admin/switch_', $feature['enabled'] ? 'on' : 'off', '.png" id="switch_', $id, '" alt="', $txt['core_settings_switch_' . ($feature['enabled'] ? 'off' : 'on')], '" title="', $txt['core_settings_switch_' . ($feature['enabled'] ? 'off' : 'on')], '" />
 						</a>
+						<div id="plain_feature_', $id, '">
+							<label for="plain_feature_', $id, '_radio_on"><input type="radio" name="feature_plain_', $id, '" id="plain_feature_', $id, '_radio_on" value="1"', $feature['enabled'] ? ' checked="checked"' : '', ' class="input_radio" />', $txt['core_settings_enabled'], '</label>
+							<label for="plain_feature_', $id, '_radio_off"><input type="radio" name="feature_plain_', $id, '" id="plain_feature_', $id, '_radio_off" value="0"', !$feature['enabled'] ? ' checked="checked"' : '', ' class="input_radio" />', $txt['core_settings_disabled'], '</label>
+						</div>
 					</div>
-					<h4>', ($feature['enabled'] && $feature['url'] ? '<a href="' . $feature['url'] . '">' . $feature['title'] . '</a>' : $feature['title']), '</h4>
-					<p>', $feature['desc'], '</p>
-					<div id="plain_feature_', $id, '">
-						<label for="plain_feature_', $id, '_radio_on"><input type="radio" name="feature_plain_', $id, '" id="plain_feature_', $id, '_radio_on" value="1"', $feature['enabled'] ? ' checked="checked"' : '', ' class="input_radio" />', $txt['core_settings_enabled'], '</label>
-						<label for="plain_feature_', $id, '_radio_off"><input type="radio" name="feature_plain_', $id, '" id="plain_feature_', $id, '_radio_off" value="0"', !$feature['enabled'] ? ' checked="checked"' : '', ' class="input_radio" />', $txt['core_settings_disabled'], '</label>
-					</div>
-				</div>
-				<span class="botslice clear_right"><span></span></span>
-			</div>';
-
-		$alternate = !$alternate;
+				</div>';
 	}
 
 	echo '
+			</div>
 			<div class="righttext">
 				<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 				<input type="hidden" value="0" name="js_worked" id="js_worked" />
 				<input type="submit" value="', $txt['save'], '" name="save" class="button_submit" />
 			</div>
 		</form>
-	</div>
-	<br class="clear" />';
+	</div>';
 
 	// Turn on the pretty javascript if we can!
 	echo '

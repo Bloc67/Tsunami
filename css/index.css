@@ -442,6 +442,9 @@ a.icon-new:after {
 .icon-mail:before { content: '\e839'; }
 .icon-print:before { content: '\e83b'; }
 .icon-flow-cross:before { content: '\e83a'; }
+.icon-calendar:before { content: '\e83c'; } 
+.icon-contrast:before { content: '\e83d'; }
+.icon-basket:before { content: '\e83e'; } 
 
 
 /* sections */
