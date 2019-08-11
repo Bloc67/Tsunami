@@ -14,12 +14,12 @@ function more_aside()
 
 	echo '
 		<div>
-			<a href="' , $scripturl , '?action=profile;area=theme"><span id="bindex_switch" class="icon-doc"></span>
+			<a href="' , $scripturl , '?action=profile;area=theme#a_hidelastpost"><span id="bindex_switch" class="icon-doc"></span>
 			' , empty($options['hidelastpost_boardindex']) ? $txt['lastpostbindex'] : $txt['lastpostbindex2'] , '</a>
 		</div>
 
 		<div>
-			<a href="' , $scripturl , '?action=profile;area=theme"><span id="binfo_switch" class="icon-doc"></span>
+			<a href="' , $scripturl , '?action=profile;area=theme#a_hideinfo"><span id="binfo_switch" class="icon-doc"></span>
 			' , empty($options['hideinfo_boardindex']) ? $txt['infobindex'] : $txt['infobindex2'] , '</a>
 		</div>
 		';

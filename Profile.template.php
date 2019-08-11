@@ -1459,12 +1459,13 @@ function template_profile_theme_settings()
 	echo '
 							<dd></dd>
 						</dl>
+						<h4>Tsunami</h4>
 						<ul class="reset options" id="theme_settings">
-							<li><h4>Tsunami</h4>
+							<li class="a_focus"   id="a_hidelastpost">
 								<input type="hidden" name="default_options[hidelastpost_boardindex]" value="0" />
 								<label for="hidelastpost_boardindex"><input type="checkbox" name="default_options[hidelastpost_boardindex]" id="hidelastpost_boardindex" value="1"', !empty($context['member']['options']['hidelastpost_boardindex']) ? ' checked="checked"' : '', ' class="input_check" /> ', $txt['lastpostbindex'], '</label>
 							</li>
-							<li>
+							<li class="a_focus" id="a_hideinfo" >
 								<input type="hidden" name="default_options[hideinfo_boardindex]" value="0" />
 								<label for="hideinfo_boardindex"><input type="checkbox" name="default_options[hideinfo_boardindex]" id="hideinfo_boardindex" value="1"', !empty($context['member']['options']['hideinfo_boardindex']) ? ' checked="checked"' : '', ' class="input_check" /> ', $txt['infobindex'], '</label>
 								<hr>
