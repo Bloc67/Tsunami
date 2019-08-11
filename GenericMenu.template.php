@@ -115,12 +115,12 @@ function template_generic_menu_dropdown_above()
 		if ($section['id'] == $menu_context['current_section'])
 		{
 			echo '
-			<li><a class="active" href="#"><span class="firstlevel parent">', $section['title'] , '</span></a>
+			<li class="a_main" id="ashow' , $section['id'] , '"><a class="active" href="javascript:;" onclick="addclass(\'ashow' , $section['id'] , '\'); return false;"><span class="firstlevel parent">', $section['title'] , '</span></a>
 				<ul class="reset">';
 		}
 		else
 			echo '
-			<li><a class="firstlevel" href="#"><span class="firstlevel parent">', $section['title'] , '</span></a>
+			<li class="a_main" id="ashow' , $section['id'] , '"><a class="firstlevel" href="javascript:;" onclick="addclass(\'ashow' , $section['id'] , '\'); return false;"><span class="firstlevel parent">', $section['title'] , '</span></a>
 				<ul class="reset">';
 
 		// For every area of this section show a link to that area (bold if it's currently selected.)
@@ -181,7 +181,23 @@ function template_generic_menu_dropdown_above()
 
 	echo '
 	</ul>
-</menu>';
+</menu>
+<script>
+	function addclass(id)
+	{
+		var element = document.getElementById(id);
+		var x = document.getElementsByClassName("a_main");
+		var i;
+		for (i = 0; i < x.length; i++) {
+			if(x[i] != element) {
+				x[i].classList.remove("ashow");
+			}
+		}
+		element.classList.toggle("ashow");	
+	}
+
+</script>
+';
 
 	// This is the main table - we need it so we can keep the content to the right of it.
 	echo '
