@@ -308,8 +308,9 @@ body { position: relative;}
     border-bottom: #2f4f4f solid 1px;
     color: #eee !important;
 }
-#menu_nav_mobile li ul { display: none; }
-#menu_nav_mobile li:focus ul { display: block; }
+#menu_nav_mobile li {
+    background: #1f2f2f;
+}
 #menu_nav_mobile li li a{
     padding-left: 2rem;
     opacity: 0.6
