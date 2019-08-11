@@ -364,16 +364,7 @@ function template_set_options()
 								<option value="2">', $txt['themeadmin_reset_options_remove'], '</option>
 							</select>';
 
-		// Is this a separator?
-		if (empty($setting))
-		{
-			echo '		</li>
-					</ul>
-					<hr class="hrcolor" />
-					<ul class="reset theme_options">
-						<li class="theme_option">';
-		}
-		elseif ($setting['type'] == 'checkbox')
+		if ($setting['type'] == 'checkbox')
 		{
 			echo '
 							<input type="hidden" name="' . (!empty($setting['default']) ? 'default_' : '') . 'options[' . $setting['id'] . ']" value="0" />
