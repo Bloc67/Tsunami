@@ -199,7 +199,10 @@ h3.titlebg {
 .green { color: green; }
 .lightgrey { color: lightgrey; }
 .icon-large { font-size: 200%; color: #356; margin-top: 12px; }
-
+.a_focus:target {
+    font-weight: bold;
+    color: orangered;
+}
 /* menus */
 ul.reset.dropmenu {
 	width: 100%;
@@ -305,6 +308,8 @@ body { position: relative;}
     border-bottom: #2f4f4f solid 1px;
     color: #eee !important;
 }
+#menu_nav_mobile li ul { display: none; }
+#menu_nav_mobile li:focus ul { display: block; }
 #menu_nav_mobile li li a{
     padding-left: 2rem;
     opacity: 0.6
@@ -960,7 +965,10 @@ input.input_text[size="5"] {width: 4rem;}
     #mobilnav { display: block;}
     #desktopmenu { display: none;}
     #topheader {grid-template-columns: auto 50px;}
-	#tsunami { background-size: auto 220px; background-position: top left; }
+	#tsunami { 
+        background-size: auto 220px; 
+        background-position: top left; 
+    }
 
 	.a_boards ul.a_boards_single {
         grid-template-columns: 40px 1fr 5rem 5px;
@@ -1043,7 +1051,10 @@ input.input_text[size="5"] {width: 4rem;}
     #h_user { padding: 0 0.3rem;}
     #h_news {padding: 0 0.2rem; border: none; background: none;}
     #h_news h2, #h_news p { font-size: 0.9rem;display: inline; clear: none;}
-    #tsunami {padding-left: 1.1rem;}
+    #tsunami, section#headersection,#h_linktree {
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
+    }
     .pagelinks { padding-left: 0;}
     #h_search { padding: 0; }
     h4.headerpost small, h2.header_name small {font-weight: normal;} 
