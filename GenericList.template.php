@@ -19,7 +19,7 @@ function template_show_list($list_id = null)
 	$cur_list = &$context[$list_id];
 
 	// These are the main tabs that is used all around the template.
-	if (!empty($settings['use_tabs']) && isset($cur_list['list_menu'], $cur_list['list_menu']['show_on']) && ($cur_list['list_menu']['show_on'] == 'both' || $cur_list['list_menu']['show_on'] == 'top'))
+	if (isset($cur_list['list_menu'], $cur_list['list_menu']['show_on']))
 		template_create_list_menu($cur_list['list_menu'], 'top');
 
 	if (isset($cur_list['form']))
@@ -55,12 +55,13 @@ function template_show_list($list_id = null)
 	{
 		echo '
 			<div class="flow_auto">';
-
+		
+		$cur_list['page_index'] = convertPageindex($cur_list['page_index']);
 		// Show the page index (if this list doesn't intend to show all items).
 		if (!empty($cur_list['items_per_page']))
 			echo '
 				<div class="floatleft">
-					<div class="pagesection">', $txt['pages'], ': ', $cur_list['page_index'], '</div>
+					<div class="pagesection">', $cur_list['page_index'], '</div>
 				</div>';
 
 		if (isset($cur_list['additional_rows']['above_column_headers']))
@@ -78,67 +79,55 @@ function template_show_list($list_id = null)
 			</div>';
 	}
 
+	echo '* a_' , $list_id , ' *';
 	echo '
-			<table class="table_grid" cellspacing="0" width="', !empty($cur_list['width']) ? $cur_list['width'] : '100%', '">';
+			<ol class="reset a_table_grid" id="a_' , $list_id , '">
+				<li class="a_headers">';
 
 	// Show the column headers.
 	$header_count = count($cur_list['headers']);
 	if (!($header_count < 2 && empty($cur_list['headers'][0]['label'])))
 	{
-		echo '
-			<thead>
-				<tr class="catbg">';
-
-		// Loop through each column and add a table header.
-		$i = 0;
+		$col =1;
 		foreach ($cur_list['headers'] as $col_header)
 		{
-			$i ++;
-			if (empty($col_header['class']) && $i == 1)
-				$col_header['class'] = 'first_th';
-			elseif (empty($col_header['class']) && $i == $header_count)
-				$col_header['class'] = 'last_th';
-
 			echo '
-					<th scope="col"', empty($col_header['class']) ? '' : ' class="' . $col_header['class'] . '"', empty($col_header['style']) ? '' : ' style="' . $col_header['style'] . '"', empty($col_header['colspan']) ? '' : ' colspan="' . $col_header['colspan'] . '"', '>', empty($col_header['href']) ? '' : '<a href="' . $col_header['href'] . '" rel="nofollow">', empty($col_header['label']) ? '&nbsp;' : $col_header['label'], empty($col_header['href']) ? '' : '</a>', empty($col_header['sort_image']) ? '' : ' <img src="' . $settings['images_url'] . '/sort_' . $col_header['sort_image'] . '.gif" alt="" />', '</th>';
+					<div class="a_col" ', empty($col_header['colspan']) ? '' : ' style="grid-column: ' . $col . ' / span ' . $col_header['colspan'] . ';"', '>
+						', empty($col_header['href']) ? '' : '<a href="' . $col_header['href'] . '" rel="nofollow">', empty($col_header['label']) ? '&nbsp;' : $col_header['label'], empty($col_header['href']) ? '' : '</a>', empty($col_header['sort_image']) ? '' : ' <span class="blue icon-' . $col_header['sort_image'] . '-open"></span>', '
+					</div>';
+			$col++;
 		}
 
 		echo '
-				</tr>
-			</thead>
-			<tbody>';
+				</li>';
 	}
 
 	// Show a nice message informing there are no items in this list.
 	if (empty($cur_list['rows']) && !empty($cur_list['no_items_label']))
 		echo '
-				<tr>
-					<td class="windowbg" colspan="', $cur_list['num_columns'], '" align="', !empty($cur_list['no_items_align']) ? $cur_list['no_items_align'] : 'center', '"><div class="padding">', $cur_list['no_items_label'], '</div></td>
-				</tr>';
+				<li>
+					<div class="padding">', $cur_list['no_items_label'], '</div>
+				</li>';
 
 	// Show the list rows.
 	elseif (!empty($cur_list['rows']))
 	{
-		$alternate = false;
 		foreach ($cur_list['rows'] as $id => $row)
 		{
 			echo '
-				<tr class="windowbg', $alternate ? '2' : '', '" id="list_', $list_id, '_', $id, '">';
+				<li class="a_row" id="list_', $list_id, '_', $id, '">';
 
 			foreach ($row as $row_data)
 				echo '
-					<td', empty($row_data['class']) ? '' : ' class="' . $row_data['class'] . '"', empty($row_data['style']) ? '' : ' style="' . $row_data['style'] . '"', '>', $row_data['value'], '</td>';
+					<div class="a_col">', $row_data['value'], '</div>';
 
 			echo '
-				</tr>';
-
-			$alternate = !$alternate;
+				</li>';
 		}
 	}
 
 	echo '
-			</tbody>
-			</table>';
+			</ol>';
 
 	if (!empty($cur_list['items_per_page']) || isset($cur_list['additional_rows']['below_table_data']) || isset($cur_list['additional_rows']['bottom_of_list']))
 	{
@@ -149,7 +138,7 @@ function template_show_list($list_id = null)
 		if (!empty($cur_list['items_per_page']))
 			echo '
 				<div class="floatleft">
-					<div class="pagesection">', $txt['pages'], ': ', $cur_list['page_index'], '</div>
+					<div class="pagesection">', $cur_list['page_index'], '</div>
 				</div>';
 
 		if (isset($cur_list['additional_rows']['below_table_data']))
@@ -243,91 +232,14 @@ function template_create_list_menu($list_menu, $direction = 'top')
 		);
 	*/
 
-	// Are we using right-to-left orientation?
-	$first = $context['right_to_left'] ? 'last' : 'first';
-	$last = $context['right_to_left'] ? 'first' : 'last';
+	$links = array();
+	foreach ($list_menu['links'] as $link)
+		$links[] = '<li><a class="button_submit' . ($link['is_selected'] ? ' active' : '') . '" href="' . $link['href'] . '">' . $link['label'] . '</a></li>';
 
-	// Tabs take preference over buttons in certain cases.
-	if (empty($settings['use_tabs']) && $list_menu['style'] == 'button')
-		$list_menu['style'] = 'tabs';
-
-	if (!isset($list_menu['style']) || isset($list_menu['style']) && $list_menu['style'] == 'tabs')
-	{
-		if (!empty($settings['use_tabs']))
-		{
-			echo '
-		<table cellpadding="0" cellspacing="0" style="margin-', $list_menu['position'], ': 10px; width: 100%;">
-			<tr>', $list_menu['position'] == 'right' ? '
-				<td>&nbsp;</td>' : '', '
-				<td align="', $list_menu['position'], '">
-					<table cellspacing="0" cellpadding="0">
-						<tr>
-							<td class="', $direction == 'top' ? 'mirror' : 'main', 'tab_', $first, '">&nbsp;</td>';
-
-			foreach ($list_menu['links'] as $link)
-			{
-				if ($link['is_selected'])
-					echo '
-							<td class="', $direction == 'top' ? 'mirror' : 'main', 'tab_active_', $first, '">&nbsp;</td>
-							<td valign="top" class="', $direction == 'top' ? 'mirrortab' : 'maintab', '_active_back">
-								<a href="', $link['href'], '">', $link['label'], '</a>
-							</td>
-							<td class="', $direction == 'top' ? 'mirror' : 'main', 'tab_active_', $last, '">&nbsp;</td>';
-				else
-					echo '
-							<td valign="top" class="', $direction == 'top' ? 'mirror' : 'main', 'tab_back">
-								<a href="', $link['href'], '">', $link['label'], '</a>
-							</td>';
-			}
-
-			echo '
-							<td class="', $direction == 'top' ? 'mirror' : 'main', 'tab_', $last, '">&nbsp;</td>
-						</tr>
-					</table>
-				</td>', $list_menu['position'] == 'left' ? '
-				<td>&nbsp;</td>' : '', '
-			</tr>
-		</table>';
-		}
-		else
-		{
-			echo '
-			<tr class="titlebg">
-				<td colspan="', $context['colspan'], '">';
-
-			$links = array();
-			foreach ($list_menu['links'] as $link)
-				$links[] = ($link['is_selected'] ? '<img src="' . $settings['images_url'] . '/selected.gif" alt="&gt;" /> ' : '') . '<a href="' . $link['href'] . '">' . $link['label'] . '</a>';
-
-			echo '
-				', implode(' | ', $links), '
-				</td>
-			</tr>';
-		}
-	}
-	elseif (isset($list_menu['style']) && $list_menu['style'] == 'buttons')
-	{
-		$links = array();
-		foreach ($list_menu['links'] as $link)
-			$links[] = '<a href="' . $link['href'] . '">' . $link['label'] . '</a>';
-
-		echo '
-		<table cellpadding="0" cellspacing="0" style="margin-', $list_menu['position'], ': 10px; width: 100%;">
-			<tr>', $list_menu['position'] == 'right' ? '
-				<td>&nbsp;</td>' : '', '
-				<td align="', $list_menu['position'], '">
-					<table cellspacing="0" cellpadding="0">
-						<tr>
-							<td class="', $direction == 'top' ? 'mirror' : 'main', 'tab_', $first, '">&nbsp;</td>
-							<td class="', $direction == 'top' ? 'mirror' : 'main', 'tab_back">', implode(' &nbsp;|&nbsp; ', $links), '</td>
-							<td class="', $direction == 'top' ? 'mirror' : 'main', 'tab_', $last, '">&nbsp;</td>
-						</tr>
-					</table>
-				</td>', $list_menu['position'] == 'left' ? '
-				<td>&nbsp;</td>' : '', '
-			</tr>
-		</table>';
-	}
+	echo '
+		<ul class="reset multi_set">
+			', implode('', $links), '
+		</ul>';
 }
 
 ?>

@@ -519,9 +519,15 @@ function get_avatars($ids = '')
 	return $avatars;
 }
 
-function convertPageindex()
+function convertPageindex($custom = '')
 {
 	global $context, $txt;
+	
+	if(!empty($custom))
+	{
+		$return =  '<span class="page_index">' . (str_replace(array('[',']'), array('<span>','</span>'),$custom)) . '</span>';
+		return $return;
+	}	
 	
 	if(empty($context['page_index']))
 		return;

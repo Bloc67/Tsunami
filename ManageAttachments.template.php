@@ -42,15 +42,11 @@ function template_browse()
 		<div class="cat_bar">
 			<h3 class="catbg">', $txt['attachment_manager_browse_files'], '</h3>
 		</div>
-		<div class="windowbg2">
-			<span class="topslice"><span></span></span>
-			<div class="content">
-				<a href="', $scripturl, '?action=admin;area=manageattachments;sa=browse">', $context['browse_type'] === 'attachments' ? '<img src="' . $settings['images_url'] . '/selected.gif" alt="&gt;" /> ' : '', $txt['attachment_manager_attachments'], '</a> |
-				<a href="', $scripturl, '?action=admin;area=manageattachments;sa=browse;avatars">', $context['browse_type'] === 'avatars' ? '<img src="' . $settings['images_url'] . '/selected.gif" alt="&gt;" /> ' : '', $txt['attachment_manager_avatars'], '</a> |
-				<a href="', $scripturl, '?action=admin;area=manageattachments;sa=browse;thumbs">', $context['browse_type'] === 'thumbs' ? '<img src="' . $settings['images_url'] . '/selected.gif" alt="&gt;" /> ' : '', $txt['attachment_manager_thumbs'], '</a>
-			</div>
-			<span class="botslice"><span></span></span>
-		</div>
+		<ul class="reset multi_set">
+			<li><a href="', $scripturl, '?action=admin;area=manageattachments;sa=browse" class="button_submit multi_start', $context['browse_type'] === 'attachments' ? ' active' : '', '">', $txt['attachment_manager_attachments'], '</a></li>
+			<li><a href="', $scripturl, '?action=admin;area=manageattachments;sa=browse;avatars" class="button_submit multi_middle', $context['browse_type'] === 'avatars' ? ' active ' : '', '">' , $txt['attachment_manager_avatars'], '</a></li>
+			<li><a href="', $scripturl, '?action=admin;area=manageattachments;sa=browse;thumbs" class="button_submit multi_end', $context['browse_type'] === 'thumbs' ? ' active' : '', '">', $txt['attachment_manager_thumbs'], '</a></li>
+		</ul>
 	</div>';
 
 	template_show_list('file_list');
@@ -65,11 +61,8 @@ function template_maintenance()
 
 	echo '
 	<div id="manage_attachments">
-		<div class="cat_bar">
-			<h3 class="catbg">', $txt['attachment_stats'], '</h3>
-		</div>
+		<h3 class="header_name">', $txt['attachment_stats'], '</h3>
 		<div class="windowbg">
-			<span class="topslice"><span></span></span>
 			<div class="content">
 				<dl class="settings">
 					<dt><strong>', $txt['attachment_total'], ':</strong></dt><dd>', $context['num_attachments'], '</dd>
@@ -78,7 +71,6 @@ function template_maintenance()
 					<dt><strong>', $txt['attachment_space' . ($context['attach_multiple_dirs'] ? '_current' : '')], ':</strong></dt><dd>', isset($context['attachment_space']) ? $context['attachment_space'] . ' ' . $txt['kilobyte'] : $txt['attachmentdir_size_not_set'], '</dd>
 				</dl>
 			</div>
-			<span class="botslice"><span></span></span>
 		</div>
 		<div class="cat_bar">
 			<h3 class="catbg">', $txt['attachment_integrity_check'], '</h3>
