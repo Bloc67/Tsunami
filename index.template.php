@@ -29,7 +29,7 @@ function template_html_above()
 	// Show right to left and the character set for ease of translating.
 	echo '
 <!DOCTYPE html>
-<html"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
+<html', $context['right_to_left'] ? ' dir="rtl"' : '', '>
 <head>
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/index', $context['theme_variant'], '.css?v2" />';
 
@@ -130,7 +130,7 @@ function template_body_above()
 		</div>
 	</header>
 </section>
-<div id="h_linktree"><a href="#maincontent" id="oaside"><span class="icon-down-open"></span></a>' , theme_linktree() , '</div>
+<div id="h_linktree"><a href="javascript:;" onclick="showaside(\'\'); return false;" id="oaside"><span id="icon-showaside" class="icon-down-open"></span></a>' , theme_linktree() , '</div>
 <div id="tsunami"' , !empty($settings['a_hide_credit']) ? ' style="display: none;"' : '' , '>Tsunami <span>theme by Bloc</span></div>
 
 <section id="contentsection">
@@ -145,6 +145,17 @@ function template_body_above()
 
 	echo '
 	</aside>
+<script>
+	function showaside(id)
+	{
+		var aside = document.getElementById(\'maside\');
+		aside.classList.toggle("showaside");	
+		var ikon = document.getElementById(\'icon-showaside\');
+		ikon.classList.toggle("flip");
+	}
+
+</script>
+
 	<main id="maincontent">';
 	// convert any pages
 	convertPageindex();
