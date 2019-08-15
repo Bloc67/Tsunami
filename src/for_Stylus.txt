@@ -1,3 +1,44 @@
+/* Some BBC related styles.
+------------------------------------------------------- */
+/* A quote, perhaps from another post. */
+blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote {
+	font-size: 90%;
+	color: #555;
+    font-style: italic;
+	padding:  0.5rem 0;
+    border-bottom: solid 3px #ddd;
+	margin: 0 0 0.5rem 0;
+	overflow: auto;
+}
+blockquote.bbc_alternate_quote { background: white;}
+
+/* A code block - maybe PHP ;). */
+code.bbc_code {
+	display: block;
+	font-family: "dejavu sans mono", "monaco", "lucida console", "courier new", monospace;
+	font-size: 0.8rem;
+    color: teal;
+	border-left: 2px solid #ddd;
+	line-height: 1.5em;
+	padding: 0.5rem 1rem;
+	overflow: auto;
+	/* Show a scrollbar after about 24 lines. */
+	max-height: 24em;
+}
+
+/* The "Quote:" and "Code:" header parts... */
+.codeheader, .quoteheader {
+	color: teal;
+	font-size: 0.7rem;
+	font-weight: bold;
+	padding: 0.3em 0.5rem;
+    border-bottom: solid 3px #e0e0e0;
+    border-left: solid 3px #e0e0e0;
+}
+.codeheader a, .quoteheader a {color: teal; }
+.codeoperation { font-weight: normal;}
+
+
 /* grids */
 #topheader {
 	display: grid;
@@ -1037,6 +1078,23 @@ input.input_text[size="5"] {width: 4rem;}
     width: 100%;
     height: 8rem;
 }
+/* posts and topics outside of messageinde/display */
+.a_topic, .a_topic li {padding: 0; margin: 0; list-style: none;}
+.a_topic li.counter {grid-area: counter; font-size: 2rem;padding-top: 0.5rem;} 
+.a_topic li.details {grid-area: details;} 
+.a_topic li.body {grid-area: body2;} 
+.a_topic li.buttons {grid-area: buttons; margin-bottom: 1rem;} 
+.a_topic {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: 2rem auto; 
+    grid-template-areas: 
+        "counter details"
+        "counter body2"
+        "counter buttons";
+}
+
+
 /* ############################### */
 /* responsive  */
 /* ############################### */
