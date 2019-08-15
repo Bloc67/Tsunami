@@ -451,7 +451,7 @@ body#help_popup a { padding: 0.5rem; }
     text-transform: uppercase;
 }
 .quickbuttons .button_submit.buts {
-    line-height: 1.2rem;
+    line-height: 1.5rem;
     display: inline-block;
     padding: 0 0.7rem;
     margin: 0;
@@ -510,8 +510,8 @@ ol.a_table_grid li > div {
     text-align: left !important;
     border-right: solid 1px #ddd;
     margin-right: 0.5rem;
-    font-size: 0.9rem;
-    padding: 4px 0.5rem 4px 0;
+    font-size: 0.85rem;
+    padding: 6px 0.5rem 4px 0;
 }
 ol.a_table_grid li > div:last-of-type {
     border-right: none;
@@ -525,15 +525,48 @@ ol.a_table_grid li > div:last-of-type {
 #a_smiley_list li { grid-template-columns: 6rem 6rem 8rem 8rem auto 5rem 1.5rem;}
 #a_message_icon_list li { grid-template-columns: 2.5rem 9rem 10rem auto 5rem 1.5rem;}
 #a_file_list li { grid-template-columns: 11rem 7rem 6rem auto 6rem 1.5rem;}
+#a_language_list li { grid-template-columns: 5rem auto 10rem 4rem 5rem;}
+#a_holiday_list li { grid-template-columns: auto 12rem 1.5rem;}
+#a_member_list li { grid-template-columns: 4rem 10rem 10rem auto 6rem 4rem 5rem 1.5rem ;}
+#a_regular_membergroups_list li { grid-template-columns: auto 8rem 6rem 5rem;}
+#a_post_count_membergroups_list li { grid-template-columns: auto 8rem 6rem 5rem 5rem;}
+#a_ban_list li { grid-template-columns: 8rem 6rem auto 5rem 5rem 5rem 5rem 1.5rem;}
+#a_ban_trigger_list li { grid-template-columns: auto 8rem 5rem 1.5rem;}
+#a_ban_log li { grid-template-columns: 6rem auto 8rem 6rem 1.5rem;}
+#a_spider_stat_list li { grid-template-columns: 6rem auto 8rem;}
+#a_spider_logs li { grid-template-columns: 12rem 8rem auto;}
+#a_spider_list li { grid-template-columns: 8rem 8rem auto 8rem 1.5rem;}
+#a_scheduled_tasks li { grid-template-columns: auto 13rem 8rem 5rem 5rem;}
+#a_task_log li { grid-template-columns: auto 13rem 8rem;}
+#a_mail_queue li { grid-template-columns: auto 13rem 5rem 8rem 1.5rem;}
+#a_moderation_log_list li { grid-template-columns: auto 10rem 6rem 8rem 8rem 1.5rem;}
+#a_warning_list li { grid-template-columns: 10rem 10rem 6rem auto 8rem;}
+#a_warning_template_list li { grid-template-columns: auto 8rem 8rem 1.5rem;}
+#a_watch_user_list li { grid-template-columns: 8rem 10rem 5rem 8rem auto;}
+#a_group_request_list li { grid-template-columns: 8rem 10rem auto 1.5rem;}
+#a_group_lists li { grid-template-columns: 10rem 8rem auto 5rem;}
+#a_track_user_list li { grid-template-columns: 10rem auto 12rem;}
+#a_edit_list li { grid-template-columns: 8rem 10rem auto 10rem 6rem;}
+#a_topic_notification_list li { grid-template-columns: auto 10rem 10rem 1.5rem;}
+#a_board_notification_list li { grid-template-columns: auto 1.5rem;}
 
+.a_col {font-size: 0.85rem !important;}
+.a_headers .a_col {font-size: 0.7rem !important;}
 .a_col .smalltext {
     background: teal;
     color: white;
     font-size: 0.7rem;
     display: inline-block;
     padding: 3px 5px;
-    margin: 0 0.2rem;
+    margin: 0;
+    border-radius: 3px;
     
+}
+.a_col br + .smalltext {
+    display: block;
+    margin: 5px 0;
+    padding: 8px 11px;
+    background: lightslategrey;
 }
 
 
