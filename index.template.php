@@ -106,6 +106,7 @@ function template_html_above()
 	<style>' , $settings['mycss'] , '</style>';
 	
 	echo '
+	<link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
 </head>
 <body' , function_exists('template_body_id') ? template_body_id() : ''   , '>';
 }
@@ -208,8 +209,8 @@ function template_head_user()
 		echo '
 				<ul class="reset">
 					<li class="greet">', $txt['hello_member_ndt'], ' <span>', $context['user']['name'], '</span></li>
-					<li class="unr"><a href="', $scripturl, '?action=unread">', $txt['unread_since_visit'], '</a></li>
-					<li class="rep"><a href="', $scripturl, '?action=unreadreplies">', $txt['show_unread_replies'], '</a></li>';
+					<li class="unr"><a href="', $scripturl, '?action=unread">', $txt['a_unread'], '</a></li>
+					<li class="rep"><a href="', $scripturl, '?action=unreadreplies">', $txt['a_replies'], '</a></li>';
 
 		// Is the forum in maintenance mode?
 		if ($context['in_maintenance'] && $context['user']['is_admin'])
