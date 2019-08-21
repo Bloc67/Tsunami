@@ -5,8 +5,9 @@ blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote {
 	font-size: 90%;
 	color: #555;
     font-style: italic;
-	padding:  0.5rem 0;
+	padding:  0.5rem 1rem 0.5rem 0;
     border-bottom: solid 3px #ddd;
+    border-right: dotted 3px #ddd;
 	margin: 0 0 0.5rem 0;
 	overflow: auto;
 }
@@ -54,11 +55,11 @@ code.bbc_code {
 }
 
 h1 {
-    font-size: 1.6rem;
-    font-family: "Verdana", arial, sans-serif;
-    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    font-family: 'Righteous', cursive;
     color: #def;
-    text-shadow: 4px 4px 10px rgba(0,0,0,0.6);
+    text-shadow: 4px 4px 10px rgba(0,0,0,0.2);
     border-right: solid 1px #678;
     padding-right: 1.5rem;
 }
@@ -84,11 +85,13 @@ section#headersection, #footersection {
     background-size: 100% auto;
 	background-position: bottom left;
     padding: 0.7rem 2rem 3% 2.2rem;
+    font-family: 'Righteous', cursive;
     font-size: 1.1rem;
     color: rgba(255,255,255,0.7);
     text-transform: uppercase;
 }
 #tsunami span {
+    font-family: verdana,sans-serif;
     display: inline-block;
     font-size: 0.7rem;
     font-weight: normal;
@@ -131,12 +134,10 @@ section#headersection a { color: #fff; }
     background-color: #f0f0f0;
 }
 /* common styles */
-.bbox {    padding: 0 0 0.5rem 0; }
+.bbox { padding: 0 0 0.5rem 0; }
 #h_user{ padding-top: 1rem; }
-.pagesection,.pagelinks {
-    padding: 1rem 0;
-    font-size: 0.8rem;
-}
+.pagesection,.pagelinks { font-size: 0.8rem; }
+.pagelinks {padding: 0 0 0.4rem 0; }
 .page_index span, .page_index a {
     display: inline-block;
     background: #f0f0f0;
@@ -268,12 +269,28 @@ ul.reset.dropmenu li ul {
     z-index: 5;
     margin-top: -2px;
 }
+ul.reset.dropmenu li li:hover ul {
+    opacity: 0.4;
+    -webkit-transition: all 400ms ease-in-out;
+    -moz-transition: all 400ms ease-in-out;
+    -ms-transition: all 400ms ease-in-out;
+    -o-transition: all 400ms ease-in-out;
+    transition: all 400ms ease-in-out;
+}
+ul.reset.dropmenu li li:hover ul:hover {
+    opacity: 1;
+    -webkit-transition: all 400ms ease-in-out;
+    -moz-transition: all 400ms ease-in-out;
+    -ms-transition: all 400ms ease-in-out;
+    -o-transition: all 400ms ease-in-out;
+    transition: all 400ms ease-in-out;
+}
 ul.reset.dropmenu li ul li {
     position: relative;
 }
 ul.reset.dropmenu li ul ul {
-	left: 15rem;
-    top: 6px;
+	left: 8rem;
+    top: -10px;
 	background: #000;
     display: none;
     position: absolute;
@@ -358,10 +375,17 @@ body { position: relative;}
 }
 
 /* admin menus */
-#adminmenu ul.dropmenu.reset  li a {
+#adminmenu ul.dropmenu.reset > li > a {
     color: #444 !important;
     font-size: 0.9rem;
     padding: 0.2rem 0.5rem !important;
+}
+#adminmenu ul.dropmenu.reset > li > ul > li > a {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem !important;
+}
+#adminmenu ul.dropmenu.reset  li a {
+    color: #fff !important;
 }
 #adminmenu ul.dropmenu.reset > li > a:after {
     font-family: "Fontello";
@@ -373,21 +397,25 @@ body { position: relative;}
 #adminmenu ul.dropmenu.reset > li:hover,
 #adminmenu ul.reset.dropmenu ul li:hover,
 #adminmenu ul.reset.dropmenu ul ul li:hover{background: #777;}
-#adminmenu ul.reset.dropmenu ul ul li:hover{background: #444;}
+#adminmenu ul.reset.dropmenu > li:hover{background: #777;}
+#adminmenu ul.reset.dropmenu > li > ul > li:hover{background: #444;}
+#adminmenu ul.reset.dropmenu ul ul li:hover{background: #222;}
 #adminmenu ul.dropmenu.reset > li:hover > a > span.firstlevel,
 #adminmenu ul.reset.dropmenu ul li:hover > a > span {color: #fff !important;}
-#adminmenu ul.dropmenu.reset > li > ul{background: #f8f8f8; border: solid 1px #777;}
-#adminmenu ul.dropmenu.reset > li > ul > li > ul{ background: #fff;border: solid 1px #777; }
+#adminmenu ul.dropmenu.reset > li > ul{background: #777; border: solid 1px #777;}
+#adminmenu ul.dropmenu.reset > li > ul > li > ul{ background: #444;border: solid 1px #444; }
 #adminmenu ul.reset.dropmenu li ul {
 	-webkit-box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.2);
 	box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.2);
 }
 #adminmenu ul.reset.dropmenu > li > a {
-    color: teal;
+    color: teal !important;
     border-bottom: solid 1px #ccc;
 }
 #adminmenu ul.reset.dropmenu > li > a:hover,
 #adminmenu ul.reset.dropmenu > li:hover > a { color: #000 !important;}
+#adminmenu ul.reset.dropmenu > li > ul li > a:hover,
+#adminmenu ul.reset.dropmenu > li > ul li:hover > a { color: #fff !important;}
 body#help_popup { padding: 2rem; }
 .mavatar {
 	padding: 0;
@@ -1006,6 +1034,32 @@ ol.packages, ol.packages li {
     margin: 0;
     padding: 0;
 }
+.progresswheel {
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border: solid 2px #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 2px;
+}
+.progresswheel span {
+    display: block;
+    width: 86px;
+    height: 86px;
+    font-size: 28px;
+    line-height: 80px;
+    background: #fff;
+    border-radius: 50%;
+    text-align: center;
+}
+.progress {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(110px,1fr));
+    grid-gap: 1rem;
+}
+
 
 /* other templates */
 #preview_section { background: #f0f0f0; padding: 0.5rem 2px;}
@@ -1092,6 +1146,28 @@ input.input_text[size="5"] {width: 4rem;}
         "counter details"
         "counter body2"
         "counter buttons";
+}
+.a_topic .quickbuttons {float: right; margin: 0.5rem 0;}
+
+/* pm template */
+.capacity_bar  {
+    display: block;
+    height: 8px;
+    background: #eee;
+    width: 50%;
+    margin: 8px 1rem 0 1rem;
+}
+.capacity_bar span {
+    display: block;
+    height: 8px;
+    background: teal;
+}
+.capacity_bar span.filled {background: orange; }
+.capacity_bar span.full {background: red; }
+.pm-icon {
+    font-size: 1.5rem;
+    color: gray;
+    margin: .1rem 0 0 0.5rem;
 }
 
 
