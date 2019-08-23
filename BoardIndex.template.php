@@ -32,6 +32,7 @@ function template_main()
 	global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
 	echo '
+<section id="a_boardindex_section">
 <article id="a_boardindex">
 	<div class="a_boards">';
 
@@ -81,9 +82,13 @@ function template_main()
 			echo '
 	<div class="a_markread">', template_button_strip($mark_read_button, 'right'), '</div>';
 	}
+
 	echo '
 </article>';
 	template_info_center();
+	
+	echo '
+</section>';
 }
 
 function template_news_slider()
@@ -159,6 +164,7 @@ function template_info_center()
 
 	// Here's where the "Info Center" starts...
 	echo '
+	' , !empty($options['hideinfo_boardindex']) ? template_news_slider() : '' , ' 
 	<div id="a_infocenter" class="a_infocenters"' , !empty($options['hideinfo_boardindex']) ? '': ' style="display: none;"' , '>
 		<div id="a_info_items">';
 
@@ -180,17 +186,23 @@ function template_info_center()
 		elseif (!empty($context['latest_posts']))
 		{
 			echo '
-				<dl>';
+				<ol class="reset a_recentblock">';
 
 			/* Each post in latest_posts has:
 					board (with an id, name, and link.), topic (the topic's id.), poster (with id, name, and link.),
 					subject, short_subject (shortened with...), time, link, and href. */
 			foreach ($context['latest_posts'] as $post)
 				echo '
-					<dt>', $post['link'], ' ', $txt['by'], ' ', $post['poster']['link'], ' (', $post['board']['link'], ')</dt>
-					<dd>', $post['time'], '</dd>';
+					<li>
+						<ul class="rec_block">
+							<li class="a_recent_post' , , '">', $post['link'], '</li> 
+							<li class="a_recent_poster"><span class="icon-user-outline"></span>', $post['poster']['link'], '</li>
+							<li class="a_recent_board"><span class="icon-folder"></span>', $post['board']['link'], '</li>
+							<li class="a_recent_time"><span class="icon-clock"></span>', $post['time'], '</li>
+						</ul>
+					</li>';
 			echo '
-				</dl>';
+				</ol>';
 		}
 		echo '
 			</div>';

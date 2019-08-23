@@ -131,7 +131,7 @@ function template_body_above()
 		</div>
 	</header>
 </section>
-<div id="h_linktree"><a href="javascript:;" onclick="showaside(\'\'); return false;" id="oaside"><span id="icon-showaside" class="icon-down-open"></span></a>' , theme_linktree() , '</div>
+<div id="h_linktree">' , theme_linktree() , '</div>
 <div id="tsunami"' , !empty($settings['a_hide_credit']) ? ' style="display: none;"' : '' , '>Tsunami <span>theme by Bloc</span></div>
 
 <section id="contentsection">
@@ -146,18 +146,8 @@ function template_body_above()
 
 	echo '
 	</aside>
-<script>
-	function showaside(id)
-	{
-		var aside = document.getElementById(\'maside\');
-		aside.classList.toggle("showaside");	
-		var ikon = document.getElementById(\'icon-showaside\');
-		ikon.classList.toggle("flip");
-	}
-
-</script>
-
 	<main id="maincontent">';
+	
 	// convert any pages
 	convertPageindex();
 }
