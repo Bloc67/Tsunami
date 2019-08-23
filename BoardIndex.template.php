@@ -190,15 +190,44 @@ function template_info_center()
 
 			/* Each post in latest_posts has:
 					board (with an id, name, and link.), topic (the topic's id.), poster (with id, name, and link.),
-					subject, short_subject (shortened with...), time, link, and href. */
+					subject, short_subject (shortened with...), time, link, and href. 
+			[7] => Array
+					(
+						[board] => Array
+							(
+								[id] => 51
+								[name] => Mosjonskroken
+								[href] => http://127.0.0.1/smf20/index.php?board=51.0
+								[link] => Mosjonskroken
+							)
+
+						[topic] => 84886
+						[poster] => Array
+							(
+								[id] => 715
+								[name] => Mammen
+								[href] => http://127.0.0.1/smf20/index.php?action=profile;u=715
+								[link] => Mammen
+							)
+
+						[subject] => Sv: Mammen skal i form (til neste KK-mila)
+						[short_subject] => Sv: Mammen skal i form (...
+						[preview] => 3.2 km løping på tirsdag og 32 minutter med styrketrening i går.
+						[time] => Thursday 09 Jun 2016 kl.13:17
+						[timestamp] => 1465471050
+						[raw_timestamp] => 1465471050
+						[href] => http://127.0.0.1/smf20/index.php?topic=84886.msg1237388;topicseen#msg1237388
+						[link] => Sv: Mammen skal i form (til neste KK-mila)
+					)
+					*/
 			foreach ($context['latest_posts'] as $post)
 				echo '
 					<li>
 						<ul class="rec_block">
-							<li class="a_recent_post' , , '">', $post['link'], '</li> 
+							<li class="a_recent_post">', $post['link'], '</li> 
 							<li class="a_recent_poster"><span class="icon-user-outline"></span>', $post['poster']['link'], '</li>
-							<li class="a_recent_board"><span class="icon-folder"></span>', $post['board']['link'], '</li>
-							<li class="a_recent_time"><span class="icon-clock"></span>', $post['time'], '</li>
+							<li class="a_recent_board"><span class="icon-folder" title="', $post['board']['name'], '"></span>', $post['board']['link'], '</li>
+							<li class="a_recent_time"><span class="icon-clock" title="', $post['time'], '"></span>', $post['time'], '</li>
 						</ul>
 					</li>';
 			echo '
@@ -219,14 +248,14 @@ function template_info_center()
 		// Holidays like "Christmas", "Chanukah", and "We Love [Unknown] Day" :P.
 		if (!empty($context['calendar_holidays']))
 				echo '
-					<span class="holiday">', $txt['calendar_prompt'], ' ', implode(', ', $context['calendar_holidays']), '</span>';
+					<span class="a_holiday">', $txt['calendar_prompt'], ' ', implode(', ', $context['calendar_holidays']), '</span>';
 
 		// People's birthdays. Like mine. And yours, I guess. Kidding.
 		if (!empty($context['calendar_birthdays']))
 		{
 			echo '
-					<span class="birthday">
-						<h5>', $context['calendar_only_today'] ? $txt['birthdays'] : $txt['birthdays_upcoming'], '</h5> ';
+					<span class="a_birthday">
+						<strong>', $context['calendar_only_today'] ? $txt['birthdays'] : $txt['birthdays_upcoming'], '</strong>: ';
 			foreach ($context['calendar_birthdays'] as $member)
 				echo '
 						<a href="', $scripturl, '?action=profile;u=', $member['id'], '">', $member['is_today'] ? '<strong>' : '', $member['name'], $member['is_today'] ? '</strong>' : '', isset($member['age']) ? ' (' . $member['age'] . ')' : '', '</a>';
@@ -237,8 +266,8 @@ function template_info_center()
 		if (!empty($context['calendar_events']))
 		{
 			echo '
-					<span class="event">
-						<h5>', $context['calendar_only_today'] ? $txt['events'] : $txt['events_upcoming'], '</h5> ';
+					<span class="a_event">
+						<strong>', $context['calendar_only_today'] ? $txt['events'] : $txt['events_upcoming'], '</strong> ';
 			/* Each event in calendar_events should have:
 					title, href, is_last, can_edit (are they allowed?), modify_href, and is_today. */
 			foreach ($context['calendar_events'] as $event)
@@ -259,10 +288,13 @@ function template_info_center()
 			<div class="a_info_item" id="a_info_stats">
 				<h4><a href="', $scripturl, '?action=stats">', $txt['forum_stats'], '</a></h4>
 				<ul>
-					<li>', $context['common_stats']['total_posts'], ' ', $txt['posts_made'], ' ', $txt['in'], ' ', $context['common_stats']['total_topics'], ' ', $txt['topics'], ' ', $txt['by'], ' ', $context['common_stats']['total_members'], ' ', $txt['members'], '. ', !empty($settings['show_latest_member']) ? '<br>' . $txt['latest_member'] . ': <strong> ' . $context['common_stats']['latest_member']['link'] . '</strong>' : '', '</li>
-					<li>', (!empty($context['latest_post']) ? $txt['latest_post'] . ': <strong>&quot;' . $context['latest_post']['link'] . '&quot;</strong><br>( ' . $context['latest_post']['time'] . ' )' : ''), '</li>
-					<li class="padding_top"><a href="', $scripturl, '?action=recent">', $txt['recent_view'], '</a>', $context['show_stats'] ? '</li>
-					<li><a href="' . $scripturl . '?action=stats">' . $txt['more_stats'] . '</a></li>' : '', '
+					<li>
+						', $context['common_stats']['total_posts'], ' ', $txt['posts_made'], ' ', $txt['in'], ' ', $context['common_stats']['total_topics'], ' ', $txt['topics'], ' ', $txt['by'], ' ', $context['common_stats']['total_members'], ' ', $txt['members'], '. ', !empty($settings['show_latest_member']) ? '<br>' . $txt['latest_member'] . ': <strong> ' . $context['common_stats']['latest_member']['link'] . '</strong>' : '', '
+						| ', (!empty($context['latest_post']) ? $txt['latest_post'] . ': <strong>&quot;' . $context['latest_post']['link'] . '&quot;</strong> ( ' . $context['latest_post']['time'] . ' )' : ''), '
+					</li>
+					<li class="padding_top flow_hidden">
+						<a href="', $scripturl, '?action=recent" class="button_submit buts">', $txt['recent_view'], '</a>', $context['show_stats'] ? '<span class="floatright"><a href="' . $scripturl . '?action=stats" class="button_submit buts">' . $txt['more_stats'] . '</a></span>' : '', '
+					</li>
 				</ul>
 			</div>';
 	}
@@ -286,27 +318,23 @@ function template_info_center()
 	if (!empty($bracketList))
 		echo ' (' . implode(', ', $bracketList) . ')';
 
-	echo $context['show_who'] ? '</a>' : '', '
-				</p>
-				<p>';
+	echo $context['show_who'] ? '</a>' : '';
 
 	// Assuming there ARE users online... each user in users_online has an id, username, name, group, href, and link.
 	if (!empty($context['users_online']))
 	{
 		echo '
-					', sprintf($txt['users_active'], $modSettings['lastActive']), ':<br />', implode(', ', $context['list_users_online']);
+					| ', sprintf($txt['users_active'], $modSettings['lastActive']), ': ', implode(', ', $context['list_users_online']);
 
 		// Showing membergroups?
 		if (!empty($settings['show_group_key']) && !empty($context['membergroups']))
 			echo '
-					<br />[' . implode(']&nbsp;&nbsp;[', $context['membergroups']) . ']';
+					| [' . implode(']&nbsp;&nbsp;[', $context['membergroups']) . ']';
 	}
 
 	echo '
-				</p>
-				<p class="last smalltext">
-					', $txt['most_online_today'], ': <strong>', comma_format($modSettings['mostOnlineToday']), '</strong>.
-					', $txt['most_online_ever'], ': ', comma_format($modSettings['mostOnline']), ' (', timeformat($modSettings['mostDate']), ')
+					<br>', $txt['most_online_today'], ': <strong>', comma_format($modSettings['mostOnlineToday']), '</strong>.
+					| ', $txt['most_online_ever'], ': ', comma_format($modSettings['mostOnline']), ' (', timeformat($modSettings['mostDate']), ')
 				</p>
 			</div>';
 
