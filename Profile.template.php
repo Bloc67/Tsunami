@@ -1450,6 +1450,8 @@ function template_profile_theme_settings()
 						</dl>
 						<h4>Tsunami</h4>
 						<ul class="reset options" id="theme_settings">
+							
+							
 							<li class="a_focus"   id="a_hidelastpost">
 								<input type="hidden" name="default_options[hidelastpost_boardindex]" value="0" />
 								<label for="hidelastpost_boardindex"><input type="checkbox" name="default_options[hidelastpost_boardindex]" id="hidelastpost_boardindex" value="1"', !empty($context['member']['options']['hidelastpost_boardindex']) ? ' checked="checked"' : '', ' class="input_check" /> ', $txt['lastpostbindex'], '</label>
@@ -1460,6 +1462,8 @@ function template_profile_theme_settings()
 								<hr>
 							</li>
 
+
+							
 							<li>
 								<input type="hidden" name="default_options[show_board_desc]" value="0" />
 								<label for="show_board_desc"><input type="checkbox" name="default_options[show_board_desc]" id="show_board_desc" value="1"', !empty($context['member']['options']['show_board_desc']) ? ' checked="checked"' : '', ' class="input_check" /> ', $txt['board_desc_inside'], '</label>

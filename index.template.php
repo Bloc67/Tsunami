@@ -257,8 +257,15 @@ function template_head_news()
 {
 	global $context, $settings, $txt;
 
+	if(function_exists(template_news_slider))
+	{
+		$done = template_news_slider();
+		if($done)
+			return;
+	}
+	
 	// Show a random news item? (or you could pick one from news_lines...)
-	if (!empty($settings['enable_news']))
+	if (!empty($settings['enable_news']) && !empty($context['random_news_line']))
 		echo '
 				<h2>', $txt['news'], ': </h2>
 				<p>', $context['random_news_line'], '</p>';
@@ -312,16 +319,12 @@ function theme_linktree($force_show = false)
 			echo $tree['extra_before'];
 
 		// Show the link, including a URL if it should have one.
-		echo $settings['linktree_link'] && isset($tree['url']) ? '
+		echo isset($tree['url']) ? '
 				<a href="' . $tree['url'] . '"><span>' . $tree['name'] . '</span></a>' : '<span>' . $tree['name'] . '</span>';
 
 		// Show something after the link...?
 		if (isset($tree['extra_after']))
 			echo $tree['extra_after'];
-
-		// Don't show a separator for the last one.
-		if ($link_num != count($context['linktree']) - 1)
-			echo ' &#187;';
 
 		echo '
 			</li>';

@@ -13,14 +13,19 @@ function more_aside()
 	global $options, $context, $txt;
 
 	echo '
-		<div>
-			<a href="' , $scripturl , '?action=profile;area=theme#a_hidelastpost"><span id="bindex_switch" class="icon-doc"></span>
-			' , empty($options['hidelastpost_boardindex']) ? $txt['lastpostbindex'] : $txt['lastpostbindex2'] , '</a>
+		<div class="cat_bar">
+			<h3 class="catbg">
+				', $txt['a_options'], '
+			</h3>
+		</div>
+		<div class="a_custom' , !empty($options['hidelastpost_boardindex']) ? ' enabled' : '' ,'">
+			<a href="' , $scripturl , '?action=profile;area=theme#a_hidelastpost">
+			<span id="bindex_switch" class="icon-chat-alt" title="' , empty($options['hidelastpost_boardindex']) ? $txt['lastpostbindex'] : $txt['lastpostbindex2'] , '"></span></a>
 		</div>
 
-		<div>
-			<a href="' , $scripturl , '?action=profile;area=theme#a_hideinfo"><span id="binfo_switch" class="icon-doc"></span>
-			' , empty($options['hideinfo_boardindex']) ? $txt['infobindex'] : $txt['infobindex2'] , '</a>
+		<div class="a_custom' , !empty($options['hideinfo_boardindex']) ? ' enabled' : '' ,'">
+			<a href="' , $scripturl , '?action=profile;area=theme#a_hideinfo">
+			<span id="binfo_switch" class="icon-info-outline" title="' , empty($options['hideinfo_boardindex']) ? $txt['infobindex'] : $txt['infobindex2'] , '"></span></a>
 		</div>
 		';
 
@@ -97,13 +102,12 @@ function template_news_slider()
 	global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
 	// Show the news fader?  (assuming there are things to show...)
-	if ($settings['show_newsfader'] && !empty($context['fader_news_lines']))
+	if (!empty($settings['show_newsfader']) && !empty($context['news_lines']))
 	{
 		echo '
 	<div id="newsfader">
 		<div class="cat_bar">
 			<h3 class="catbg">
-				<img id="newsupshrink" src="', $settings['images_url'], '/collapse.gif" alt="*" title="', $txt['upshrink_description'], '" align="bottom" style="display: none;" />
 				', $txt['news'], '
 			</h3>
 		</div>
@@ -111,7 +115,7 @@ function template_news_slider()
 
 			foreach ($context['news_lines'] as $news)
 				echo '
-			<li>', $news, '</li>';
+			<li class="smalltext">', $news, '</li>';
 
 	echo '
 		</ul>
@@ -123,39 +127,14 @@ function template_news_slider()
 		var oNewsFader = new smf_NewsFader({
 			sSelf: \'oNewsFader\',
 			sFaderControlId: \'smfFadeScroller\',
-			sItemTemplate: ', JavaScriptEscape('<strong>%1$s</strong>'), ',
+			sItemTemplate: ', JavaScriptEscape('<span class="smalltext">%1$s</span>'), ',
 			iFadeDelay: ', empty($settings['newsfader_time']) ? 5000 : $settings['newsfader_time'], '
 		});
-
-		// Create the news fader toggle.
-		var smfNewsFadeToggle = new smc_Toggle({
-			bToggleEnabled: true,
-			bCurrentlyCollapsed: ', empty($options['collapse_news_fader']) ? 'false' : 'true', ',
-			aSwappableContainers: [
-				\'smfFadeScroller\'
-			],
-			aSwapImages: [
-				{
-					sId: \'newsupshrink\',
-					srcExpanded: smf_images_url + \'/collapse.gif\',
-					altExpanded: ', JavaScriptEscape($txt['upshrink_description']), ',
-					srcCollapsed: smf_images_url + \'/expand.gif\',
-					altCollapsed: ', JavaScriptEscape($txt['upshrink_description']), '
-				}
-			],
-			oThemeOptions: {
-				bUseThemeSettings: ', $context['user']['is_guest'] ? 'false' : 'true', ',
-				sOptionName: \'collapse_news_fader\',
-				sSessionVar: ', JavaScriptEscape($context['session_var']), ',
-				sSessionId: ', JavaScriptEscape($context['session_id']), '
-			},
-			oCookieOptions: {
-				bUseCookie: ', $context['user']['is_guest'] ? 'true' : 'false', ',
-				sCookieName: \'newsupshrink\'
-			}
-		});
 	// ]]></script>';
+		return true;
 	}
+	else
+		return false;
 }
 
 function template_info_center()
@@ -164,7 +143,6 @@ function template_info_center()
 
 	// Here's where the "Info Center" starts...
 	echo '
-	' , !empty($options['hideinfo_boardindex']) ? template_news_slider() : '' , ' 
 	<div id="a_infocenter" class="a_infocenters"' , !empty($options['hideinfo_boardindex']) ? '': ' style="display: none;"' , '>
 		<div id="a_info_items">';
 
@@ -225,8 +203,8 @@ function template_info_center()
 					<li>
 						<ul class="rec_block">
 							<li class="a_recent_post">', $post['link'], '</li> 
-							<li class="a_recent_poster"><span class="icon-user-outline"></span>', $post['poster']['link'], '</li>
-							<li class="a_recent_board"><span class="icon-folder" title="', $post['board']['name'], '"></span>', $post['board']['link'], '</li>
+							<li class="a_recent_poster"><a href="', $post['poster']['href'], '"><span class="icon-user-outline"></span>', $post['poster']['name'], '</a></li>
+							<li class="a_recent_board"><a href="', $post['board']['href'], '"><span class="icon-folder" title="', $post['board']['name'], '"></span>', $post['board']['name'], '</a></li>
 							<li class="a_recent_time"><span class="icon-clock" title="', $post['time'], '"></span>', $post['time'], '</li>
 						</ul>
 					</li>';

@@ -17,12 +17,12 @@ function template_main()
 
 	echo '
 		<div id="calendar">
-			<div id="month_grid">
-				', template_show_month_grid('prev'), '
-				', template_show_month_grid('current'), '
-				', template_show_month_grid('next'), '
-			</div>
-			<div id="main_grid" style="', $context['browser']['is_ie'] && !$context['browser']['is_ie8'] ? 'float: ' . ($context['right_to_left'] ? 'right; padding-right' : 'left; padding-left') . ': 20px;' : 'margin-' . ($context['right_to_left'] ? 'right' : 'left') . ': 220px; ', '">
+			<section id="month_grid">
+				<div>', template_show_month_grid('prev'), '</div>
+				<div>', template_show_month_grid('current'), '</div>
+				<div>', template_show_month_grid('next'), '</div>
+			</section>
+			<div id="main_grid">
 				', $context['view_week'] ? template_show_week_grid('main') : template_show_month_grid('main');
 
 	// Build the calendar button array.
@@ -55,7 +55,6 @@ function template_main()
 
 	echo '
 				</form>
-				<br class="clear" />
 			</div>
 		</div>';
 }
@@ -283,13 +282,14 @@ function template_show_month_grid($grid_name)
 	}
 
 	echo '
-				<table cellspacing="1" class="calendar_table">';
+				<table class="calendar_table">
+				<thead>';
 
 	// Show each day of the week.
 	if (empty($calendar_data['disable_day_titles']))
 	{
 		echo '
-					<tr class="titlebg2">';
+					<tr>';
 
 		if (!empty($calendar_data['show_week_links']))
 			echo '
@@ -301,9 +301,11 @@ function template_show_month_grid($grid_name)
 						<th class="days" scope="col" ', $calendar_data['size'] == 'small' ? 'style="font-size: x-small;"' : '', '>', !empty($calendar_data['short_day_titles']) ? ($smcFunc['substr']($txt['days'][$day], 0, 1)) : $txt['days'][$day], '</th>';
 		}
 		echo '
-					</tr>';
+					</tr>
+				</thead>';
 	}
-
+	echo '
+				<tbody>';
 	/* Each week in weeks contains the following:
 		days (a list of days), number (week # in the year.) */
 	foreach ($calendar_data['weeks'] as $week)
@@ -313,8 +315,8 @@ function template_show_month_grid($grid_name)
 
 		if (!empty($calendar_data['show_week_links']))
 			echo '
-						<td class="windowbg2 weeks">
-							<a href="', $scripturl, '?action=calendar;viewweek;year=', $calendar_data['current_year'], ';month=', $calendar_data['current_month'], ';day=', $week['days'][0]['day'], '">&#187;</a>
+						<td class="weeks">
+							<a href="', $scripturl, '?action=calendar;viewweek;year=', $calendar_data['current_year'], ';month=', $calendar_data['current_month'], ';day=', $week['days'][0]['day'], '"><span class="icon-right-small"></span></a>
 						</td>';
 
 		/* Every day has the following:
@@ -324,7 +326,7 @@ function template_show_month_grid($grid_name)
 		{
 			// If this is today, make it a different color and show a border.
 			echo '
-						<td style="height: ', $calendar_data['size'] == 'small' ? '20' : '100', 'px; padding: 2px;', $calendar_data['size'] == 'small' ? 'font-size: x-small;' : '', '" class="', $day['is_today'] ? 'calendar_today' : 'windowbg', ' days">';
+						<td class="', $day['is_today'] ? 'calendar_today' : '', ' days">';
 
 			// Skip it if it should be blank - it's not a day if it has no number.
 			if (!empty($day['day']))
@@ -332,11 +334,13 @@ function template_show_month_grid($grid_name)
 				// Should the day number be a link?
 				if (!empty($modSettings['cal_daysaslink']) && $context['can_post'])
 					echo '
-							<a href="', $scripturl, '?action=calendar;sa=post;month=', $calendar_data['current_month'], ';year=', $calendar_data['current_year'], ';day=', $day['day'], ';', $context['session_var'], '=', $context['session_id'], '">', $day['day'], '</a>';
+							<a class="cal_header" href="', $scripturl, '?action=calendar;sa=post;month=', $calendar_data['current_month'], ';year=', $calendar_data['current_year'], ';day=', $day['day'], ';', $context['session_var'], '=', $context['session_id'], '">', $day['day'], '</a>';
 				else
 					echo '
-							', $day['day'];
+							<span class="cal_header">', $day['day'],'</span>';
 
+				echo '
+							<div class="cal_text">';
 				// Is this the first day of the week? (and are we showing week numbers?)
 				if ($day['is_first_day'] && $calendar_data['size'] != 'small')
 					echo '<span class="smalltext"> - <a href="', $scripturl, '?action=calendar;viewweek;year=', $calendar_data['current_year'], ';month=', $calendar_data['current_month'], ';day=', $day['day'], '">', $txt['calendar_week'], ' ', $week['number'], '</a></span>';
@@ -401,7 +405,7 @@ function template_show_month_grid($grid_name)
 				}
 			}
 
-			echo '
+			echo '		</div>
 						</td>';
 		}
 
@@ -410,6 +414,7 @@ function template_show_month_grid($grid_name)
 	}
 
 	echo '
+				</tbody>
 				</table>';
 }
 
@@ -446,7 +451,7 @@ function template_show_week_grid($grid_name)
 		$done_title = true;
 
 		echo '
-				<table width="100%" class="calendar_table weeklist" cellspacing="1" cellpadding="0">';
+				<table class="weeklist">';
 
 		foreach ($month_data['days'] as $day)
 		{

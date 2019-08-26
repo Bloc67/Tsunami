@@ -79,7 +79,9 @@ function template_show_list($list_id = null)
 			</div>';
 	}
 
-	echo '* a_' , $list_id , ' *';
+	//use to quickly identify
+	//echo '* a_' , $list_id , ' *';
+	
 	echo '
 			<ol class="reset a_table_grid" id="a_' , $list_id , '">
 				<li class="a_headers">';

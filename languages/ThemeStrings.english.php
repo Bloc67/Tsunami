@@ -10,5 +10,6 @@ $txt['infobindex2'] = 'Hide Info center';
 
 $txt['a_unread'] = 'Show unread posts';
 $txt['a_replies'] = 'Show new replies';
+$txt['a_options'] = 'Options';
 
 ?>
