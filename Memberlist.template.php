@@ -10,6 +10,11 @@
  * @version 2.0
  */
 
+function template_body_id()
+{
+	echo ' id="m_list"';
+}
+
 // Displays a sortable listing of all members registered on the forum.
 function template_main()
 {
@@ -22,24 +27,25 @@ function template_main()
 		);
 
 	echo '
+<section id="a_memberlist">
 	<div class="main_section" id="memberlist">
-		<div class="cat_bar">
-			<h4 class="catbg">
-				<span class="floatleft">', $txt['members_list'], '</span>';
+		<h3 class="header_name">
+			', $txt['members_list'];
+		
 		if (!isset($context['old_search']))
 				echo '
-				<span class="floatright">', $context['letter_links'], '</span>';
+			<span class="floatright">', $context['letter_links'], '</span>';
+		
 		echo '
-			</h4>
-		</div>
-		<div class="pagesection">
-			', template_button_strip($memberlist_buttons, 'right'), '
-			<div class="pagelinks floatleft">', $txt['pages'], ': ', $context['page_index'], '</div>
+		</h3>
+		<div class="pagesection clear">
+			<div class="floatright">', template_button_strip($memberlist_buttons, 'right'), '</div>
+			<div class="pagelinks">', $context['page_index'], '</div>
 		</div>';
 
 	echo '
-		<div id="mlist" class="tborder topic_table">
-			<table class="table_grid" cellspacing="0" width="100%">
+		<div id="mlist">
+			<table class="table_grid">
 			<thead>
 				<tr class="catbg">';
 
@@ -49,18 +55,21 @@ function template_main()
 		// We're not able (through the template) to sort the search results right now...
 		if (isset($context['old_search']))
 			echo '
-					<th scope="col" class="', isset($column['class']) ? ' ' . $column['class'] : '', '"', isset($column['width']) ? ' width="' . $column['width'] . '"' : '', isset($column['colspan']) ? ' colspan="' . $column['colspan'] . '"' : '', '>
-						', $column['label'], '</th>';
+					<th scope="col" ', isset($column['colspan']) ? ' colspan="' . $column['colspan'] . '"' : '', '>
+						', $column['label'], '
+					</th>';
 		// This is a selected column, so underline it or some such.
 		elseif ($column['selected'])
 			echo '
-					<th scope="col" class="', isset($column['class']) ? ' ' . $column['class'] : '', '" style="width: auto;"' . (isset($column['colspan']) ? ' colspan="' . $column['colspan'] . '"' : '') . ' nowrap="nowrap">
-						<a href="' . $column['href'] . '" rel="nofollow">' . $column['label'] . ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" /></a></th>';
+					<th scope="col"' . (isset($column['colspan']) ? ' colspan="' . $column['colspan'] . '"' : '') . '>
+						<a href="' . $column['href'] . '" rel="nofollow">' . $column['label'] . ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" /></a>
+					</th>';
 		// This is just some column... show the link and be done with it.
 		else
 			echo '
-					<th scope="col" class="', isset($column['class']) ? ' ' . $column['class'] : '', '"', isset($column['width']) ? ' width="' . $column['width'] . '"' : '', isset($column['colspan']) ? ' colspan="' . $column['colspan'] . '"' : '', '>
-						', $column['link'], '</th>';
+					<th scope="col"', isset($column['colspan']) ? ' colspan="' . $column['colspan'] . '"' : '', '>
+						', $column['link'], '
+					</th>';
 	}
 	echo '
 				</tr>
@@ -75,14 +84,14 @@ function template_main()
 			echo '
 				<tr ', empty($member['sort_letter']) ? '' : ' id="letter' . $member['sort_letter'] . '"', '>
 					<td class="windowbg2">
-						', $context['can_send_pm'] ? '<a href="' . $member['online']['href'] . '" title="' . $member['online']['text'] . '">' : '', $settings['use_image_buttons'] ? '<img src="' . $member['online']['image_href'] . '" alt="' . $member['online']['text'] . '" align="middle" />' : $member['online']['label'], $context['can_send_pm'] ? '</a>' : '', '
+						', $context['can_send_pm'] ? '<a href="' . $member['online']['href'] . '" title="' . $member['online']['text'] . '">' : '', !empty($member['online']['is_online']) ? '<span class="icon-micro-new"></span>' : '<span class="icon-micro-new grey"></span>',  $context['can_send_pm'] ? '</a>' : '', '
 					</td>
 					<td class="windowbg lefttext">', $member['link'], '</td>
-					<td class="windowbg2">', $member['show_email'] == 'no' ? '' : '<a href="' . $scripturl . '?action=emailuser;sa=email;uid=' . $member['id'] . '" rel="nofollow"><img src="' . $settings['images_url'] . '/email_sm.gif" alt="' . $txt['email'] . '" title="' . $txt['email'] . ' ' . $member['name'] . '" /></a>', '</td>';
+					<td class="windowbg2">', $member['show_email'] == 'no' ? '' : '<a href="' . $scripturl . '?action=emailuser;sa=email;uid=' . $member['id'] . '" rel="nofollow"><span class="icon-mail" title="' . $txt['email'] . ' ' . $member['name'] . '"></span></a>', '</td>';
 
 		if (!isset($context['disabled_fields']['website']))
 			echo '
-					<td class="windowbg">', $member['website']['url'] != '' ? '<a href="' . $member['website']['url'] . '" target="_blank" class="new_win"><img src="' . $settings['images_url'] . '/www.gif" alt="' . $member['website']['title'] . '" title="' . $member['website']['title'] . '" /></a>' : '', '</td>';
+					<td class="windowbg">', $member['website']['url'] != '' ? '<a href="' . $member['website']['url'] . '" target="_blank" class="new_win"><span class="icon-home-outline" title="' . $member['website']['title'] . '"></span></a>' : '', '</td>';
 
 		// ICQ?
 		if (!isset($context['disabled_fields']['icq']))
@@ -144,7 +153,7 @@ function template_main()
 
 	echo '
 		<div class="pagesection">
-			<div class="pagelinks floatleft">', $txt['pages'], ': ', $context['page_index'], '</div>';
+			<div class="pagelinks floatleft">', $context['page_index'], '</div>';
 
 	// If it is displaying the result of a search show a "search again" link to edit their criteria.
 	if (isset($context['old_search']))
@@ -154,7 +163,8 @@ function template_main()
 			</div>';
 	echo '
 		</div>
-	</div>';
+	</div>
+</section>';
 
 }
 

@@ -224,7 +224,7 @@ function template_main()
 		// Show online and offline buttons?
 		if (!empty($modSettings['onlineEnable']) && !$message['member']['is_guest'])
 			echo '
-							', $context['can_send_pm'] ? '<a href="' . $message['member']['online']['href'] . '" title="' . $message['member']['online']['label'] . '">' : '', '<span class="icon-micro-new"></span>', $context['can_send_pm'] ? '</a>' : '';
+							', $context['can_send_pm'] ? '<a href="' . $message['member']['online']['href'] . '" title="' . $message['member']['online']['label'] . '">' : '', $message['member']['online']['is_online'] ? '<span class="icon-micro-new"></span>' : '' , $context['can_send_pm'] ? '</a>' : '';
 
 		// Show a link to the member's profile.
 		echo '
@@ -239,7 +239,7 @@ function template_main()
 						<a class="mavatar mobile floatright" href="', $scripturl, '?action=profile;u=', $message['member']['id'], '" style="background-image: url(', $message['member']['avatar']['href'], ');"></a>';
 		}
 		echo '
-						<ul class="desktop reset smalltext" id="msg_', $message['id'], '_extra_info">';
+						<ul class="clear desktop reset smalltext" id="msg_', $message['id'], '_extra_info">';
 
 		// Show the member's custom title, if they have one.
 		if (!empty($message['member']['title']))
@@ -276,17 +276,17 @@ function template_main()
 			// Is karma display enabled?  Total or +/-?
 			if ($modSettings['karmaMode'] == '1')
 				echo '
-							<li class="desktop karma">', $modSettings['karmaLabel'], ' ', $message['member']['karma']['good'] - $message['member']['karma']['bad'], '</li>';
+							<li class="desktop karma"><span class="icon-heart"></span>', $message['member']['karma']['good'] - $message['member']['karma']['bad'], '</li>';
 			elseif ($modSettings['karmaMode'] == '2')
 				echo '
-							<li class="desktop karma">', $modSettings['karmaLabel'], ' +', $message['member']['karma']['good'], '/-', $message['member']['karma']['bad'], '</li>';
+							<li class="desktop karma"><span class="icon-heart"></span> +', $message['member']['karma']['good'], '/-', $message['member']['karma']['bad'], '</li>';
 
 			// Is this user allowed to modify this member's karma?
 			if ($message['member']['karma']['allow'])
 				echo '
 							<li class="desktop karma_allow">
-								<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $modSettings['karmaApplaudLabel'], '</a>
-								<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $modSettings['karmaSmiteLabel'], '</a>
+								<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '"><span class="icon-thumbs-up circle green"></span></a>
+								<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '"><span class="icon-thumbs-down circle red"></span></a>
 							</li>';
 
 			// Show the member's gender icon?
@@ -328,10 +328,10 @@ function template_main()
 				echo '
 							<li class="desktop im_icons flexlist">
 								<ul class="reset flexlist">
-									', !empty($message['member']['icq']['link']) ? '<li>' . $message['member']['icq']['link'] . '</li>' : '', '
-									', !empty($message['member']['msn']['link']) ? '<li>' . $message['member']['msn']['link'] . '</li>' : '', '
-									', !empty($message['member']['aim']['link']) ? '<li>' . $message['member']['aim']['link'] . '</li>' : '', '
-									', !empty($message['member']['yim']['link']) ? '<li>' . $message['member']['yim']['link'] . '</li>' : '', '
+									', !empty($message['member']['icq']['link']) ? '<li><a class="button_submit buts" href="' . $message['member']['icq']['href'] . '">ICQ</a></li>' : '', '
+									', !empty($message['member']['msn']['link']) ? '<li><a class="button_submit buts" href="' . $message['member']['msn']['href'] . '">MSN</a></li>' : '', '
+									', !empty($message['member']['aim']['link']) ? '<li><a class="button_submit buts" href="' . $message['member']['aim']['href'] . '">AIM</a></li>' : '', '
+									', !empty($message['member']['yim']['link']) ? '<li><a class="button_submit buts" href="' . $message['member']['yim']['href'] . '">YIM</a></li>' : '', '
 								</ul>
 							</li>';
 

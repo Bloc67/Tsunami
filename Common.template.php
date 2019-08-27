@@ -3,12 +3,12 @@
 /*	@ Bloc 2019										*/
 /*	@	SMF 2.0.x										*/
 
-function a_boardindex($board, $category = '')
+function a_boardindex($board, $category_id = '')
 {
 	global $context, $scripturl, $settings, $options, $modSettings, $txt;
 
 	echo '
-		<ul id="category_', $category['id'], '_boards" class="reset a_boards_single">
+		<ul id="category_', $category_id, '_boards" class="reset a_boards_single">
 			<li class="a_board_subject">
 				<a class="a_subject" href="', $board['href'], '" name="b', $board['id'], '">', $board['name'], '</a>' , ($board['new'] || $board['children_new']) ? '<span class="icon-micro-new"></span>' : '';
 
@@ -50,7 +50,7 @@ function a_boardindex($board, $category = '')
 	echo '
 			</li>
 			<li class="a_board_avvy' , ($board['new'] || $board['children_new']) ? ' avvy_new'.($board['children_new'] ? '2' : '') : '' , '">
-				<span class="avvy avvy_not" style="background-image: url(' , $avatars[$board['last_post']['member']['id']] , ');"></span>
+				<span class="avvy avvy_not"></span>
 			</li>
 			<li class="a_board_childs">';
 	// Show the "Child Boards: ". (there's a link_children but we're going to bold the new ones...)
@@ -108,18 +108,20 @@ function a_topic($topic, $check = false)
 				<li class="icon1"><img src="', $settings['images_url'], '/post/svg/', $topic['first_post']['icon'], '.svg" alt="" /></li>
 				<li class="subject">
 					<div ', (!empty($topic['quick_mod']['modify']) ? 'id="topic_' . $topic['first_post']['id'] . '" onmouseout="mouse_on_div = 0;" onmouseover="mouse_on_div = 1;" ondblclick="modify_topic(\'' . $topic['id'] . '\', \'' . $topic['first_post']['id'] . '\');"' : ''), '>
-						<span id="msg_' . $topic['first_post']['id'] . '">', $topic['first_post']['link'], (!$context['can_approve_posts'] && !$topic['approved'] ? '&nbsp;<em class="red">(' . $txt['awaiting_approval'] . ')</em>' : ''), '</span>';
-
+						<span id="msg_' . $topic['first_post']['id'] . '">';
+						
 	// Is this topic new? (assuming they are logged in!)
 	if ($topic['new'] && $context['user']['is_logged'])
-			echo '
-						<a href="', $topic['new_href'], '" id="newicon' . $topic['first_post']['id'] . '"><span class="icon-micro-new"></span></a>';
+		echo '
+						<a href="', $topic['new_href'], '" id="newicon' . $topic['first_post']['id'] . '"><span class="icon-micro-new"></span></a> <span class="active">', $topic['first_post']['link'],'</span>';
+	else
+		echo $topic['first_post']['link'];
 
-	echo ' ' , $exclass, '
+	echo (!$context['can_approve_posts'] && !$topic['approved'] ? '&nbsp;<em class="red">(' . $txt['awaiting_approval'] . ')</em>' : ''), '</span> ' , $exclass, '
 					</div>
 				</li>
 				<li class="user">', $topic['first_post']['member']['link'], '</li>
-				<li class="pages">', $topic['pages'], '</li>
+				<li class="pages">', convertPages($topic['pages']), '</li>
 				<li class="stats">', $topic['replies'], ' |	', $topic['views'], '</li>
 				<li class="lastpost">
 					<a href="', $topic['last_post']['href'], '"><span class="floatleft icon-chat-alt"></span> ', $topic['last_post']['time'], '</a> | ', $topic['last_post']['member']['link'], '

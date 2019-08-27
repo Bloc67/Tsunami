@@ -24,7 +24,7 @@ function template_main()
 			</div>
 			<div class="topic_table" id="mlist">
 				<div class="pagesection">
-					<div class="pagelinks floatleft">', $txt['pages'], ': ', $context['page_index'], '</div>';
+					<div class="pagelinks floatleft">', $context['page_index'], '</div>';
 		echo '
 					<div class="selectbox floatright">', $txt['who_show1'], '
 						<select name="show_top" onchange="document.forms.whoFilter.show.value = this.value; document.forms.whoFilter.submit();">';
@@ -39,12 +39,12 @@ function template_main()
 						</noscript>
 					</div>
 				</div>
-				<table class="table_grid" cellspacing="0">
+				<table class="table_grid">
 					<thead>
-						<tr class="catbg">
-							<th scope="col" class="lefttext first_th" width="40%"><a href="', $scripturl, '?action=who;start=', $context['start'], ';show=', $context['show_by'], ';sort=user', $context['sort_direction'] != 'down' && $context['sort_by'] == 'user' ? '' : ';asc', '" rel="nofollow">', $txt['who_user'], ' ', $context['sort_by'] == 'user' ? '<img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a></th>
-							<th scope="col" class="lefttext" width="10%"><a href="', $scripturl, '?action=who;start=', $context['start'], ';show=', $context['show_by'], ';sort=time', $context['sort_direction'] == 'down' && $context['sort_by'] == 'time' ? ';asc' : '', '" rel="nofollow">', $txt['who_time'], ' ', $context['sort_by'] == 'time' ? '<img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a></th>
-							<th scope="col" class="lefttext last_th" width="50%">', $txt['who_action'], '</th>
+						<tr>
+							<th scope="col"><a href="', $scripturl, '?action=who;start=', $context['start'], ';show=', $context['show_by'], ';sort=user', $context['sort_direction'] != 'down' && $context['sort_by'] == 'user' ? '' : ';asc', '" rel="nofollow">', $txt['who_user'], ' ', $context['sort_by'] == 'user' ? '<img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a></th>
+							<th scope="col"><a href="', $scripturl, '?action=who;start=', $context['start'], ';show=', $context['show_by'], ';sort=time', $context['sort_direction'] == 'down' && $context['sort_by'] == 'time' ? ';asc' : '', '" rel="nofollow">', $txt['who_time'], ' ', $context['sort_by'] == 'time' ? '<img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a></th>
+							<th scope="col">', $txt['who_action'], '</th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -56,15 +56,15 @@ function template_main()
 	{
 		// $alternate will either be true or false. If it's true, use "windowbg2" and otherwise use "windowbg".
 		echo '
-						<tr class="windowbg', $alternate ? '2' : '', '">
+						<tr>
 							<td>';
 
 		// Guests don't have information like icq, msn, y!, and aim... and they can't be messaged.
 		if (!$member['is_guest'])
 		{
 			echo '
+									', $context['can_send_pm'] ? '<a href="' . $member['online']['href'] . '" title="' . $member['online']['label'] . '">' : '', '<span class="' . (!empty($member['online']['is_online']) ? 'icon-micro-new' : 'icon-micro-new gray') . '"></span>', $context['can_send_pm'] ? '</a>' : '', '
 								<span class="contact_info floatright">
-									', $context['can_send_pm'] ? '<a href="' . $member['online']['href'] . '" title="' . $member['online']['label'] . '">' : '', $settings['use_image_buttons'] ? '<img src="' . $member['online']['image_href'] . '" alt="' . $member['online']['text'] . '" align="bottom" />' : $member['online']['text'], $context['can_send_pm'] ? '</a>' : '', '
 									', isset($context['disabled_fields']['icq']) ? '' : $member['icq']['link'] , ' ', isset($context['disabled_fields']['msn']) ? '' : $member['msn']['link'], ' ', isset($context['disabled_fields']['yim']) ? '' : $member['yim']['link'], ' ', isset($context['disabled_fields']['aim']) ? '' : $member['aim']['link'], '
 								</span>';
 		}
@@ -104,7 +104,7 @@ function template_main()
 				</table>
 			</div>
 			<div class="pagesection">
-				<div class="pagelinks floatleft">', $txt['pages'], ': ', $context['page_index'], '</div>';
+				<div class="pagelinks floatleft">', $context['page_index'], '</div>';
 
 	echo '
 				<div class="selectbox floatright">', $txt['who_show1'], '

@@ -17,6 +17,7 @@ function template_init()
 	$settings['strict_doctype'] = false;
 	$settings['message_index_preview'] = false;
 	$settings['require_theme_strings'] = true;
+	$settings['show_member_bar'] = true;
 }
 
 // The main sub template above the content.
@@ -257,7 +258,7 @@ function template_head_news()
 {
 	global $context, $settings, $txt;
 
-	if(function_exists(template_news_slider))
+	if(function_exists("template_news_slider"))
 	{
 		$done = template_news_slider();
 		if($done)
@@ -538,6 +539,17 @@ function convertPageindex($custom = '')
 		return;
 
 	$context['page_index'] = '<span class="page_index">' . (str_replace(array('[',']'), array('<span>','</span>'),$context['page_index'])) . '</span>';
+}
+
+function convertPages($code= '')
+{
+	global $context, $txt;
+	
+	if(!empty($code))
+	{
+		$code = str_replace(array('&#171;','&#187;'), array('',''), $code);
+		echo $code;
+	}	
 }
 
 ?>

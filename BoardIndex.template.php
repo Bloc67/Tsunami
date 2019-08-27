@@ -10,7 +10,7 @@ function template_body_id()
 
 function more_aside()
 {
-	global $options, $context, $txt;
+	global $options, $context, $txt, $scripturl;
 
 	echo '
 		<div class="cat_bar">
@@ -28,7 +28,6 @@ function more_aside()
 			<span id="binfo_switch" class="icon-info-outline" title="' , empty($options['hideinfo_boardindex']) ? $txt['infobindex'] : $txt['infobindex2'] , '"></span></a>
 		</div>
 		';
-
 }
 
 
@@ -68,7 +67,7 @@ function template_main()
 		{
 			foreach ($category['boards'] as $board)
 			{
-				a_boardindex($board);
+				a_boardindex($board, $category['id']);
 			}
 		}
 	}
@@ -113,11 +112,11 @@ function template_news_slider()
 		</div>
 		<ul class="reset" id="smfFadeScroller"', empty($options['collapse_news_fader']) ? '' : ' style="display: none;"', '>';
 
-			foreach ($context['news_lines'] as $news)
-				echo '
+		foreach ($context['news_lines'] as $news)
+			echo '
 			<li class="smalltext">', $news, '</li>';
 
-	echo '
+		echo '
 		</ul>
 	</div>
 	<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/fader.js"></script>
@@ -131,6 +130,7 @@ function template_news_slider()
 			iFadeDelay: ', empty($settings['newsfader_time']) ? 5000 : $settings['newsfader_time'], '
 		});
 	// ]]></script>';
+		
 		return true;
 	}
 	else
@@ -143,7 +143,7 @@ function template_info_center()
 
 	// Here's where the "Info Center" starts...
 	echo '
-	<div id="a_infocenter" class="a_infocenters"' , !empty($options['hideinfo_boardindex']) ? '': ' style="display: none;"' , '>
+	<div id="a_infocenter" class="a_infocenters"' , empty($options['hideinfo_boardindex']) ? '': ' style="display: none;"' , '>
 		<div id="a_info_items">';
 
 	// This is the "Recent Posts" bar.
@@ -166,44 +166,12 @@ function template_info_center()
 			echo '
 				<ol class="reset a_recentblock">';
 
-			/* Each post in latest_posts has:
-					board (with an id, name, and link.), topic (the topic's id.), poster (with id, name, and link.),
-					subject, short_subject (shortened with...), time, link, and href. 
-			[7] => Array
-					(
-						[board] => Array
-							(
-								[id] => 51
-								[name] => Mosjonskroken
-								[href] => http://127.0.0.1/smf20/index.php?board=51.0
-								[link] => Mosjonskroken
-							)
-
-						[topic] => 84886
-						[poster] => Array
-							(
-								[id] => 715
-								[name] => Mammen
-								[href] => http://127.0.0.1/smf20/index.php?action=profile;u=715
-								[link] => Mammen
-							)
-
-						[subject] => Sv: Mammen skal i form (til neste KK-mila)
-						[short_subject] => Sv: Mammen skal i form (...
-						[preview] => 3.2 km løping på tirsdag og 32 minutter med styrketrening i går.
-						[time] => Thursday 09 Jun 2016 kl.13:17
-						[timestamp] => 1465471050
-						[raw_timestamp] => 1465471050
-						[href] => http://127.0.0.1/smf20/index.php?topic=84886.msg1237388;topicseen#msg1237388
-						[link] => Sv: Mammen skal i form (til neste KK-mila)
-					)
-					*/
 			foreach ($context['latest_posts'] as $post)
 				echo '
 					<li>
 						<ul class="rec_block">
 							<li class="a_recent_post">', $post['link'], '</li> 
-							<li class="a_recent_poster"><a href="', $post['poster']['href'], '"><span class="icon-user-outline"></span>', $post['poster']['name'], '</a></li>
+							<li class="a_recent_poster">', $post['poster']['link'], ' </li>
 							<li class="a_recent_board"><a href="', $post['board']['href'], '"><span class="icon-folder" title="', $post['board']['name'], '"></span>', $post['board']['name'], '</a></li>
 							<li class="a_recent_time"><span class="icon-clock" title="', $post['time'], '"></span>', $post['time'], '</li>
 						</ul>
@@ -246,6 +214,7 @@ function template_info_center()
 			echo '
 					<span class="a_event">
 						<strong>', $context['calendar_only_today'] ? $txt['events'] : $txt['events_upcoming'], '</strong> ';
+			
 			/* Each event in calendar_events should have:
 					title, href, is_last, can_edit (are they allowed?), modify_href, and is_today. */
 			foreach ($context['calendar_events'] as $event)
