@@ -110,8 +110,10 @@ h3.catbg {	font-size: 0.8rem !important; 	letter-spacing: 2px; }
 h3 img { display: none; }
 h3 .floatright img { display: block; }
 
+/* #####################################	*/
 /* SMF styles
-------------------------------------------------------- */
+/* #####################################	*/
+
 .floatright { float: right;}
 .floatleft { float: left;}
 .flow_auto { overflow: auto;}
@@ -201,9 +203,11 @@ a.help:before {
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 1rem;
 	color: #697;
-	vertical-align: 10%;
-	margin: 0 0.6rem 0 0;
+	opacity: 0.3;
+    margin: 0 10px 0 0;
+    vertical-align: middle;
 }
+a.help:hover:before { opacity: 1; }
 
 /* AJAX notification bar
 ------------------------------------------------------- */
@@ -231,8 +235,10 @@ a.help:before {
 	margin-right: 20px;
 }
 
+/* #####################################	*/
 /* some standard styles, tweaked
-------------------------------------------------------- */
+/* #####################################	*/
+
 dl dt, dl dd { 	line-height: 1.1rem; }
 
 /* a smaller version */
@@ -275,7 +281,10 @@ form { width: 100%; }
 {
 }
 
+/* #####################################	*/
 /* icons */
+/* #####################################	*/
+
 a.icon-new:after {
 	content: " ";
 	width:
@@ -298,32 +307,17 @@ a.icon-new:after {
   font-style: normal;
   font-weight: normal;
   speak: none;
-
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
   margin-right: .2em;
   text-align: center;
-  /* opacity: .8; */
-
-  /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none;
-
-  /* fix buttons height, for twitter bootstrap */
   line-height: 1em;
-
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
   margin-left: .2em;
-
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
-
-  /* Font smoothing. That was taken from TWBS */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 .icon-heart:before { content: '\e800'; }
@@ -393,13 +387,17 @@ a.icon-new:after {
 .icon-basket:before { content: '\e83e'; } 
 
 
+/* #####################################	*/
 /* sections */
-body {
-	background: #f0f0f0;
-}
+/* #####################################	*/
 
+body {background: #f0f0f0;}
+
+/* #####################################	*/
 /* attachment CSS */
 /* The Modal (background) */
+/* #####################################	*/
+
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -475,6 +473,10 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+/* #####################################	*/
+/* various */
+/* #####################################	*/
+
 #tsunami {
 	background-image: url(../images/logobg.jpg);
 }
@@ -485,8 +487,10 @@ body {
   }
 }
 
+/* #####################################	*/
 /* Some BBC related styles.
-------------------------------------------------------- */
+/* #####################################	*/
+
 /* A quote, perhaps from another post. */
 blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote {
 	font-size: 90%;
@@ -527,7 +531,10 @@ code.bbc_code {
 .codeoperation { font-weight: normal;}
 
 
+/* #####################################	*/
 /* grids */
+/* #####################################	*/
+
 #topheader {
 	display: grid;
 	grid-template-columns: auto 3fr;
@@ -618,7 +625,11 @@ section#headersection a { color: #fff; }
     border-radius: 50%;
     background-color: #f0f0f0;
 }
+
+/* #####################################	*/
 /* common styles */
+/* #####################################	*/
+
 .bbox { padding: 0 0 0.5rem 0; }
 #h_user{ padding-top: 1rem; }
 .pagesection,.pagelinks { font-size: 0.8rem; }
@@ -766,8 +777,10 @@ h3.titlebg {
 }
 .a_custom.enabled { border: solid 2px mediumseagreen; }
 
-
+/* #####################################	*/
 /* menus */
+/* #####################################	*/
+
 ul.reset.dropmenu {
 	width: 100%;
 	display: flex;
@@ -841,7 +854,10 @@ ul.reset.dropmenu ul li:hover a:hover {
     color: #fff !important;
 }
 
+/* #####################################	*/
 /* mobile menu top */
+/* #####################################	*/
+
 #mobilmeny {
     position: absolute;
     top: -999rem;
@@ -896,7 +912,10 @@ body { position: relative;}
     opacity: 0.6
 }
 
+/* #####################################	*/
 /* admin menus */
+/* #####################################	*/
+
 #adminmenu ul.dropmenu.reset > li > a {
     color: #444 !important;
     font-size: 0.9rem;
@@ -932,7 +951,7 @@ body { position: relative;}
 }
 #adminmenu ul.reset.dropmenu > li > a {
     color: teal !important;
-    border-bottom: solid 1px #ccc;
+    border: solid 1px #ccc;
 }
 #adminmenu ul.reset.dropmenu > li > a:hover,
 #adminmenu ul.reset.dropmenu > li:hover > a { color: #000 !important;}
@@ -991,7 +1010,10 @@ textarea.mycss {width: 100%; height: 30rem;}
 dl.settings dt span.smalltext { opacity: 0.5; margin: 0.5rem 0; display: block;}
 .cat_bar + p { margin-top: 0;}
 
+/* #####################################	*/
 /* input buttons and textareas */
+/* #####################################	*/
+
 .buttons_rows a,
 select, input, .button_submit,
 body#help_popup a {
@@ -1076,7 +1098,11 @@ menu.buttons .buts { text-align: center; }
 }
 
 .info { padding: 0.7rem 0; font-size: 0.9rem; }
+
+/* #####################################	*/
 /* table grid responsive */
+/* #####################################	*/
+
 ol.a_table_grid {
     list-style: none;
     padding: 0;
@@ -1117,7 +1143,10 @@ ol.a_table_grid li > div:last-of-type {
     padding-right: 1rem;
 }
 
+/* #####################################	*/
 /* id-based table grids */
+/* #####################################	*/
+
 #a_smiley_set_list li {grid-template-columns: 6rem 8rem auto 5rem 1.5rem;}
 #a_smiley_list li { grid-template-columns: 6rem 6rem 8rem 8rem auto 5rem 1.5rem;}
 #a_message_icon_list li { grid-template-columns: 2.5rem 9rem 10rem auto 5rem 1.5rem;}
@@ -1159,8 +1188,10 @@ ol.a_table_grid li > div:last-of-type {
     margin: 0;
 }
 
-
+/* #####################################	*/
 /* Boardindex */
+/* #####################################	*/
+
 #smfFadeScroller {
     height: 10rem;
     overflow: auto;
@@ -1398,7 +1429,10 @@ ol.a_recentblock ul li span {padding-right: 0.2rem; }
 ol.a_recentblock ul li { line-height: 1.5rem; }
 ol.a_recentblock ul li span + a {display: none; }
 
-/* messageindex corrections */
+/* #####################################	*/
+/* messageindex */
+/* #####################################	*/
+
 menu.buttons.floatright a span{ overflow: hidden; }
 
 .a_topics_headers {
@@ -1458,7 +1492,10 @@ menu.buttons.floatright a span{ overflow: hidden; }
 .moderation_bar { margin-top: 8px; text-align: right;}
 #topic_icons { border-top: solid 1px #ddd;}
 
-/* display corrections */
+/* #####################################	*/
+/* display template */
+/* #####################################	*/
+
 .a_message {
     display: grid;
     grid-template-columns: 12rem 1fr;
@@ -1566,8 +1603,10 @@ menu.buttons.floatright a span{ overflow: hidden; }
     text-align: center;
 } 
 
+/* #####################################	*/
+/* admin template */
+/* #####################################	*/
 
-/* admin corrections */
 #admincenter { line-height: 1.5rem !important; }
 #smfAnnouncements dl {
     font-size: 0.9rem;
@@ -1653,7 +1692,10 @@ ol.packages, ol.packages li {
 }
 
 
+/* #####################################	*/
 /* other templates */
+/* #####################################	*/
+
 #preview_section { background: #f0f0f0; padding: 0.5rem 2px;}
 #preview_body { background: #fff; padding: 1rem 1.5rem; }
 #preview_section > h3 { padding: 0; margin: 0.5rem;}
@@ -1668,7 +1710,10 @@ ul.ignoreboards li.category a {
 input.input_password[size="24"] {width: 24rem;}
 input.input_text[size="5"] {width: 4rem;}
 
+/* #####################################	*/
 /* result page */
+/* #####################################	*/
+
 .a_topics_single.a_result li.count {margin-top: 4px;grid-area: mcount; font-size: 1.4rem;}
 .a_topics_single.a_result li.subject {font-weight: inherit;}
 .a_topics_single.a_result li.body {font-size: 0.8rem; grid-area: mbody; padding-top: 0.5rem;}
@@ -1706,6 +1751,16 @@ input.input_text[size="5"] {width: 4rem;}
     line-height: 1; 
     display: block;
 }
+
+/* #####################################	*/
+/* profile template */
+/* #####################################	*/
+
+#basicinfo .avatar {
+    float: right;
+    clear: right;
+}
+
 #popularposts dl,
 #popularactivity dl { display: grid; grid-template-columns: 1fr 2fr; grid-gap: 0.5rem;}
 #popularposts dd,
@@ -1724,7 +1779,11 @@ input.input_text[size="5"] {width: 4rem;}
     width: 100%;
     height: 8rem;
 }
+
+/* #####################################	*/
 /* posts and topics outside of messageinde/display */
+/* #####################################	*/
+
 .a_topic, .a_topic li {padding: 0; margin: 0; list-style: none;}
 .a_topic li.counter {grid-area: counter; font-size: 2rem;padding-top: 0.5rem;} 
 .a_topic li.details {grid-area: details;} 
@@ -1741,7 +1800,10 @@ input.input_text[size="5"] {width: 4rem;}
 }
 .a_topic .quickbuttons {float: right; margin: 0.5rem 0; }
 
+/* #####################################	*/
 /* pm template */
+/* #####################################	*/
+
 .capacity_bar  {
     display: block;
     height: 8px;
@@ -1761,7 +1823,11 @@ input.input_text[size="5"] {width: 4rem;}
     color: gray;
     margin: .1rem 0 0 0.5rem;
 }
+
+/* #####################################	*/
 /* calendar template */
+/* #####################################	*/
+
 #month_grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -1835,22 +1901,27 @@ input.input_text[size="5"] {width: 4rem;}
 }
 .weeklist tr:nth-of-type(even) {background: #f0f0f0;}
 
+/* #####################################	*/
 /* memberlist template */
+/* #####################################	*/
+
 #m_list #maincontent {
     display: grid;
     grid-template-columns: 1fr;
 }
+
+/* #####################################	*/
 /* who template */
+/* #####################################	*/
+
 #whos_online .table_grid tr {
     display: grid;
     grid-template-columns: 4fr 10rem 3fr;
 }
 
-
-
-/* ############################### */
+/* #####################################	*/
 /* responsive  */
-/* ############################### */
+/* #####################################	*/
 
 @media only screen and (max-width:1059px) {
     #popularposts dd div,
@@ -2093,6 +2164,10 @@ input.input_text[size="5"] {width: 4rem;}
         margin: 0.7rem 0 0 0;
         padding: 0;
         font-size: 1.3rem;
+    }
+    input[type=checkbox] {
+        float: right;
+        margin-top: -16px !important;
     }
 }
 @media only screen and (max-width:1359px) {
