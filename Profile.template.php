@@ -51,19 +51,15 @@ function template_summary()
 	// Display the basic information about the user
 	echo '
 <div id="profileview" class="flow_auto">
-	<div class="cat_bar">
-		<h3 class="catbg">
-			<span class="ie6_header floatleft"><img src="', $settings['images_url'], '/icons/profile_sm.gif" alt="" class="icon" />', $txt['summary'], '</span>
-		</h3>
-	</div>
+	<h3 class="header_name">', $txt['summary'], '</h3>
 	<div id="basicinfo">
 		<div class="windowbg">
 			<div class="content flow_auto">
+				', $context['member']['avatar']['image'], '
 				<h3>', $context['member']['name'], '
 					', $context['can_send_pm'] ? '<a href="' . $context['member']['online']['href'] . '" title="' . $context['member']['online']['label'] . '" rel="nofollow">' : '', '<span class="icon-micro-new' , !empty($context['member']['online']['is_online']) ? ' gray' : '' , '"></span>' , $context['can_send_pm'] ? '</a>' : '','
 				</h3> 
-				<div class="floatright">', (!empty($context['member']['group']) ? $context['member']['group'] : $context['member']['post_group']), '</div>
-				', $context['member']['avatar']['image'], '
+				<h4>', (!empty($context['member']['group']) ? $context['member']['group'] : $context['member']['post_group']), '</h4>
 				<ul class="reset flexlist">';
 
 	// What about if we allow email only via the forum??
@@ -95,21 +91,16 @@ function template_summary()
 	// Can they add this member as a buddy?
 	if (!empty($context['can_have_buddy']) && !$context['user']['is_owner'])
 		echo '
-				<br /><a href="', $scripturl, '?action=buddy;u=', $context['id_member'], ';', $context['session_var'], '=', $context['session_id'], '">[', $txt['buddy_' . ($context['member']['is_buddy'] ? 'remove' : 'add')], ']</a>';
-
-	echo '
-				</span>';
-
-	echo '
-				<p id="infolinks">';
+				<p><a href="', $scripturl, '?action=buddy;u=', $context['id_member'], ';', $context['session_var'], '=', $context['session_id'], '">[', $txt['buddy_' . ($context['member']['is_buddy'] ? 'remove' : 'add')], ']</a></p>';
 
 	if (!$context['user']['is_owner'] && $context['can_send_pm'])
 		echo '
-					<a href="', $scripturl, '?action=pm;sa=send;u=', $context['id_member'], '">', $txt['profile_sendpm_short'], '</a><br />';
+				<p><a href="', $scripturl, '?action=pm;sa=send;u=', $context['id_member'], '">', $txt['profile_sendpm_short'], '</a></p>';
 	echo '
-					<a href="', $scripturl, '?action=profile;area=showposts;u=', $context['id_member'], '">', $txt['showPosts'], '</a><br />
-					<a href="', $scripturl, '?action=profile;area=statistics;u=', $context['id_member'], '">', $txt['statPanel'], '</a>
-				</p>';
+				<ul class="reset flexlist" id="infolinks">
+					<li><a href="', $scripturl, '?action=profile;area=showposts;u=', $context['id_member'], '" class="button_submit buts">', $txt['showPosts'], '</a> </li>
+					<li> <a href="', $scripturl, '?action=profile;area=statistics;u=', $context['id_member'], '" class="button_submit buts">', $txt['statPanel'], '</a></li>
+				</ul>';
 
 	echo '
 			</div>
