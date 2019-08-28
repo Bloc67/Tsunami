@@ -107,7 +107,6 @@ function template_html_above()
 	<style>' , $settings['mycss'] , '</style>';
 	
 	echo '
-	<link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
 </head>
 <body' , function_exists('template_body_id') ? template_body_id() : ''   , '>';
 }

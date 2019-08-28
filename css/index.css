@@ -105,7 +105,6 @@ h1,h2,h3,h4,h5 { padding: 0; margin: 0; padding: 0.5em 0 1em 0; }
 h1 a,h2 a,h3 a,h4 a,h5 a { color: #60686d; text-decoration: none;}
 menu, nav, section, article, main, footer, header { margin: 0; padding: 0; }
 
-
 /* SMF resets */
 h3.catbg {	font-size: 0.8rem !important; 	letter-spacing: 2px; }
 h3 img { display: none; }
@@ -122,9 +121,6 @@ h3 .floatright img { display: block; }
 .clear_left { clear: left;}
 .clear_right { clear: right;}
 .fullwidth { width: 100%; display: block; }
-
-
-/* Default font sizes: small (8pt), normal (10pt), and large (14pt). */
 .smalltext, tr.smalltext th { font-size: 0.8rem;	}
 .tinytext { font-size: 0.7rem;	}
 .middletext { font-size: 0.9rem;}
@@ -134,8 +130,6 @@ h3 .floatright img { display: block; }
 .righttext { margin-left: auto;	margin-right: 0;	text-align: right;}
 .lefttext { margin-left: 0;	margin-right: auto;	text-align: left;}
 .double_height { line-height: 2rem;}
-
-/* a quick reset list class. */
 ul.reset, ul.reset li { padding: 0;	margin: 0;	list-style: none;}
 
 .padding_top { padding-top: 1rem !important; }
@@ -151,17 +145,9 @@ ul.reset, ul.reset li { padding: 0;	margin: 0;	list-style: none;}
 .bbc_u { text-decoration: underline;}
 .bbc_list { text-align: left;}
 .bbc_tt { font-family: "dejavu sans mono", "monaco", "lucida console", "courier new", monospace;}
-
-/* Generally, those [?] icons.  This makes your cursor a help icon. */
 .help { cursor: help;}
-
-/* /me uses this a lot. (emote, try typing /me in a post.) */
 .meaction { color: red;}
-
-/* Highlighted text - such as search results. */
 .highlight { font-weight: bold;	color: #ff7200 !important;	font-size: 1.1em;}
-
-/* A more discreet highlight color, for selected membergroups etc. */
 .highlight2 { background-color: #D1E1EF;	color: #000 !important;}
 .error { color: red;}
 .alert { color: red;}
@@ -213,7 +199,7 @@ a.help:before {
 	margin: 0;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	font-size: 0.8rem;
+	font-size: 1rem;
 	color: #697;
 	vertical-align: 10%;
 	margin: 0 0.6rem 0 0;
@@ -558,7 +544,6 @@ code.bbc_code {
 h1 {
     text-transform: uppercase;
     font-size: 1.8rem;
-    font-family: 'Righteous', cursive;
     color: #def;
     text-shadow: 4px 4px 10px rgba(0,0,0,0.2);
     border-right: solid 1px #678;
@@ -586,7 +571,6 @@ section#headersection, #footersection {
     background-size: 100% auto;
 	background-position: bottom left;
     padding: 0.7rem 2rem 3% 2.2rem;
-    font-family: 'Righteous', cursive;
     font-size: 1.1rem;
     color: rgba(255,255,255,0.7);
     text-transform: uppercase;
@@ -604,7 +588,7 @@ section#headersection, #footersection {
 #h_linktree { background: #003040; color: #aaa;}
 #h_linktree a { color: #aaa; padding-right: 0.5rem;}
 section#headersection a { color: #fff; }
-#headersection, #h_linktree { padding: 0.5rem 3%;}
+#headersection, #h_linktree { padding: 0.5rem 2.2rem;}
 #a_openid { display: grid;}
 
 #h_user .user {
