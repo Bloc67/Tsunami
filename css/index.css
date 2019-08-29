@@ -2167,7 +2167,21 @@ input.input_text[size="5"] {width: 4rem;}
     }
     input[type=checkbox] {
         float: right;
+        margin-top: 0 !important;
+    }
+    .settings dd input[type=checkbox] {
         margin-top: -16px !important;
+    }
+    .button_strip_markread {
+        padding: 0;
+    }
+    #a_boardindex_section {
+        grid-gap: 0.5rem;
+    }
+    #a_info_stats li a.button_submit.buts,
+    #a_info_stats li span.floatright {
+        width: 100%;
+        text-align: center;
     }
 }
 @media only screen and (max-width:1359px) {
@@ -2191,5 +2205,18 @@ input.input_text[size="5"] {width: 4rem;}
         grid-template-columns: 1fr 200px;
         grid-template-areas: 
             "cal_main cal_months";
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    ol.a_recentblock ul.rec_block {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            "rec_post rec_post" 
+            "rec_board rec_poster" 
+            "rec_time rec_time";
+    }
+    ol.a_recentblock ul li.a_recent_poster {
+        text-align: right;
     }
 }
