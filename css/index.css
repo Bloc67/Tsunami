@@ -1320,6 +1320,11 @@ span.icon-micro-new {
     border-radius: 50%;
     margin: 0 0 0 4px;
 }
+span.icon-micro-new.micro-small {
+    width: 7px;
+    height: 7px;
+    margin: 0 0 2px 5px;
+}
 span.icon-micro-new.grey {
     background: lightgray;
 }

@@ -627,7 +627,7 @@ function template_main()
 		// Show the member's signature?
 		if (!empty($message['member']['signature']) && empty($options['show_no_signatures']) && $context['signature_enabled'])
 			echo '
-					<div class="signature" id="msg_', $message['id'], '_signature">', $message['member']['signature'], '</div>';
+					<div class="signature" id="msg_', $message['id'], '_signature"><div style="">', $message['member']['signature'], '</div></div>';
 
 		echo '
 				</div>

@@ -113,7 +113,7 @@ function a_topic($topic, $check = false)
 	// Is this topic new? (assuming they are logged in!)
 	if ($topic['new'] && $context['user']['is_logged'])
 		echo '
-						<a href="', $topic['new_href'], '" id="newicon' . $topic['first_post']['id'] . '"><span class="icon-micro-new"></span></a> <span class="active">', $topic['first_post']['link'],'</span>';
+						<span class="active">', $topic['first_post']['link'],'</span><a href="', $topic['new_href'], '" id="newicon' . $topic['first_post']['id'] . '"><span class="icon-micro-new micro-small"></span></a> ';
 	else
 		echo $topic['first_post']['link'];
 
