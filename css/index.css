@@ -1607,6 +1607,12 @@ menu.buttons.floatright a span{ overflow: hidden; }
     line-height: 26px;
     text-align: center;
 } 
+.signature {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+}
+.signature > div {overflow: auto; }
 
 /* #####################################	*/
 /* admin template */
@@ -2188,7 +2194,44 @@ input.input_text[size="5"] {width: 4rem;}
         width: 100%;
         text-align: center;
     }
+@media only screen and (max-width: 1059px) {
+    .a_topics_single {
+        grid-template-columns: 1fr 24px;
+        grid-template-areas: 
+            "msubject mmoderation"
+            "mpages mpages";
+        margin: 0 !important;
+    }
+    .a_topics_single li.stats,
+     .a_topics_single li.icon1 {
+        display: none;
+    }
+    .a_topics_single li.moderation {
+        margin-top: 5px;
+    }
+    .a_topics_headers li input[type=checkbox].input_check.floatright {
+        margin: 5px -5px 0 10px !important;
+    } 
+    #a_maside h2.header_name { font-size: 1rem; }
+    #a_maside h2.header_name small.floatright {
+        float: none;
+        display: block;
+    }
+    .a_message .poster { padding-bottom: 0.5rem;}
+    .postarea h4.mobile.headerpost a {
+        display: block;
+        width: 100%;
+        line-height: 1.4rem;
+    }
+    .postarea h4.mobile.headerpost small.floatright {
+        float: none;
+        display: block;
+        padding: 0.5rem 0 0 0;
+    }
+    .quickbuttons .inline_mod_check.floatright { margin-top: 5px;}
 }
+
+
 @media only screen and (max-width:1359px) {
     #a_boardindex_section { grid-template-columns: 1fr; }
 }
