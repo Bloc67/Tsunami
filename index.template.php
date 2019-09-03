@@ -32,7 +32,7 @@ function template_html_above()
 <!DOCTYPE html>
 <html', $context['right_to_left'] ? ' dir="rtl"' : '', '>
 <head>
-	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/index', $context['theme_variant'], '.css?v2" />';
+	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/index', $context['theme_variant'], '.css?v102" />';
 
 	// RTL languages require an additional stylesheet.
 	if ($context['right_to_left'])
