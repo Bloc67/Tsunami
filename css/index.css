@@ -2239,6 +2239,14 @@ input.input_text[size="5"] {width: 4rem;}
         padding: 0.5rem 0 0 0;
     }
     .quickbuttons .inline_mod_check.floatright { margin-top: 5px;}
+    dl#search_options {
+        grid-template-columns: 1fr;
+    }
+    dl#search_options dt { font-size: 0.8rem; letter-spacing: 2px; padding-top: 0.4rem; }
+    dl#search_options dd { margin: 0;font-size: 0.9rem; }
+    #advanced_search em.smalltext { display: block; }
+    #advanced_search select { width: 100%; }
+    input#check_all.input_check.floatleft { clear: left; float: left; margin: 0 0.5rem 0 0; }
 }
 
 
