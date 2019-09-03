@@ -1507,7 +1507,7 @@ menu.buttons.floatright a span{ overflow: hidden; }
     grid-gap: 1rem;
 }
 .a_message .poster { background: #f3f4f5; padding: 0.5rem 2rem }
-.post .inner { line-height: 1.4rem; font-size: 0.9rem;}
+.post .inner { line-height: 1.4rem; font-size: 0.9rem; border-top: solid 1px #ddd; padding-top: 1rem;}
 .flexlist { 
     padding: 0.5rem 0; 
     display: flex;
@@ -1584,17 +1584,19 @@ menu.buttons.floatright a span{ overflow: hidden; }
 .voted.pollchart.statsbar .barchart span {
     background: rgb(73, 200, 87) !important;
 }
-.post { padding: 1rem; }
+.post { padding: 0 1rem 1rem 1rem; }
 .keyinfo h5 {margin-bottom: 0.6rem; font-size: 1rem;}
 .signature {
-    display: block;
     background: #f9f9f9;
-    padding: 1rem 1.5rem;
     font-size: 0.8rem;
     border: solid 1px #ddd;
     opacity: 0.6;
     margin: -0.8rem 0 1rem 0;
     text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+	box-sizing: border-box;
 }
 .circle {
     width: 30px;
@@ -1607,12 +1609,10 @@ menu.buttons.floatright a span{ overflow: hidden; }
     line-height: 26px;
     text-align: center;
 } 
-.signature {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 100%;
+.signature > div { 
+	overflow: auto; 
+    padding: 1rem 1.5rem;
 }
-.signature > div {overflow: auto; }
 
 /* #####################################	*/
 /* admin template */
@@ -2005,10 +2005,10 @@ input.input_text[size="5"] {width: 4rem;}
         width: 14px !important;
     }
     .a_topics_single {
-        grid-template-columns: 24px 1fr 5rem 24px;
+        grid-template-columns: 1fr 5rem 24px;
         grid-template-areas:
-            "micon msubject mstats mmoderation"
-            "micon mpages mpages mpages";
+            "msubject mstats mmoderation"
+            "mpages mpages mpages";
         margin: 2px 0 0 0 !important;
     }
     .a_topics_single li.lastpost {display: none; text-align: left; }
@@ -2044,7 +2044,7 @@ input.input_text[size="5"] {width: 4rem;}
     }
     .a_boards ul.a_boards_single li.a_board_lastpost {display: none;}
     .a_topics_single.boxes {
-        grid-template-columns: 24px 1fr 1fr;
+        grid-template-columns: 1fr 24px;
     }
     h1 {font-size: 1.2rem;}
     #supportVersionsTable, #live_news { width: 100%; }
@@ -2194,8 +2194,7 @@ input.input_text[size="5"] {width: 4rem;}
         width: 100%;
         text-align: center;
     }
-@media only screen and (max-width: 1059px) {
-    .a_topics_single {
+   .a_topics_single {
         grid-template-columns: 1fr 24px;
         grid-template-areas: 
             "msubject mmoderation"

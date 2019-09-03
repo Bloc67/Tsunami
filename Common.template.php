@@ -125,13 +125,12 @@ function a_topic($topic, $check = false)
 				<li class="stats">', $topic['replies'], ' |	', $topic['views'], '</li>
 				<li class="lastpost">
 					<a href="', $topic['last_post']['href'], '"><span class="floatleft icon-chat-alt"></span> ', $topic['last_post']['time'], '</a> | ', $topic['last_post']['member']['link'], '
-				</li>';
+				</li>
+				<li class="moderation">';
 
 	// Show the quick moderation options?
 	if (!empty($context['can_quick_mod']) || $check)
 	{
-		echo '
-				<li class="moderation">';
 		if ($options['display_quick_mod'] == 1 || $check)
 			echo '
 					<input type="checkbox" name="topics[]" value="', $topic['id'], '" class="input_check" />';
@@ -154,14 +153,8 @@ function a_topic($topic, $check = false)
 				echo '
 					<a href="', $scripturl, '?action=movetopic;board=', $context['current_board'], '.', $context['start'], ';topic=', $topic['id'], '.0"><span class="icon-forward-outline" title="', $txt['move_topic'], '"></span></a>';
 		}
-		echo '
-				</li>';
 	}
-	else
-		echo '
-				<li class="moderation">&nbsp;</li>';
-
-	echo '
+	echo '	</li>
 			</ul>';
 }
 
