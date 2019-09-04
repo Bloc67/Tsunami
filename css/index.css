@@ -535,8 +535,6 @@ code.bbc_code {
 /* grids */
 /* #####################################	*/
 
-
-
 #topheader {
 	display: grid;
 	grid-template-columns: auto 3fr;
@@ -599,14 +597,6 @@ section#headersection, #footersection {
 section#headersection a { color: #fff; }
 #headersection, #h_linktree { padding: 0.5rem 2.2rem;}
 #a_openid { display: grid;}
-
-#headersection {
-    width: 100%;
-    position: fixed;
-    z-index: 10;
-    box-shadow: 0 0 15px 0 rgba(0,0,0,0.5);
-}
-#h_linktree { padding-top: 6.5rem; }
 
 #h_user .user {
     grid-area: user;
@@ -2092,8 +2082,7 @@ input.input_text[size="5"] {width: 4rem;}
         padding-left: 1.1rem;
         padding-right: 1.1rem;
     }
-	#h_linktree { padding-top: 4.5rem; }
-	.pagelinks { padding-left: 0;}
+    .pagelinks { padding-left: 0;}
     #h_search { padding: 0; }
     h4.headerpost small, h2.header_name small {font-weight: normal;} 
     #a_maside .a_boards {margin-bottom: 1rem;}
