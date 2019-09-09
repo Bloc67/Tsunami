@@ -569,7 +569,7 @@ section#headersection, #footersection {
     opacity: 0.5;
 }
 
-#maincontent, #maside { padding: 1rem 2rem; }
+#maincontent, #maside { padding: 1rem 2rem; box-sizing: border-box; }
 
 #maincontent { padding-top: 2rem; background: #fff; }
 #tsunami {
@@ -578,7 +578,7 @@ section#headersection, #footersection {
     padding: 1rem 2rem 1rem  2.2rem;
     color: #fff;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
 	grid-gap: 2rem;
 	background-image: url(../images/logobg.jpg);
     text-shadow: 1px 1px 2px #888;
@@ -1947,7 +1947,7 @@ input.input_text[size="5"] {width: 4rem;}
     .activity_stats li span.stats_hour { display: none; }
     #h_user .user { display: block;}
     .mavatar { width: 40px; height: 40px; float: right; margin-right: 2rem; }
-    #contentsection { grid-template-columns: 1fr; }
+    #contentsection { display: block; }
     #oaside {
         display: block;
         position: absolute;
@@ -2007,7 +2007,7 @@ input.input_text[size="5"] {width: 4rem;}
         transition: all 200ms ease-in-out;
     }
     #h_more {display: none;}
-    #maincontent{ padding: 1.1rem; }
+    #maincontent{ padding: 1.1rem; width: 100%;  display: block; box-sizing: border-box;}
     #mobilnav { display: block;}
     #desktopmenu { display: none;}
     #topheader {grid-template-columns: auto 50px;}
@@ -2017,7 +2017,7 @@ input.input_text[size="5"] {width: 4rem;}
 	}
 
     .a_boards ul.a_boards_single {
-        grid-template-columns: 40px 1fr 10rem 5px;
+        grid-template-columns: 40px auto 7rem 5px;
         padding-left: 0;
     }
     .avvy {
@@ -2113,9 +2113,9 @@ input.input_text[size="5"] {width: 4rem;}
 	}	
 	
 	
-	h4.mobile.headerpost { padding: 0 0.2rem 0.7rem 0.2rem;}
+	h4.mobile.headerpost { padding: 0 0.2rem 0 0.2rem;}
     ul.quickbuttons {margin-left: 0; }
-    .post {padding: 0.7rem 0.2rem;}
+    .post {padding: 0.2rem;}
     .pagelinks { padding: 0.2rem 0.2rem 0.5rem 0.2rem;}
     .pagesection {
         padding-top: 0;
@@ -2128,12 +2128,14 @@ input.input_text[size="5"] {width: 4rem;}
     #a_boardindex .button_strip_markread span {
         width: 100%;
     }
-    #h_user { padding: 0;}
-    #h_news {padding: 0.5rem 0; border-top: 1px solid #888; background: none;}
+    #h_user { padding: 0;box-sizing: border-box; width: 100%;}
+    #h_news {padding: 0.5rem 0; border-top: 1px solid #888; background: none; box-sizing: border-box;}
     #h_news h2, #h_news p { font-size: 0.9rem;display: inline; clear: none;}
     #tsunami, section#headersection,#h_linktree {
         padding-left: 1.1rem;
         padding-right: 1.1rem;
+		box-sizing: border-box;
+		width: 100%;
     }
     .pagelinks { padding-left: 0;}
     #h_search { padding: 0; }
@@ -2208,7 +2210,8 @@ input.input_text[size="5"] {width: 4rem;}
         float: none;
         display: block;
     }
-    .a_message .poster { padding-bottom: 0.5rem;}
+	.post .inner { padding-top: 0.5rem;}
+	.a_message .poster { padding-bottom: 0.5rem;}
     .postarea h4.mobile.headerpost a {
         display: block;
         width: 100%;
