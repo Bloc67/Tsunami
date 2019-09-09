@@ -12,6 +12,7 @@ function more_aside()
 {
 	global $options, $context, $txt, $scripturl;
 
+	template_news_slider();
 	echo '
 		<div class="cat_bar">
 			<h3 class="catbg">
@@ -36,7 +37,6 @@ function template_main()
 	global $context, $settings, $options, $txt, $scripturl, $modSettings;
 
 	echo '
-<section id="a_boardindex_section">
 <article id="a_boardindex">
 	<div class="a_boards">';
 
@@ -86,13 +86,10 @@ function template_main()
 			echo '
 	<div class="a_markread">', template_button_strip($mark_read_button, 'right'), '</div>';
 	}
+	template_info_center();
 
 	echo '
 </article>';
-	template_info_center();
-	
-	echo '
-</section>';
 }
 
 function template_news_slider()

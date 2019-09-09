@@ -15,72 +15,6 @@ function template_generic_menu_sidebar_above()
 {
 	 template_generic_menu_dropdown_above();
 	 return;
-	
-	global $context, $settings, $options, $scripturl, $txt, $modSettings;
-
-	// This is the main table - we need it so we can keep the content to the right of it.
-	echo '
-	<div id="main_container">
-		<div id="left_admsection"><span id="admin_menu"></span>';
-
-	// What one are we rendering?
-	$context['cur_menu_id'] = isset($context['cur_menu_id']) ? $context['cur_menu_id'] + 1 : 1;
-	$menu_context = &$context['menu_data_' . $context['cur_menu_id']];
-
-	// For every section that appears on the sidebar...
-	$firstSection = true;
-	foreach ($menu_context['sections'] as $section)
-	{
-		// Show the section header - and pump up the line spacing for readability.
-		echo '
-			<div class="adm_section">
-				<div class="cat_bar">
-					<h4 class="catbg">', $section['title'], '</h4>
-				</div>
-				<ul class="smalltext left_admmenu">';
-
-		// For every area of this section show a link to that area (bold if it's currently selected.)
-		foreach ($section['areas'] as $i => $area)
-		{
-			// Not supposed to be printed?
-			if (empty($area['label']))
-				continue;
-
-			echo '
-					<li>';
-
-			// Is this the current area, or just some area?
-			if ($i == $menu_context['current_area'])
-			{
-				echo '
-						<strong><a href="', isset($area['url']) ? $area['url'] : $menu_context['base_url'] . ';area=' . $i, $menu_context['extra_parameters'], '">', $area['label'], '</a></strong>';
-
-				if (empty($context['tabs']))
-					$context['tabs'] = isset($area['subsections']) ? $area['subsections'] : array();
-			}
-			else
-				echo '
-						<a href="', isset($area['url']) ? $area['url'] : $menu_context['base_url'] . ';area=' . $i, $menu_context['extra_parameters'], '">', $area['label'], '</a>';
-
-			echo '
-					</li>';
-		}
-
-		echo '
-				</ul>
-			</div>';
-
-		$firstSection = false;
-	}
-
-	// This is where the actual "main content" area for the admin section starts.
-	echo '
-		</div>
-		<div id="main_admsection">';
-
-	// If there are any "tabs" setup, this is the place to shown them.
-	if (!empty($context['tabs']) && empty($context['force_disable_tabs']))
-		template_generic_menu_tabs($menu_context);
 }
 
 // Part of the sidebar layer - closes off the main bit.
@@ -88,26 +22,37 @@ function template_generic_menu_sidebar_below()
 {
 	template_generic_menu_dropdown_below();
 	return;
-	
-	global $context, $settings, $options;
+}
 
+function template_generic_menu_dropdown_above() 
+{ 
+	global $context, $settings, $options, $scripturl, $txt, $modSettings;
+
+	// This is the main table - we need it so we can keep the content to the right of it.
 	echo '
-		</div>
-	</div><br class="clear" />';
+<div id="admin_content">
+	<span id="menu_adm" class="icon-menu mobile floatright" onclick="addclass2(\'maside\' , \'showadmin\', \'menu_adm\', \'closeme\'); return false;"></span>
+	<h3 class="header_name mobile">' , $txt['admin_toggle'] , '</h3>
+';
+
+	// It's possible that some pages have their own tabs they wanna force...
+	if (!empty($context['tabs']))
+		template_generic_menu_tabs($context['drops']);
 }
 
 // This contains the html for the side bar of the admin center, which is used for all admin pages.
-function template_generic_menu_dropdown_above()
+function more_menu()
 {
 	global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
 	// Which menu are we rendering?
 	$context['cur_menu_id'] = isset($context['cur_menu_id']) ? $context['cur_menu_id'] + 1 : 1;
 	$menu_context = &$context['menu_data_' . $context['cur_menu_id']];
+	$context['drops'] = $menu_context;
 
 	echo '
 <menu id="adminmenu">
-	<ul class="reset dropmenu" id="dropdown_menu_', $context['cur_menu_id'], '">';
+	<ul class="reset" id="dropdown_menu_', $context['cur_menu_id'], '">';
 
 	// Main areas first.
 	foreach ($menu_context['sections'] as $section)
@@ -115,12 +60,12 @@ function template_generic_menu_dropdown_above()
 		if ($section['id'] == $menu_context['current_section'])
 		{
 			echo '
-			<li class="a_main" id="ashow' , $section['id'] , '"><a class="active" href="javascript:;" onclick="addclass(\'ashow' , $section['id'] , '\'); return false;"><span class="firstlevel parent">', $section['title'] , '</span></a>
+			<li class="a_main ashow" id="ashow' , $section['id'] , '"><a class="active" href="javascript:;" onclick="addclass(\'ashow' , $section['id'] , '\' , \'ashow\', \'a_main\'); return false;"><span class="firstlevel parent">', $section['title'] , '</span></a>
 				<ul class="reset">';
 		}
 		else
 			echo '
-			<li class="a_main" id="ashow' , $section['id'] , '"><a class="firstlevel" href="javascript:;" onclick="addclass(\'ashow' , $section['id'] , '\'); return false;"><span class="firstlevel parent">', $section['title'] , '</span></a>
+			<li class="a_main" id="ashow' , $section['id'] , '"><a class="firstlevel" href="javascript:;" onclick="addclass(\'ashow' , $section['id'] , '\', \'ashow\', \'a_main\'); return false;"><span class="firstlevel parent">', $section['title'] , '</span></a>
 				<ul class="reset">';
 
 		// For every area of this section show a link to that area (bold if it's currently selected.)
@@ -132,7 +77,7 @@ function template_generic_menu_dropdown_above()
 				continue;
 
 			echo '
-					<li>';
+					<li class="a_sub' , $i == $menu_context['current_area'] ? ' ashowsub' : '' , '" id="ashowsub' , $i ,'">';
 
 			// Is this the current area, or just some area?
 			if ($i == $menu_context['current_area'])
@@ -182,30 +127,8 @@ function template_generic_menu_dropdown_above()
 	echo '
 	</ul>
 </menu>
-<script>
-	function addclass(id)
-	{
-		var element = document.getElementById(id);
-		var x = document.getElementsByClassName("a_main");
-		var i;
-		for (i = 0; i < x.length; i++) {
-			if(x[i] != element) {
-				x[i].classList.remove("ashow");
-			}
-		}
-		element.classList.toggle("ashow");	
-	}
-
-</script>
 ';
 
-	// This is the main table - we need it so we can keep the content to the right of it.
-	echo '
-<div id="admin_content">';
-
-	// It's possible that some pages have their own tabs they wanna force...
-	if (!empty($context['tabs']))
-		template_generic_menu_tabs($menu_context);
 }
 
 // Part of the admin layer - used with admin_above to close the table started in it.

@@ -11,5 +11,6 @@ $txt['infobindex2'] = 'Show Info center';
 $txt['a_unread'] = 'Show unread posts';
 $txt['a_replies'] = 'Show new replies';
 $txt['a_options'] = 'Options';
+$txt['admin_toggle'] = 'Admin Menu';
 
 ?>

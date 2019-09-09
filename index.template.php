@@ -132,17 +132,22 @@ function template_body_above()
 	</header>
 </section>
 <div id="h_linktree">' , theme_linktree() , '</div>
-<div id="tsunami"' , !empty($settings['a_hide_credit']) ? ' style="display: none;"' : '' , '>Tsunami <span>theme by Bloc</span></div>
+<div id="tsunami">
+	<div id="h_user">' , template_head_user() , '</div>
+	<div id="h_news">' , template_head_news() , '</div>
+</div>
 
 <section id="contentsection">
-	<aside id="maside">
-		<div id="h_user">' , template_head_user() , '</div>
-		<div id="h_search">' , template_head_search() , '</div>
-		<div id="h_news">' , template_head_news() , '</div>';
+	<aside id="maside" class="maside_class">
+		<div id="h_search">' , template_head_search() , '</div>';
 	
+	// from subtemplates
 	if(function_exists('more_aside'))
-		echo '
-		<div id="h_more">', more_aside() ,'</div>';
+		more_aside();
+
+	// from menu template
+	if(function_exists('more_menu'))
+		more_menu();
 
 	echo '
 	</aside>
@@ -258,13 +263,6 @@ function template_head_news()
 {
 	global $context, $settings, $txt;
 
-	if(function_exists("template_news_slider"))
-	{
-		$done = template_news_slider();
-		if($done)
-			return;
-	}
-	
 	// Show a random news item? (or you could pick one from news_lines...)
 	if (!empty($settings['enable_news']) && !empty($context['random_news_line']))
 		echo '
