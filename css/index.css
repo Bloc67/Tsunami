@@ -1946,7 +1946,7 @@ input.input_text[size="5"] {width: 4rem;}
     #popularactivity dd div { display: none;  }
     .activity_stats li span.stats_hour { display: none; }
     #h_user .user { display: block;}
-    .mavatar { width: 40px; height: 40px; float: right; margin-right: 2rem; }
+    .mavatar { width: 40px; height: 40px; float: right; margin-right: 0.5rem; }
     #contentsection { display: block; }
     #oaside {
         display: block;
