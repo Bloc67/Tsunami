@@ -1465,8 +1465,7 @@ menu.buttons.floatright a span{ overflow: hidden; }
 .a_topics_single li.icon1 {grid-area: micon;}
 .a_topics_single li.icon1 img { height: 20px; margin-top: 2px; opacity: 0.5;}
 .a_topics_single li.icon1:hover img { opacity: 1;}
-.a_topics_single li.subject {grid-area: msubject; }
-.a_topics_single li.subject .active a {font-weight: bold; }
+.a_topics_single li.subject {grid-area: msubject; font-weight: bold; }
 .a_topics_single li.user {grid-area: muser;}
 .a_topics_single li.pages {grid-area: mpages;}
 .a_topics_single li.stats {grid-area: mstats; font-size: 90%;}
@@ -1488,14 +1487,15 @@ menu.buttons.floatright a span{ overflow: hidden; }
     background: #f6f6f7;
     margin: 0 !important;
     border-radius: 0 3px 3px 0;
+	border-bottom: solid 2px #fff;
     border-left: 4px solid #f6f6f7;
 }
 .a_topics_single.boxes {
     grid-template-columns: 32px 4fr 2fr 5rem 5fr 40px;
 }
 .a_topics_single:nth-of-type(odd) {
-    background: #fff;
-    border-left: 2px solid #fff;
+    background: #f0f0f0;
+    border-left: 2px solid #f0f0f0;
 }
 .a_topics_single.hot { border-bottom: 2px solid #fff0c0;border-top: 2px solid #fff0c0; }
 .a_topics_single.veryhot { border-bottom: 2px solid #ffc0c0;border-top: 2px solid #ffc0c0; }
