@@ -1848,7 +1848,7 @@ input.input_text[size="5"] {width: 4rem;}
 
 #month_grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
     grid-gap: 1rem;
     margin-bottom: 1rem;
 }
