@@ -1882,10 +1882,11 @@ nav#mletters a {
 #main_grid .calendar_table { 
     border-collapse: collapse; 
     margin: 0 0 0.5rem 0;
+	width: 100%;
 }
 #main_grid .calendar_table tr { 
     display: grid;
-    grid-template-columns: 24px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 }
 
 #main_grid .calendar_table td {
