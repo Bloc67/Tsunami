@@ -9,6 +9,17 @@
  *
  * @version 2.0
  */
+function more_aside()
+{
+	global $context, $settings, $options, $txt, $scripturl, $modSettings;
+
+	echo '
+			<section id="month_grid">
+				<div>', template_show_month_grid('prev'), '</div>
+				<div>', template_show_month_grid('current'), '</div>
+				<div>', template_show_month_grid('next'), '</div>
+			</section>';
+}
 
 // The main calendar - January, for example.
 function template_main()
@@ -17,11 +28,6 @@ function template_main()
 
 	echo '
 		<div id="calendar">
-			<section id="month_grid">
-				<div>', template_show_month_grid('prev'), '</div>
-				<div>', template_show_month_grid('current'), '</div>
-				<div>', template_show_month_grid('next'), '</div>
-			</section>
 			<div id="main_grid">
 				', $context['view_week'] ? template_show_week_grid('main') : template_show_month_grid('main');
 

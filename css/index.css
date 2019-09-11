@@ -1727,6 +1727,16 @@ ul.ignoreboards li.category a {
 }
 input.input_password[size="24"] {width: 24rem;}
 input.input_text[size="5"] {width: 4rem;}
+nav#mletters { padding: 1rem 0;  display: grid; grid-template-columns: repeat(auto-fit, minmax(1.5rem, 1fr)); grid-gap: 4px;}
+nav#mletters a {
+	display: block;
+	text-align: center;
+	height: 1.5rem;
+	line-height: 1.4rem;
+	background: #fff;
+	border: solid 1px #ccc;
+	border-radius: 3px;
+}
 
 /* #####################################	*/
 /* result page */
@@ -2231,6 +2241,17 @@ input.input_text[size="5"] {width: 4rem;}
     #advanced_search em.smalltext { display: block; }
     #advanced_search select { width: 100%; }
     input#check_all.input_check.floatleft { clear: left; float: left; margin: 0 0.5rem 0 0; }
+	.table_grid tr  {
+		display: grid !important;
+		grid-template-columns: repeat(auto-fit,minmax(8rem, 1fr)) !important;
+		border-bottom: solid 4px #ccc  !important;
+		grid-gap: 2px;
+	}
+	.table_grid tr td  {
+		display:block;
+		background: #eee;
+		width: 100%;
+	}
 }
 
 
@@ -2240,18 +2261,6 @@ input.input_text[size="5"] {width: 4rem;}
 @media only screen and (min-width:1459px) {
     #contentsection {
         grid-template-columns: 1fr 3fr !important;
-    }
-    #month_grid { 
-        grid-template-columns: 1fr;
-        grid-area: cal_months; 
-    }
-    #main_grid { grid-area: cal_main; }
-    #calendar {
-        display: grid;
-        grid-gap: 1rem;
-        grid-template-columns: 1fr 200px;
-        grid-template-areas: 
-            "cal_main cal_months";
     }
 }
 

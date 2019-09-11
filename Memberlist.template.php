@@ -10,6 +10,15 @@
  * @version 2.0
  */
 
+function more_aside()
+{
+	global $context, $settings, $options, $scripturl, $txt;
+
+	if (!isset($context['old_search']))
+		echo '
+	<nav id="mletters">', $context['letter_links'], '</nav>';
+}
+
 function template_body_id()
 {
 	echo ' id="m_list"';
@@ -30,13 +39,7 @@ function template_main()
 <section id="a_memberlist">
 	<div class="main_section" id="memberlist">
 		<h3 class="header_name">
-			', $txt['members_list'];
-		
-		if (!isset($context['old_search']))
-				echo '
-			<span class="floatright">', $context['letter_links'], '</span>';
-		
-		echo '
+			', $txt['members_list'],'
 		</h3>
 		<div class="pagesection clear">
 			<div class="floatright">', template_button_strip($memberlist_buttons, 'right'), '</div>
