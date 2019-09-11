@@ -867,7 +867,7 @@ ul.reset.dropmenu ul li:hover a:hover {
 	margin-left: -4px;
 	position: fixed;
 	z-index: 99;
-	background: #000;
+	background: #fff;
 	border-radius: 50%;
 	width: 2rem;
 	height: 2rem;
@@ -884,7 +884,7 @@ body { position: relative;}
     height: 100%;
     box-shadow: 0 0 20px 0 rgba(0,0,0,0.5);
     z-index: 99;
-    background: #1f2f2f;
+    background: #ffff;
 	transform-origin: 0% 0%;
 	transform: translate(-120%, 0);
 	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
@@ -894,11 +894,11 @@ body { position: relative;}
     display: block;
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
-    border-bottom: #2f4f4f solid 1px;
-    color: #eee !important;
+    border-bottom: #eee solid 1px;
+    color: #333 !important;
 }
 #menu_nav_mobile li {
-    background: #1f2f2f;
+    background: #fff;
 }
 #menu_nav_mobile li li a{
     padding-left: 2rem;
