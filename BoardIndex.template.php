@@ -29,6 +29,7 @@ function more_aside()
 			<span id="binfo_switch" class="icon-info-outline" title="' , empty($options['hideinfo_boardindex']) ? $txt['infobindex'] : $txt['infobindex2'] , '"></span></a>
 		</div>
 		';
+	template_info_center();
 }
 
 
@@ -86,7 +87,6 @@ function template_main()
 			echo '
 	<div class="a_markread">', template_button_strip($mark_read_button, 'right'), '</div>';
 	}
-	template_info_center();
 
 	echo '
 </article>';
