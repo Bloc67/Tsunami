@@ -1371,6 +1371,9 @@ span.icon-micro-new.grey {
     font-size: 0.9rem;
     border-radius: 4px 0 0 4px;
 }
+#a_info_items h4 a {
+    color: #fff;
+}
 #a_info_items .a_info_item p,
 #a_info_items .a_info_item dl,
 #a_info_items .a_info_item ul,
@@ -2291,7 +2294,7 @@ nav#mletters a {
 
 
 @media only screen and (min-width:1060px) {
-    .mobile {  display: none;    }
+    .mobile {  display: none !important;    }
 }
 @media only screen and (min-width:1459px) {
     #contentsection {

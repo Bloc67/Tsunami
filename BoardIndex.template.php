@@ -29,7 +29,6 @@ function more_aside()
 			<span id="binfo_switch" class="icon-info-outline" title="' , empty($options['hideinfo_boardindex']) ? $txt['infobindex'] : $txt['infobindex2'] , '"></span></a>
 		</div>
 		';
-	template_info_center();
 }
 
 
@@ -79,7 +78,7 @@ function template_main()
 	{
 		// Mark read button.
 		$mark_read_button = array(
-			'markread' => array('text' => 'mark_as_read', 'image' => 'markread.gif', 'lang' => true, 'url' => $scripturl . '?action=markasread;sa=all;' . $context['session_var'] . '=' . $context['session_id']),
+			'markread' => array('active' => true,'text' => 'mark_as_read', 'image' => 'markread.gif', 'lang' => true, 'url' => $scripturl . '?action=markasread;sa=all;' . $context['session_var'] . '=' . $context['session_id']),
 		);
 
 		// Show the mark all as read button?
@@ -90,6 +89,7 @@ function template_main()
 
 	echo '
 </article>';
+	template_info_center();
 }
 
 function template_news_slider()

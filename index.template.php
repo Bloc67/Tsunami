@@ -499,8 +499,12 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	if (empty($buttons))
 		return;
 
-	echo 	'<span id="qubs_toggle' , $settings['qubs_counter'] , '" class="mobile icon-down-open floatright button_submit buts" onclick="addclass2(\'qubs' ,  $settings['qubs_counter'] , '\', \'show\',\'qubs_toggle' ,  $settings['qubs_counter'] , '\', \'icon-up-open\');"></span>
-			<span class="qubs" id="qubs' , $settings['qubs_counter'] , '">', implode('', $buttons), '</span>';
+	if(count($button_strip)>1)
+		echo 	'
+	<span id="qubs_toggle' , $settings['qubs_counter'] , '" class=" icon-down-open floatright button_submit buts mobile" onclick="addclass2(\'qubs' ,  $settings['qubs_counter'] , '\', \'show\',\'qubs_toggle' ,  $settings['qubs_counter'] , '\', \'icon-up-open\');"></span>';
+
+	echo '		
+	<span class="qubs" id="qubs' , $settings['qubs_counter'] , '">', implode('', $buttons), '</span>';
 	
 	$settings['qubs_counter']++;
 }
