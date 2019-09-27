@@ -592,9 +592,8 @@ section#headersection a { color: #fff; }
 
 h1 { padding: 0.5rem 1.5rem 0.3rem 0;}
 #h_linktree, #tsunami { border-top: solid 1px #222;}
-.quickbuttons {
-    vertical-align: bottom;
-}
+.quickbuttons { vertical-align: bottom; }
+.quickbuttons li { margin-bottom: 4px; }
 
 #h_user .user {
     display: grid;
@@ -1084,10 +1083,10 @@ body#help_popup a { padding: 0.5rem; }
     line-height: 1.5rem;
     display: inline-block;
     padding: 0 0.7rem;
-    margin: 0;
+    margin: 0 0 4px 0;
     text-transform: uppercase;
 }
-ul.quickbuttons { margin-left: 1rem;  }
+ul.quickbuttons { margin-left: 1rem;  margin-top: 1rem;}
 
 
 menu.buttons .buts { text-align: center; }

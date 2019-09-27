@@ -432,7 +432,7 @@ function template_main()
 		if (!empty($message['attachment']))
 		{
 			echo '
-						<div id="msg_', $message['id'], '_footer" class="attachments smalltext" style="columns: ' , ($modSettings['attachmentThumbWidth'] + 20) , 'px;">';
+						<div id="msg_', $message['id'], '_footer" class="attachments smalltext" style="padding-bottom: 1rem; columns: ' , ($modSettings['attachmentThumbWidth'] + 20) , 'px;">';
 
 			$last_approved_state = 1;
 			foreach ($message['attachment'] as $attachment)
@@ -501,37 +501,41 @@ function template_main()
 		// Maybe we can approve it, maybe we should?
 		if ($message['can_approve'])
 			echo '
-								<li class="is_icon approve_button button_submit buts"><a href="', $scripturl, '?action=moderate;area=postmod;sa=approve;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '"><span class="icon-thumbs-up iconbig mobile"></span><span class="desktop">', $txt['approve'], '</span></a></li>';
+								<li class="approve_button button_submit buts">
+									<a href="', $scripturl, '?action=moderate;area=postmod;sa=approve;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">
+										', $txt['approve'], '
+									</a>
+								</li>';
 
 		// Can they reply? Have they turned on quick reply?
 		if ($context['can_quote'] && !empty($options['display_quick_reply']))
 			echo '
-								<li class="is_icon quote_button button_submit buts"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '" onclick="return oQuickReply.quote(', $message['id'], ');"><span class="icon-chat iconbig mobile"></span><span class="desktop">', $txt['quote'], '</span></a></li>';
+								<li class="quote_button button_submit buts"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '" onclick="return oQuickReply.quote(', $message['id'], ');">', $txt['quote'], '</a></li>';
 
 		// So... quick reply is off, but they *can* reply?
 		elseif ($context['can_quote'])
 			echo '
-								<li class="is_icon quote_button button_submit buts"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '"><span class="icon-comment iconbig mobile"></span><span class="desktop">', $txt['quote'], '</span></a></li>';
+								<li class="quote_button button_submit buts"><a href="', $scripturl, '?action=post;quote=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';last_msg=', $context['topic_last_message'], '">', $txt['quote'], '</a></li>';
 
 		// Can the user modify the contents of this post?
 		if ($message['can_modify'])
 			echo '
-								<li class="is_icon modify_button  button_submit buts"><a href="', $scripturl, '?action=post;msg=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], '"><span class="icon-wrench-outline iconbig mobile"></span><span class="desktop">', $txt['modify'], '</span></a></li>';
+								<li class="modify_button  button_submit buts"><a href="', $scripturl, '?action=post;msg=', $message['id'], ';topic=', $context['current_topic'], '.', $context['start'], '">', $txt['modify'], '</a></li>';
 
 		// How about... even... remove it entirely?!
 		if ($message['can_remove'])
 			echo '
-								<li class="is_icon remove_button button_submit buts"><a href="', $scripturl, '?action=deletemsg;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '" onclick="return confirm(\'', $txt['remove_message'], '?\');"><span class="icon-trash iconbig mobile"></span><span class="desktop">', $txt['remove'], '</span></a></li>';
+								<li class="remove_button button_submit buts"><a href="', $scripturl, '?action=deletemsg;topic=', $context['current_topic'], '.', $context['start'], ';msg=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '" onclick="return confirm(\'', $txt['remove_message'], '?\');">', $txt['remove'], '</a></li>';
 
 		// What about splitting it off the rest of the topic?
 		if ($context['can_split'] && !empty($context['real_num_replies']))
 			echo '
-								<li class="is_icon split_button button_submit buts"><a href="', $scripturl, '?action=splittopics;topic=', $context['current_topic'], '.0;at=', $message['id'], '"><span class="icon-flow-split iconbig mobile"></span><span class="desktop">', $txt['split'], '</span></a></li>';
+								<li class="split_button button_submit buts"><a href="', $scripturl, '?action=splittopics;topic=', $context['current_topic'], '.0;at=', $message['id'], '">', $txt['split'], '</a></li>';
 
 		// Can we restore topics?
 		if ($context['can_restore_msg'])
 			echo '
-								<li class="is_icon restore_button button_submit buts"><a href="', $scripturl, '?action=restoretopic;msgs=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '"><span class="icon-cog-outline iconbig mobile"></span><span class="desktop">', $txt['restore_message'], '</span></a></li>';
+								<li class="restore_button button_submit buts"><a href="', $scripturl, '?action=restoretopic;msgs=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $txt['restore_message'], '</a></li>';
 
 		// Show a checkbox for quick moderation?
 		if (!empty($options['display_quick_mod']) && $options['display_quick_mod'] == 1 && $message['can_remove'])
@@ -541,7 +545,7 @@ function template_main()
 		// Can the user modify the contents of this post?  Show the modify inline image.
 		if ($message['can_modify'])
 			echo '
-								<li class="is_icon button_submit buts">
+								<li class="button_submit buts">
 									<span class="icon-edit iconbig" id="modify_button_', $message['id'], '" style="cursor: pointer; " onclick="oQuickModify.modifyMsg(\'', $message['id'], '\')"></span>
 								</li>';
 
@@ -648,7 +652,7 @@ function template_main()
 	</div>';
 
 	$mod_buttons = array(
-		'move' => array('aactive' => true, 'test' => 'can_move', 'text' => 'move_topic', 'image' => 'admin_move.gif', 'lang' => true, 'url' => $scripturl . '?action=movetopic;topic=' . $context['current_topic'] . '.0'),
+		'move' => array('active' => true, 'test' => 'can_move', 'text' => 'move_topic', 'image' => 'admin_move.gif', 'lang' => true, 'url' => $scripturl . '?action=movetopic;topic=' . $context['current_topic'] . '.0'),
 		'delete' => array('test' => 'can_delete', 'text' => 'remove_topic', 'image' => 'admin_rem.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . $txt['are_sure_remove_topic'] . '\');"', 'url' => $scripturl . '?action=removetopic2;topic=' . $context['current_topic'] . '.0;' . $context['session_var'] . '=' . $context['session_id']),
 		'lock' => array('test' => 'can_lock', 'text' => empty($context['is_locked']) ? 'set_lock' : 'set_unlock', 'image' => 'admin_lock.gif', 'lang' => true, 'url' => $scripturl . '?action=lock;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
 		'sticky' => array('test' => 'can_sticky', 'text' => empty($context['is_sticky']) ? 'set_sticky' : 'set_nonsticky', 'image' => 'admin_sticky.gif', 'lang' => true, 'url' => $scripturl . '?action=sticky;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
