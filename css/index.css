@@ -864,11 +864,11 @@ ul.reset.dropmenu ul li:hover a:hover {
 #mobilmeny:checked ~ #mobilmeny_label span:before {
     content: '\e82f';
     font-size: 1.4rem;
-    margin-top: -4px;
+    margin-top: -8px;
 	margin-left: -4px;
 	position: fixed;
 	z-index: 99;
-	background: #fff;
+	background: #fff2;
 	border-radius: 50%;
 	width: 2rem;
 	height: 2rem;
