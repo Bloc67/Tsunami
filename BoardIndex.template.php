@@ -29,7 +29,6 @@ function more_aside()
 			<span id="binfo_switch" class="icon-info-outline" title="' , empty($options['hideinfo_boardindex']) ? $txt['infobindex'] : $txt['infobindex2'] , '"></span></a>
 		</div>
 		';
-	template_info_center();
 }
 
 
@@ -90,6 +89,7 @@ function template_main()
 
 	echo '
 </article>';
+	template_info_center();
 }
 
 function template_news_slider()
