@@ -157,7 +157,7 @@ function template_main()
 <article id="a_display" class="clear">
 	<div class="pagesection clear">
 		<div class="clear bgline">
-			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#lastPost" class="button_submit buts floatleft">' . $txt['go_down'] . '</a>' : '', '
+			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#lastPost" class="button_submit buts">' . $txt['go_down'] . '</a>' : '', '
 			', template_button_strip($normal_buttons, 'right'), '
 			<div class="button_submit buts is_icon">', $context['previous_next'], '</div>
 		</div>
@@ -642,18 +642,18 @@ function template_main()
 	<div class="pagesection clear">
 		<div class="pagelinks clear"><small class="desktop">', $txt['pages'], '</small> ', $context['page_index'], '</div>
 		<div class="clear bgline">
-			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#top" class="button_submit buts floatleft">' . $txt['go_up'] . '</a>' : '', '
+			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#top" class="button_submit buts">' . $txt['go_up'] . '</a>' : '', '
 			', template_button_strip($normal_buttons, 'right'), '
 		</div>
 	</div>';
 
 	$mod_buttons = array(
-		'move' => array('icon' => array('icon-right-open','icon-doc-text'), 'test' => 'can_move', 'text' => 'move_topic', 'image' => 'admin_move.gif', 'lang' => true, 'url' => $scripturl . '?action=movetopic;topic=' . $context['current_topic'] . '.0'),
-		'delete' => array('icon' => array('icon-right-open','icon-trash'),'test' => 'can_delete', 'text' => 'remove_topic', 'image' => 'admin_rem.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . $txt['are_sure_remove_topic'] . '\');"', 'url' => $scripturl . '?action=removetopic2;topic=' . $context['current_topic'] . '.0;' . $context['session_var'] . '=' . $context['session_id']),
-		'lock' => array('icon' => array('icon-right-open','icon-lock'),'test' => 'can_lock', 'text' => empty($context['is_locked']) ? 'set_lock' : 'set_unlock', 'image' => 'admin_lock.gif', 'lang' => true, 'url' => $scripturl . '?action=lock;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
-		'sticky' => array('icon' => array('icon-right-open','icon-pin-outline'),'test' => 'can_sticky', 'text' => empty($context['is_sticky']) ? 'set_sticky' : 'set_nonsticky', 'image' => 'admin_sticky.gif', 'lang' => true, 'url' => $scripturl . '?action=sticky;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
-		'merge' => array('icon' => array('icon-right-open','icon-flow-cross'),'test' => 'can_merge', 'text' => 'merge', 'image' => 'merge.gif', 'lang' => true, 'url' => $scripturl . '?action=mergetopics;board=' . $context['current_board'] . '.0;from=' . $context['current_topic']),
-		'calendar' => array('icon' => array('icon-right-open','icon-clock'),'test' => 'calendar_post', 'text' => 'calendar_link', 'image' => 'linktocal.gif', 'lang' => true, 'url' => $scripturl . '?action=post;calendar;msg=' . $context['topic_first_message'] . ';topic=' . $context['current_topic'] . '.0'),
+		'move' => array('aactive' => true, 'test' => 'can_move', 'text' => 'move_topic', 'image' => 'admin_move.gif', 'lang' => true, 'url' => $scripturl . '?action=movetopic;topic=' . $context['current_topic'] . '.0'),
+		'delete' => array('test' => 'can_delete', 'text' => 'remove_topic', 'image' => 'admin_rem.gif', 'lang' => true, 'custom' => 'onclick="return confirm(\'' . $txt['are_sure_remove_topic'] . '\');"', 'url' => $scripturl . '?action=removetopic2;topic=' . $context['current_topic'] . '.0;' . $context['session_var'] . '=' . $context['session_id']),
+		'lock' => array('test' => 'can_lock', 'text' => empty($context['is_locked']) ? 'set_lock' : 'set_unlock', 'image' => 'admin_lock.gif', 'lang' => true, 'url' => $scripturl . '?action=lock;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
+		'sticky' => array('test' => 'can_sticky', 'text' => empty($context['is_sticky']) ? 'set_sticky' : 'set_nonsticky', 'image' => 'admin_sticky.gif', 'lang' => true, 'url' => $scripturl . '?action=sticky;topic=' . $context['current_topic'] . '.' . $context['start'] . ';' . $context['session_var'] . '=' . $context['session_id']),
+		'merge' => array('test' => 'can_merge', 'text' => 'merge', 'image' => 'merge.gif', 'lang' => true, 'url' => $scripturl . '?action=mergetopics;board=' . $context['current_board'] . '.0;from=' . $context['current_topic']),
+		'calendar' => array('test' => 'calendar_post', 'text' => 'calendar_link', 'image' => 'linktocal.gif', 'lang' => true, 'url' => $scripturl . '?action=post;calendar;msg=' . $context['topic_first_message'] . ';topic=' . $context['current_topic'] . '.0'),
 	);
 
 	// Restore topic. eh?  No monkey business.
@@ -664,7 +664,7 @@ function template_main()
 	call_integration_hook('integrate_mod_buttons', array(&$mod_buttons));
 
 	echo '
-	<div class="clear" id="mbuttons">', template_button_strip($mod_buttons, 'bottom', array('id' => 'moderationbuttons_strip')), '</div>';
+	<div class="clear">', template_button_strip($mod_buttons, 'bottom', array('id' => 'moderationbuttons_strip')), '</div>';
 
 	// Show the jumpto box, or actually...let Javascript do it.
 	echo '

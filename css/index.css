@@ -2281,7 +2281,7 @@ nav#mletters a {
 	}
 	#a_go_down { padding: 0; }
 	#a_go_down span { line-height: 1rem; }
-	.pagesection > a { width: 100% !important;}
+	.pagesection > a,.pagesection .bgline > a { width: 100% !important;}
 	.qubs a span {
 		display: block;
 		width: calc(100% - 2.6rem);

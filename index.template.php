@@ -466,6 +466,24 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	if ($context['right_to_left'])
 		$button_strip = array_reverse($button_strip, true);
 
+	// test it
+	$set = false;
+	foreach ($button_strip as $key => $value)
+	{
+		if(isset($value['active']))
+			$set = true;
+	}
+	if(!$set)
+	{
+		$first = true;
+		foreach ($button_strip as $key => $value)
+		{
+			if($first)
+				$button_strip[$key]['active'] = true;
+			$first = false;
+		}
+	}
+
 	// Create the buttons...
 	$buttons = array();
 	foreach ($button_strip as $key => $value)
