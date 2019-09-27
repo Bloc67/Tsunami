@@ -2,9 +2,9 @@
 	<rect width="210" height="45" style="fill:rgb(255,255,255);stroke-width:1;stroke:#555" />
 	<text fill="#578" font-size="14" font-family="Verdana" font-weight="bold" x="10" y="20">Tsunami</text>
 	<text fill="#888" font-size="10" font-family="Verdana" x="12" y="34">for SMF 2.0.x</text>
-	<rect width="90" height="45" x="120" y="0" style="fill:#00a070;" />
-	<text fill="#fff" font-size="14" font-family="Verdana" x="140" y="20">1.1</text>
-	<text fill="#ddd" font-size="10" font-family="Verdana" x="140" y="34">11.09.19</text>
+	<rect width="90" height="45" x="120" y="0" style="fill: darkgreen;" />
+	<text fill="#fff" font-size="14" font-family="Verdana" x="140" y="20">1.22</text>
+	<text fill="#ddd" font-size="10" font-family="Verdana" x="140" y="34">27.09.19</text>
    
     Sorry, your browser does not support inline SVG.
 </svg>
