@@ -157,7 +157,7 @@ function template_main()
 <article id="a_display" class="clear">
 	<div class="pagesection clear">
 		<div class="clear bgline">
-			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#lastPost" class="button_submit buts floatleft is_icon space"><span class="icon-down-open iconbig"></span></a>' : '', '
+			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#lastPost" class="button_submit buts floatleft">' . $txt['go_down'] . '</a>' : '', '
 			', template_button_strip($normal_buttons, 'right'), '
 			<div class="button_submit buts is_icon">', $context['previous_next'], '</div>
 		</div>
@@ -642,7 +642,7 @@ function template_main()
 	<div class="pagesection clear">
 		<div class="pagelinks clear"><small class="desktop">', $txt['pages'], '</small> ', $context['page_index'], '</div>
 		<div class="clear bgline">
-			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#top" class="button_submit buts floatleft is_icon space"><span class="icon-up-open iconbig"></span></a>' : '', '
+			', !empty($modSettings['topbottomEnable']) ? $context['menu_separator'] . ' <a href="#top" class="button_submit buts floatleft">' . $txt['go_up'] . '</a>' : '', '
 			', template_button_strip($normal_buttons, 'right'), '
 		</div>
 	</div>';

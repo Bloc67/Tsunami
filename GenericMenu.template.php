@@ -65,7 +65,7 @@ function more_menu()
 		}
 		else
 			echo '
-			<li class="a_main" id="ashow' , $section['id'] , '"><a class="firstlevel" href="javascript:;" onclick="addclass(\'ashow' , $section['id'] , '\', \'ashow\', \'a_main\'); return false;"><span class="firstlevel parent">', $section['title'] , '</span></a>
+			<li class="a_main" id="ashow' , $section['id'] , '"><a class="firstlevel"><span class="firstlevel parent">', $section['title'] , '</span></a>
 				<ul class="reset">';
 
 		// For every area of this section show a link to that area (bold if it's currently selected.)
@@ -92,29 +92,6 @@ function more_menu()
 				echo '
 						<a href="', (isset($area['url']) ? $area['url'] : $menu_context['base_url'] . ';area=' . $i), $menu_context['extra_parameters'], '"><span>', $area['label'], !empty($area['subsections']) ? '...' : '', '</span></a>';
 
-			// Is there any subsections?
-			$additional_items_sub = 0;
-			if (!empty($area['subsections']))
-			{
-				echo '
-						<ul class="reset">';
-
-				foreach ($area['subsections'] as $sa => $sub)
-				{
-					if (!empty($sub['disabled']))
-						continue;
-
-					$url = isset($sub['url']) ? $sub['url'] : (isset($area['url']) ? $area['url'] : $menu_context['base_url'] . ';area=' . $i) . ';sa=' . $sa;
-
-					echo '
-							<li', (++$additional_items_sub > 6) ? ' class="additional_items"' : '' ,'>
-								<a ', !empty($sub['selected']) ? 'class="active" ' : '', 'href="', $url, $menu_context['extra_parameters'], '"><span>', $sub['label'], '</span></a>
-							</li>';
-				}
-
-				echo '
-						</ul>';
-			}
 
 			echo '
 					</li>';

@@ -18,6 +18,7 @@ function template_init()
 	$settings['message_index_preview'] = false;
 	$settings['require_theme_strings'] = true;
 	$settings['show_member_bar'] = true;
+	$settings['qubs_counter'] = 1;
 }
 
 // The main sub template above the content.
@@ -174,7 +175,7 @@ function template_body_below()
 		<small>', $txt['page_created'], $context['load_time'], $txt['seconds_with'], $context['load_queries'], $txt['queries'], '</small>';
 
 	echo '
-		<small><a href="https://github.com/blocthemes/Tsunami" target="_blank">Tsunami theme v1.1 by Bloc</small>
+		<small><a href="https://github.com/blocthemes/Tsunami" target="_blank">Tsunami theme v1.2 by Bloc</small>
 	</footer>
 </section>
 ';
@@ -197,10 +198,10 @@ function template_head_user()
 			<div class="user">';
 		if (!empty($context['user']['avatar']))
 			echo '
-				<p class="mavatar" style="background-image: url(', $context['user']['avatar']['href'], '"></p>';
+				<a href="' , $scripturl , '?action=profile" class="mavatar" style="background-image: url(', $context['user']['avatar']['href'], '"></a>';
 		else
 			echo '
-				<p class="mavatar"></p>';
+				<a href="' , $scripturl , '?action=profile"  class="mavatar">&nbsp;</a>';
 			
 		echo '
 				<ul class="reset">
@@ -471,18 +472,8 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	{
 		if (!isset($value['test']) || !empty($context[$value['test']]))
 		{
-			if(isset($value['icon']))
-			{
-				if(is_array($value['icon']))
-					$buttons[] = '
-				<a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="button_strip_' . $key . (isset($value['active']) ? ' active' : '') . '" href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span class="button_submit buts is_icon"><span style="opacity: 0.7;" class="mobile ' . (implode('"></span><span class="mobile iconbig ',$value['icon'])) . '"></span><span class="desktop">' . $txt[$value['text']] . '</span></span></a>';
-				else
-					$buttons[] = '
-				<a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="button_strip_' . $key . (isset($value['active']) ? ' active' : '') . '" href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span class="button_submit buts is_icon"><span class="' . $value['icon'] . ' mobile iconbig"></span><span class="desktop">' . $txt[$value['text']] . '</span></span></a>';
-			}
-			else
-				$buttons[] = '
-				<a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="button_strip_' . $key . (isset($value['active']) ? ' active' : '') . '" href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span class="button_submit buts">' . $txt[$value['text']] . '</span></a>';
+			$buttons[] = '
+				<a' . (isset($value['id']) ? ' id="button_strip_' . $value['id'] . '"' : '') . ' class="button_strip_' . $key . (isset($value['active']) ? ' active' : ' bs hide') . '" href="' . $value['url'] . '"' . (isset($value['custom']) ? ' ' . $value['custom'] : '') . '><span class="button_submit buts">' . $txt[$value['text']] . '</span></a>';
 		}
 	}
 
@@ -490,7 +481,10 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	if (empty($buttons))
 		return;
 
-	echo 	implode('', $buttons);
+	echo 	'<span id="qubs_toggle' , $settings['qubs_counter'] , '" class="mobile icon-down-open floatright button_submit buts" onclick="addclass2(\'qubs' ,  $settings['qubs_counter'] , '\', \'show\',\'qubs_toggle' ,  $settings['qubs_counter'] , '\', \'icon-up-open\');"></span>
+			<span class="qubs" id="qubs' , $settings['qubs_counter'] , '">', implode('', $buttons), '</span>';
+	
+	$settings['qubs_counter']++;
 }
 function get_avatars($ids = '')
 {

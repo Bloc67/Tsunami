@@ -19,3 +19,12 @@ function addclass2(id, toggleclass, id2, toggleclass2)
 	element.classList.toggle(toggleclass);	
 	element2.classList.toggle(toggleclass2);	
 }
+
+function addclass2(id, toggleclass, id2, toggleclass2)
+{
+	var element = document.getElementById(id);
+	var element2 = document.getElementById(id2);
+	element.classList.toggle(toggleclass);	
+	element2.classList.toggle(toggleclass2);	
+}
+
