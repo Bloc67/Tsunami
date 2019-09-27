@@ -1550,7 +1550,7 @@ menu.buttons.floatright a span{ overflow: hidden; }
     margin-bottom: 6px;
 }
 .a_attach img { max-width: 100%; }
-.attachments { column-gap: 10px; }
+.attachments { column-gap: 10px; padding: 1rem;}
 .a_filetype {
     background: teal;
     padding: 0.7rem ;
