@@ -1386,6 +1386,8 @@ span.icon-micro-new.grey {
 #a_info_items .a_info_item ul li {
     padding: 0;
     margin: 0;
+    width: auto;
+    margin-right: 0.5rem;
 }
 body#b_index #maincontent {
     display: grid;
@@ -1427,20 +1429,13 @@ ol.a_recentblock ul.rec_block {
     margin: 0 4px 5px 4px !important;
     border-bottom: solid 1px #ddd;
     overflow: hidden;
-    padding: 0 0 5px 0!important;
-    display: grid;
-    grid-gap: 0rem ;
-    grid-template-columns: 5rem 1fr; 
-    grid-template-areas: 
-        "rec_post rec_post"
-		"rec_poster rec_time"
-        "rec_board rec_board" 
-		;
+    display: flex;   
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 0 0.4rem !important;
 }
-ol.a_recentblock ul li.a_recent_post {grid-area: rec_post; font-size: 0.9rem; font-weight: bold; }
-ol.a_recentblock ul li.a_recent_poster {font-size: 0.8rem; grid-area: rec_poster; }
-ol.a_recentblock ul li.a_recent_board {grid-area: rec_board; opacity: 0.7;}
-ol.a_recentblock ul li.a_recent_time {grid-area: rec_time; opacity: 0.7; }
+ol.a_recentblock ul li.a_recent_post {font-size: 0.9rem; font-weight: bold; }
+ol.a_recentblock ul li.a_recent_poster {font-size: 0.8rem;  }
 ol.a_recentblock ul li span {padding-right: 0.2rem; }
 ol.a_recentblock ul li { line-height: 1.5rem; }
 ol.a_recentblock ul li span + a {display: none; }
@@ -2031,9 +2026,10 @@ nav#mletters a {
     #mobilnav { display: block;}
     #desktopmenu { display: none;}
     #topheader {grid-template-columns: auto 50px;}
+
 	#tsunami { 
         background-position: top left; 
-		background-size: auto 100%;
+        background-size: cover;
 	}
 
    .a_boards li.a_board_subject {font-size: 0.9rem; }
@@ -2197,6 +2193,15 @@ nav#mletters a {
     }
     .settings dd input[type=checkbox] {
         margin-top: -16px !important;
+    }
+    dl.settings dt, dl.settings dd {
+        width: calc( 100% - 32px );
+    }
+    dl.settings dd input[type=checkbox] {
+        margin-right: -24px;
+    }
+    #subfooter {
+        padding: 1rem 0.5rem;
     }
     .button_strip_markread {
         padding: 0;

@@ -175,7 +175,7 @@ function template_body_below()
 		<small>', $txt['page_created'], $context['load_time'], $txt['seconds_with'], $context['load_queries'], $txt['queries'], '</small>';
 
 	echo '
-		<small><a href="https://github.com/blocthemes/Tsunami" target="_blank">Tsunami theme v1.2 by Bloc</small>
+		<small><a href="https://github.com/blocthemes/Tsunami" target="_blank">Tsunami theme v1.3 by Bloc</small>
 	</footer>
 </section>
 ';
@@ -508,6 +508,7 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 	
 	$settings['qubs_counter']++;
 }
+
 function get_avatars($ids = '')
 {
 	global $smcFunc, $user_profile, $scripturl, $modSettings, $settings, $boardurl, $image_proxy_enabled, $image_proxy_secret;
