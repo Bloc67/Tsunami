@@ -2336,3 +2336,37 @@ nav#mletters a {
         padding-left: 1rem;
     }
 }
+
+ol.a_recentblock ul.rec_block {
+    display: flex;   
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 0 0.4rem !important;
+}
+#a_info_items .a_info_item ul li {
+    width: auto;
+    margin-right: 0.5rem;
+}
+#tsunami {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+@media only screen and (max-width: 1059px) {
+    #tsunami {
+        background-size: cover;
+    }
+    dl.settings dt, dl.settings dd {
+        width: calc( 100% - 32px );
+    }
+    dl.settings dd input[type=checkbox] {
+        margin-right: -24px;
+    }
+    #subfooter {
+        padding: 1rem 0.5rem;
+    }
+    dl, .optionsettings li, .post_options li {
+        grid-template-columns: 1fr;
+    }
+    dl dt, dl dd {
+        margin: 0 0 0.2rem 0;
+    }
+}
