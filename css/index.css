@@ -742,6 +742,25 @@ h3.titlebg {
 #mlist .table_grid tr:target ~ tr {
     background: azure;
 }
+#mlist .table_grid tr {
+    grid-template-columns: repeat(auto-fit, minmax(5rem,1fr));
+    width: 100%;
+}
+#mlist .table_grid tr td {
+    text-align: left;
+}
+#mlist .table_grid thead {
+    background: #fff;
+    color: #444;
+}   
+#mlist table.table_grid th {
+    padding: 0.5rem 0;
+    color: #444;
+    border-bottom: solid 1px #ccc;
+}
+#mlist table.table_grid th a { color: #444; }
+
+
 /* icon adjusters */
 .smaller { font-size: 90%; opacity: 0.7; }
 .blue { color: steelblue; }
