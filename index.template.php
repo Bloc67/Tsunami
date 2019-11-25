@@ -175,7 +175,7 @@ function template_body_below()
 		<small>', $txt['page_created'], $context['load_time'], $txt['seconds_with'], $context['load_queries'], $txt['queries'], '</small>';
 
 	echo '
-		<small><a href="https://github.com/blocthemes/Tsunami" target="_blank">Tsunami theme v1.3 by Bloc</small>
+		<small><a href="https://github.com/blocthemes/Tsunami" target="_blank">Tsunami theme v1.4 by Bloc</small>
 	</footer>
 </section>
 ';

@@ -58,21 +58,21 @@ function template_main()
 		// We're not able (through the template) to sort the search results right now...
 		if (isset($context['old_search']))
 			echo '
-					<th scope="col" ', isset($column['colspan']) ? ' colspan="' . $column['colspan'] . '"' : '', '>
+					<th scope="col">
 						', $column['label'], '
-					</th>';
+					</th>', isset($column['colspan']) ? '<th>&nbsp;</th>' : '';
 		// This is a selected column, so underline it or some such.
 		elseif ($column['selected'])
 			echo '
-					<th scope="col"' . (isset($column['colspan']) ? ' colspan="' . $column['colspan'] . '"' : '') . '>
+					<th scope="col">
 						<a href="' . $column['href'] . '" rel="nofollow">' . $column['label'] . ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" /></a>
-					</th>';
+					</th>', isset($column['colspan']) ? '<th>&nbsp;</th>' : '';
 		// This is just some column... show the link and be done with it.
 		else
 			echo '
-					<th scope="col"', isset($column['colspan']) ? ' colspan="' . $column['colspan'] . '"' : '', '>
+					<th scope="col">
 						', $column['link'], '
-					</th>';
+					</th>', isset($column['colspan']) ? '<th>&nbsp;</th>' : '';
 	}
 	echo '
 				</tr>

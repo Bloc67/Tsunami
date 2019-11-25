@@ -60,7 +60,7 @@ function more_menu()
 		if ($section['id'] == $menu_context['current_section'])
 		{
 			echo '
-			<li class="a_main ashow" id="ashow' , $section['id'] , '"><a class="active" href="javascript:;" onclick="addclass(\'ashow' , $section['id'] , '\' , \'ashow\', \'a_main\'); return false;"><span class="firstlevel parent">', $section['title'] , '</span></a>
+			<li class="a_main ashow" id="ashow' , $section['id'] , '"><a class="active"><span class="firstlevel parent">', $section['title'] , '</span></a>
 				<ul class="reset">';
 		}
 		else

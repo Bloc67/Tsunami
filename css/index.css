@@ -541,7 +541,7 @@ code.bbc_code {
 #h_menu { justify-self: start; text-align: left;}
 #contentsection {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 20rem 1fr;
     width: 100%;
 }
 
@@ -922,26 +922,6 @@ body { position: relative;}
 #adminmenu > ul > li.ashow > ul > li.ashowsub a { 
     color: teal; 
 }
-#adminmenu > ul > li:before { 
-    content: " + ";
-    display: block;
-	float: left;
-	opacity: 0.5;
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
-    text-align: center;
-    line-height: 15px;
-    border: solid 1px #aaa;
-    margin: 5px 5px 0 0;
-    background: #fff;
-    border-radius: 50%;
-}
-#adminmenu > ul > li.ashow:before { 
-    content: " - ";
-	opacity: 1;
-    line-height: 12px;
-}
 #adminmenu > ul > li.ashow > ul,
 #adminmenu > ul > li.ashow > ul li.ashowsub ul { 
     font-weight: normal; 
@@ -1187,6 +1167,8 @@ ol.a_table_grid li > div:last-of-type {
 #a_board_notification_list li { grid-template-columns: auto 1.5rem;}
 #a_standard_profile_fields li { grid-template-columns: 4fr 1fr 2fr;}
 #a_custom_profile_fields li { grid-template-columns: 4fr 8rem 5rem 6rem 5rem;}
+#a_approve_list li { grid-template-columns: 3rem 6rem 16rem 10rem 11rem 1fr 1rem;}
+#a_approve_list li .a_col:nth-of-type(1) { text-align: center !important;}
 
 .a_col {font-size: 0.8rem !important; line-height: 1.2rem;}
 .a_headers .a_col {font-size: 0.7rem !important;}
@@ -2119,11 +2101,7 @@ nav#mletters a {
 		text-align: center;
 		background: #000;
 		border-radius: 50%;
-		width: 2rem;
-		height: 2rem;
-		line-height: 2rem;
 		box-shadow: 5px 5px 10px 0 rgba(0,0,0,0.2);
-		margin-top: -4px;
 	}	
 	
 	
@@ -2192,7 +2170,7 @@ nav#mletters a {
         margin-top: 0 !important;
     }
     .settings dd input[type=checkbox] {
-        margin-top: -16px !important;
+        margin-top: -20px !important;
     }
     dl.settings dt, dl.settings dd {
         width: calc( 100% - 32px );
@@ -2300,11 +2278,6 @@ nav#mletters a {
 
 @media only screen and (min-width:1060px) {
     .mobile {  display: none !important;    }
-}
-@media only screen and (min-width:1459px) {
-    #contentsection {
-        grid-template-columns: 1fr 3fr !important;
-    }
 }
 
 @media only screen and (max-width: 460px) {
